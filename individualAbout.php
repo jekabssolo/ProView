@@ -56,7 +56,7 @@
          exit;
       };
 
-      $query = "SELECT * FROM projekti";
+      $query = "SELECT * FROM projekti WHERE ID = 1";
 
       if ($result = mysqli_query($link, $query)) {
 

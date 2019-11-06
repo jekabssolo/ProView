@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 06, 2019 at 05:57 PM
+-- Generation Time: Nov 06, 2019 at 06:12 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `projekti` (
 --
 
 INSERT INTO `projekti` (`ID`, `Name`, `Financer`, `Status`, `Number`, `SAM`, `Budget`, `Purpose`, `Activities`, `StartDate`, `FinishDate`, `CoordinatorName`, `CoordinatorContacts`, `BudgetSpent`, `BudgetMunicipality`, `BudgetOther`, `BudgetELFLA`, `BudgetERAF`, `BudgetESF`, `BudgetKF`, `BudgetKPFI`, `BudgetLAT-LIT`, `BudgetNor`, `BudgetCountry`) VALUES
-(2, 'Bauskas novada pašvaldības grants ceļu pārbūve Mežotnes pagastā', 'ELFLA', 'Aktīvs', 'Nr. 18-06-A00702-000065', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos”', 630235, 'Projekta mērķis ir veikt grants ceļa „Mežotne – Bajāri – A1”  posma pārbūvi 2,497 km garumā, grants ceļa “Bērzu muiža – Ciņi – Internātvidusskola” posma pārbūvi 2,375 km garumā un grants ceļa “Līdumnieki – Mežstrautnieki” posma pārbūvi 1,231 km garumā.', 'Projektā paredzēts atjaunot ceļa konstrukciju 6,103 km garā posmā ar platumu 3,50 m līdz 5,50 m, nodrošinot ūdens noteci no brauktuves. Tai tiks veidots vismaz 3% liels šķērskritums uz nogāzes pusi vai atbilstoši šķērsprofilu elementiem. Lietus ūdeni paredzēts uztvert esošajos un projektējamajos sāngrāvjos vai ievalkās, caurtekās zem ceļa un nobrauktuvēm un meliorācijas drenāžas sistēmās. Segas konstrukcijas aprēķini veikti ņemot vērā ģeoloģisko izpēti. Pastiprinot slāni ar nesaistītu minerālmateriālu maisījumu 0/32s un atsevišķās vietās atjaunojot salizturīgo slāni, konstrukcija tiks pastiprināta līdz 120 MPa.', '2018-07-25', '2020-08-15', 'Jolanta Kalinka', '+37163922400', 315118, 76926.8, NULL, 553308, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'Bauskas novada pašvaldības grants ceļu pārbūve Mežotnes pagastā', 'ELFLA', 'Aktīvs', 'Nr. 18-06-A00702-000065', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos”', 630235, 'Projekta mērķis ir veikt grants ceļa „Mežotne – Bajāri – A1”  posma pārbūvi 2,497 km garumā, grants ceļa “Bērzu muiža – Ciņi – Internātvidusskola” posma pārbūvi 2,375 km garumā un grants ceļa “Līdumnieki – Mežstrautnieki” posma pārbūvi 1,231 km garumā.', 'Projektā paredzēts atjaunot ceļa konstrukciju 6,103 km garā posmā ar platumu 3,50 m līdz 5,50 m, nodrošinot ūdens noteci no brauktuves. Tai tiks veidots vismaz 3% liels šķērskritums uz nogāzes pusi vai atbilstoši šķērsprofilu elementiem. Lietus ūdeni paredzēts uztvert esošajos un projektējamajos sāngrāvjos vai ievalkās, caurtekās zem ceļa un nobrauktuvēm un meliorācijas drenāžas sistēmās. Segas konstrukcijas aprēķini veikti ņemot vērā ģeoloģisko izpēti. Pastiprinot slāni ar nesaistītu minerālmateriālu maisījumu 0/32s un atsevišķās vietās atjaunojot salizturīgo slāni, konstrukcija tiks pastiprināta līdz 120 MPa.', '2018-07-25', '2020-08-15', 'Jolanta Kalinka', '+37163922400', 315118, 76926.8, NULL, 553308, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

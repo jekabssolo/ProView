@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Status of the "Project title"</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <?php require_once "blocks/head.php"; ?>
     </head>
     <body>
       <h1>"Project title"</h1>
@@ -10,7 +9,7 @@
         <option value="About">About</option>
         <option value="Status" selected="selected">Status</option>
       </select>
-      <div id="progressBorder">        
+      <div id="progressBorder">
         <div id="progressBar"></div>
       </div>
       <div id="progressTitle">
@@ -21,7 +20,7 @@
       </div>
       <h1>Project completion</h1>
       <h1>Update log</h1>
-      <h1>Budget Overview</h1>    
+      <h1>Budget Overview</h1>
     </body>
     <script src="script.js"></script>
 </html>

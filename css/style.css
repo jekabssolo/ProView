@@ -1,0 +1,15 @@
+#progressBorder{
+    height: 15px;
+    width: 700px;
+    background-color: transparent;
+    border: 2px solid black;
+}
+#progressBar{
+    height: 15px;
+    width: 300px;
+    background-color: green;
+}
+#progressTitle h2{
+    display: inline-block;
+    margin: 10px 140px 0 0;
+}

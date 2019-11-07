@@ -43,6 +43,7 @@
       .dropdown {
         float: right;
         overflow: hidden;
+        margin-right: 5%;
       }
 
       /* Dropdown button */
@@ -67,7 +68,7 @@
         display: none;
         position: absolute;
         background-color: #f9f9f9;
-        min-width: 160px;
+        min-width: 100px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
       }
@@ -92,10 +93,54 @@
         display: block;
       }</style>
 
+      <!-- Back button style -->
+    <style>
+      .back-button {
+  position:relative;
+  display:inline-block;
+  width:100px;
+  height:40px;
+  background-color:#ffffff;
+  line-height:39px;
+  /* color:#35495e; */
+  font-family:'arial';
+  text-align:center;
+  text-decoration:none;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow:hidden;
+  font-size: 16px;
+  color: black;
+}
+.back-button:after {
+  position:absolute;
+  display:block;
+  content:"";
+  width:100%;
+  height:1px;
+  background-color:#42b883;
+  transform:scale3d(0,1,1);
+  transform-origin:left;
+  transition:transform .3s;
+}
+.back-button:hover:after {
+  transform:scale3d(1,1,1);
+}
+    </style>
+  <?php
+    function intToMoney($amount){
+      $money = floatval($amount) / 100;
+      return $money;
+    }
+?>
+
 
 
   </head>
   <body>
+    
+  <a class="back-button" href="#"><span>All Projects</span></a>
+    
     <div class='dropdown'>
             <button class='dropbtn'>Sekcija
               <i class='fa fa-caret-down'></i>
@@ -130,30 +175,54 @@
           //     echo $row["Name"],". Budžets: ", $row["Budget"];
           // }
           $row = mysqli_fetch_assoc($result);
+          ?>
 
-          echo "<section class='b-content'>";
-          echo "<div class='wrap'>";
-          echo "<article class='b-article'>";
-          echo "<h1 class='header-1'>", $row["Name"], "</h1>";
-          echo "<hr>";
-          echo "<div class='tr-details'>";
-          echo "<b>Projekta finansētājs: </b>", $row["Financer"], "<br><br>";
-          echo "<b>Statuss: </b>", $row["Status"], "<br><br>";
-          echo "<b>Projekta numurs: </b>", $row["Number"], "<br><br>";
-          echo "<b>Projekta programma/SAM: </b>", $row["SAM"], "<br><br>"; 
-          echo "<b>Projekta budžets: </b>", $row["Budget"], " EUR", "<br><br>";
-          echo "<b>Projekta mērķis</b>", "<br>", $row["Purpose"], "<br><br>";
-          echo "<b>Galvenās aktivitātes</b>", "<br>", $row["Activities"], "<br><br>";
-          echo "<b>Īstenošanas laiks: </b>", date("d.m.Y.", strtotime($row["StartDate"])), " - ", date("d.m.Y.", strtotime($row["FinishDate"])), "<br><br>";
-          echo "<b>Koordinators: </b>", $row["CoordinatorName"], "<br><br>";
-          echo "<b>Kontakti: </b>", $row["CoordinatorContacts"], "<br><br>";
-          echo "</div>";
-          echo "<hr>";
-          echo "</article>";
-          echo "</div>";
-          echo "</section>";
-
-
+           <section class='b-content'>
+           <div class='wrap'>
+           <article class='b-article'>
+           <h1 class='header-1'>
+           <?php echo $row["Name"]; ?>
+           </h1>
+           <hr>
+           <div class='tr-details'>
+           <b>Projekta finansētājs: </b>
+           <?php echo $row["Financer"]; ?>
+           <br><br>
+           <b>Statuss: </b>
+           <?php echo $row["Status"]; ?>
+           <br><br>
+           <b>Projekta numurs: </b>
+           <?php echo $row["Number"]; ?>
+           <br><br>
+           Projekta programma/SAM: </b>
+           <?php echo $row["SAM"]; ?>
+           <br><br> 
+           <b>Projekta budžets: </b>
+           <?php echo
+           intToMoney($row["Budget"]); ?>
+           EUR <br><br>
+           <b>Projekta mērķis</b> <br>
+           <?php echo $row["Purpose"]; ?>
+           <br><br>
+           <b>Galvenās aktivitātes</b> <br>
+           <?php echo $row["Activities"]; ?>
+           <br><br>
+           <b>Īstenošanas laiks: </b>
+           <?php echo date("d.m.Y.", strtotime($row["StartDate"])), " - ", date("d.m.Y.", strtotime($row["FinishDate"])); ?>
+           <br><br>
+           <b>Koordinators: </b>
+           <?php echo $row["CoordinatorName"]; ?>
+           <br><br>
+           <b>Kontakti: </b>
+           <?php echo $row["CoordinatorContacts"]; ?>
+           <br><br>
+           </div>
+           <hr>
+           </article>
+           </div>
+          </section>
+          
+          <?php
           /* Free results */
           mysqli_free_result($result);
       }

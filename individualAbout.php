@@ -16,8 +16,10 @@
         <i class='fa fa-caret-down'></i>
       </button>
       <div class='dropdown-content'>
-        <a href='#'>Par projektu</a>
-        <a href='#'>Statuss</a>
+        <a class='selected'>Par projektu</a>
+        <?php 
+            echo "<a href='status.php?id=".$projects["ID"]."'>Status</a>";
+          ?>
       </div>
     </div>
 
@@ -43,6 +45,7 @@
       echo "</article>";
       echo "</div>";
       echo "</section>";
+      echo "<a href='index.php'>Back to homepage</a>";
      ?>
   </body>
 </html>

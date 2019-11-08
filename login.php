@@ -28,7 +28,7 @@
             max-width: 330px;
             padding: 15px;
             margin: 0 auto;
-            color: #017572;
+            color: #000000;
          }
          
          .form-signin .form-signin-heading,

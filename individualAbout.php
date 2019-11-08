@@ -2,14 +2,23 @@
 <!DOCTYPE html>
 <html lang="lv" dir="ltr">
   <head>
+  <link href="css/buttons.css" rel="stylesheet">
     <?php
       require_once "functions/function.php";
       $projects = getProjects($_GET['id']);
       $title = $projects["Name"];
       require_once "blocks/head.php";
      ?>
+     <?php
+      function intToMoney($amount){
+      $money = floatval($amount) / 100;
+      return $money;
+      }
+    ?>
   </head>
   <body>
+    <a class="back-button" href="index.php"><span>Visi Projekti</span></a>
+
     <div class='dropdown'>
       <button class='dropbtn'>
         Sekcija
@@ -23,29 +32,50 @@
       </div>
     </div>
 
-    <?php
-      echo "<section class='b-content'>";
-      echo "<div class='wrap'>";
-      echo "<article class='b-article'>";
-      echo "<h1 class='header-1'>".$projects["Name"]."</h1>";
-      echo "<hr>";
-      echo "<div class='tr-details'>";
-      echo "<b>Projekta finansētājs: </b>".$projects["Financer"]."<br><br>";
-      echo "<b>Statuss: </b>".$projects["Status"]."<br><br>";
-      echo "<b>Projekta numurs: </b>".$projects["Number"]."<br><br>";
-      echo "<b>Projekta programma/SAM: </b>".$projects["SAM"]."<br><br>";
-      echo "<b>Projekta budžets: </b>".$projects["Budget"]." EUR", "<br><br>";
-      echo "<b>Projekta mērķis</b>", "<br>".$projects["Purpose"]."<br><br>";
-      echo "<b>Galvenās aktivitātes</b>", "<br>".$projects["Activities"]."<br><br>";
-      echo "<b>Īstenošanas laiks: </b>", date("d.m.Y.", strtotime($projects["StartDate"])), " - ", date("d.m.Y.", strtotime($projects["FinishDate"])), "<br><br>";
-      echo "<b>Koordinators: </b>".$projects["CoordinatorName"]."<br><br>";
-      echo "<b>Kontakti: </b>".$projects["CoordinatorContacts"]."<br><br>";
-      echo "</div>";
-      echo "<hr>";
-      echo "</article>";
-      echo "</div>";
-      echo "</section>";
-      echo "<a href='index.php'>Back to homepage</a>";
-     ?>
+      <hr>
+      <section class='b-content'>
+      <div class='wrap'>
+      <article class='b-article'>
+      <h1 class='header-1'>
+      <?php echo $projects["Name"]; ?>
+      </h1>
+      <hr>
+      <div class='tr-details'>
+      <b>Projekta finansētājs: </b>
+      <?php echo $projects["Financer"]; ?>
+      <br><br>
+      <b>Statuss: </b>
+      <?php echo $projects["Status"]; ?>
+      <br><br>
+      <b>Projekta numurs: </b>
+      <?php echo $projects["Number"]; ?>
+      <br><br>
+      Projekta programma/SAM: </b>
+      <?php echo $projects["SAM"]; ?>
+      <br><br> 
+      <b>Projekta budžets: </b>
+      <?php echo
+      intToMoney($projects["Budget"]); ?>
+      EUR <br><br>
+      <b>Projekta mērķis</b> <br>
+      <?php echo $projects["Purpose"]; ?>
+      <br><br>
+      <b>Galvenās aktivitātes</b> <br>
+      <?php echo $projects["Activities"]; ?>
+      <br><br>
+      <b>Īstenošanas laiks: </b>
+      <?php echo date("d.m.Y.", strtotime($projects["StartDate"])), " - ", date("d.m.Y.", strtotime($projects["FinishDate"])); ?>
+      <br><br>
+      <b>Koordinators: </b>
+      <?php echo $projects["CoordinatorName"]; ?>
+      <br><br>
+      <b>Kontakti: </b>
+      <?php echo $projects["CoordinatorContacts"]; ?>
+      <br><br>
+      </div>
+      <hr>
+      </article>
+      </div>
+     </section>
   </body>
 </html>

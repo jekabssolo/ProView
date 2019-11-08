@@ -90,7 +90,7 @@
                   $_SESSION['username'] = 'admin';
                   
                   echo 'You have entered valid use name and password';
-                  header("Location: http://bausvote.rf.gd/individualAbout.php"); 
+                  header("Location: /index.php"); 
                   exit();
                }else {
                   $msg = 'Wrong username or password';

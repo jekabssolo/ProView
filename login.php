@@ -17,7 +17,7 @@
          body {
             padding-top: 40px;
             padding-bottom: 40px;
-            background-color: #ADABAB;
+            background-color: #ffffff;
          }
 
          .container {
@@ -28,7 +28,7 @@
             max-width: 330px;
             padding: 15px;
             margin: 0 auto;
-            color: #017572;
+            color: #000000;
          }
          
          .form-signin .form-signin-heading,
@@ -58,19 +58,16 @@
             margin-bottom: -1px;
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;
-            border-color:#017572;
          }
          
          .form-signin input[type="password"] {
             margin-bottom: 10px;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
-            border-color:#017572;
          }
          
          h2{
             text-align: center;
-            color: #017572;
          }
       </style>
       
@@ -78,10 +75,8 @@
 	
    <body>
       
-      <h2>Project Administration</h2>
-      <h2>Enter Username and Password</h2> 
-      <div class = "container form-signin">
-         
+      <h2>Projektu Administrēšana</h2>
+              
          <?php
             $msg = '';
             
@@ -89,20 +84,20 @@
                && !empty($_POST['password'])) {
 				
                if ($_POST['username'] == 'admin' && 
-                  $_POST['password'] == 'password') {
+                  $_POST['password'] == 'admin') {
                   $_SESSION['valid'] = true;
                   $_SESSION['timeout'] = time();
                   $_SESSION['username'] = 'admin';
                   
                   echo 'You have entered valid use name and password';
-                  header("Location: http://bausvote.rf.gd/individualAbout.php"); 
+                  header("Location: /index.php"); 
                   exit();
                }else {
                   $msg = 'Wrong username or password';
                }
             }
          ?>
-      </div> <!-- /container -->
+      
       
       <div class = "container">
       
@@ -111,10 +106,10 @@
             ?>" method = "post">
             <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <input type = "text" class = "form-control" 
-               name = "username" placeholder = "username" 
+               name = "username" placeholder = "lietotājvārds" 
                required autofocus><br>
             <input type = "password" class = "form-control"
-               name = "password" placeholder = "password" required>
+               name = "password" placeholder = "parole" required>
                <br>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
                name = "login">Login</button>

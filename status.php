@@ -41,5 +41,4 @@
       <h1>Update log</h1>
       <h1>Budget Overview</h1>
     </body>
-    <script src="script.js"></script>
 </html>

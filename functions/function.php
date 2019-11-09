@@ -1,5 +1,6 @@
 <?php
   require_once "connect.php";
+  require_once "phpCSS.php";
 
   function getProjects($id) {
     global $mysqli;
@@ -33,6 +34,7 @@
     $query = "SELECT Status FROM projekti WHERE ID = ".$id;    
     $result = mysqli_query($mysqli, $query);
     closeDB();
-    return mysqli_fetch_assoc($result);
+    $status = mysqli_fetch_assoc($result);
+    completionRow($status);
   }
  ?>

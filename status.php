@@ -1,14 +1,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php require_once "blocks/head.php"; ?>
+        <?php 
+          require_once "functions/function.php";
+          $projects = getProjects($_GET['id']);
+          $completion = completionStatusRow($_GET['id']);
+          require_once "blocks/head.php"; 
+        ?>
     </head>
     <body>
-      <h1>"Project title"</h1>
-      <select name="Project view" id="selectView">
-        <option value="About">About</option>
-        <option value="Status" selected="selected">Status</option>
-      </select>
+      <h1 class='header-1'>
+        <?php echo $projects["Name"]; ?>
+      </h1>
+      <div class='dropdown'>
+        <button class='dropbtn'>
+          Sekcija
+          <i class='fa fa-caret-down'></i>
+        </button>
+        <div class='dropdown-content'>
+          
+          <?php 
+            echo "<a href='individualAbout.php?id=".$projects["ID"]."'>Par projektu</a>";
+          ?>
+          <a class='selected'>Statuss</a>
+        </div>
+      </div>      
+      <h1>Project completion</h1>
+      <h1 class='header-1'>
+        <?php echo $completion["Status"]; ?>
+      </h1>
       <div id="progressBorder">
         <div id="progressBar"></div>
       </div>
@@ -18,7 +38,6 @@
           <h2>Active</h2>
           <h2>Completed</h2>
       </div>
-      <h1>Project completion</h1>
       <h1>Update log</h1>
       <h1>Budget Overview</h1>
     </body>

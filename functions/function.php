@@ -28,6 +28,11 @@
   }
 
   function completionStatusRow($id){
-    
+    global $mysqli;
+    connectDB();
+    $query = "SELECT Status FROM projekti WHERE ID = ".$id;    
+    $result = mysqli_query($mysqli, $query);
+    closeDB();
+    return mysqli_fetch_assoc($result);
   }
  ?>

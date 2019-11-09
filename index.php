@@ -7,7 +7,7 @@
         position: absolute;
         border-collapse: collapse;
         border: 1px solid black;
-        width: 60%;
+        width: 65%;
         font-size: 110%;
         top: 25%;
         left: 20%;
@@ -91,6 +91,15 @@
           <input type="submit" value="Filtrēt">
         </form>
 
+        <br>
+
+        <!-- clearing filters -->
+        <form method="post">
+          <input name="status" value="" type="hidden">
+          <input name="financer" value="" type="hidden">
+          <input type="submit" value="Notīrīt filtrus">
+        </form>
+
         <!-- Search form -->
         <form method="post" class="search-field">
               Meklēt pēc nosaukuma<br>
@@ -108,19 +117,19 @@
         <?php
 
           // filter results
-          if(array_key_exists('financer',$_POST) || array_key_exists('status',$_POST)){
-            if(!array_key_exists('financer',$_POST)){
-              $finanval = "";
-            }else{
-              $finanval = $_POST["financer"];
-            }
-            if(!array_key_exists('status',$_POST)){
-              $statusval = "";
-            }else{
-              $statusval = $_POST["status"];
-            }
+          if(array_key_exists('status',$_POST) && array_key_exists('financer',$_POST)){
             require_once "functions/filter.php";
-            $projects = getProjectsthatstatus($statusval, $finanval);
+            $projects = getProjectsthatstatus($_POST["status"], $_POST["financer"]);
+          }
+          
+          if(array_key_exists('status',$_POST) && !array_key_exists('financer',$_POST)){
+            require_once "functions/filter.php";
+            $projects = getProjectsthatstatus($_POST["status"], "");
+          }
+
+          if(!array_key_exists('status',$_POST) && array_key_exists('financer',$_POST)){
+            require_once "functions/filter.php";
+            $projects = getProjectsthatstatus("", $_POST["financer"]);
           }
 
 

@@ -66,7 +66,7 @@
         <br>
 
 
-        <!-- filter by status -->
+        <!-- filter -->
         <form method="post" class="filter">
           Filtrēt: <br> <br>
           Pēc statusa <br> <br>
@@ -75,13 +75,26 @@
           <input type="radio" name="status" value="Plānošana" <?php if((isset($_POST['status']) && $_POST['status'] == 'Plānošana')) echo ' checked="checked"';?>> Plānošana<br>
           <input type="radio" name="status" value="Balsošana" <?php if((isset($_POST['status']) && $_POST['status'] == 'Balsošana')) echo ' checked="checked"';?>> Balsošana<br>
           <input type="radio" name="status" value="Iesniegts" <?php if((isset($_POST['status']) && $_POST['status'] == 'Iesniegts')) echo ' checked="checked"';?>> Iesniegts <br> <br>
+          
+          Pēc finansētāja <br> <br>
+          <input type="radio" name="financer" value="Pašvaldība" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'Pašvaldība')) echo ' checked="checked"';?> > Pašvaldība<br>
+          <input type="radio" name="financer" value="Cits" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'Cits')) echo ' checked="checked"';?>> Cits<br>
+          <input type="radio" name="financer" value="ELFLA" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'ELFLA')) echo ' checked="checked"';?>> ELFLA<br>
+          <input type="radio" name="financer" value="ERAF" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'ERAF')) echo ' checked="checked"';?>> ERAF<br>
+          <input type="radio" name="financer" value="ESF" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'ESF')) echo ' checked="checked"';?> > ESF<br>
+          <input type="radio" name="financer" value="KF" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'KF')) echo ' checked="checked"';?>> KF<br>
+          <input type="radio" name="financer" value="KPFI" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'KPFI')) echo ' checked="checked"';?>> KPFI<br>
+          <input type="radio" name="financer" value="LAT-LIT" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'LAT-LIT')) echo ' checked="checked"';?>> LAT-LIT<br>
+          <input type="radio" name="financer" value="NORVĒĢU FINANŠU INSTRUMENTS" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'NORVĒĢU FINANŠU INSTRUMENS')) echo ' checked="checked"';?>> NFI<br>
+          <input type="radio" name="financer" value="Valsts" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'Valsts')) echo ' checked="checked"';?>> Valsts<br> <br>
+          
           <input type="submit" value="Filtrēt">
         </form>
 
         <!-- Search form -->
         <form method="post" class="search-field">
               Meklēt pēc nosaukuma<br>
-              <input type="text" size="30" placeholder="Sāc rakstīt" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
+              <input type="text" size="30" placeholder="Sāc rakstīt" name="search" value="<?php echo isset($_post['search']) ? $_POST['search'] : '' ?>">
               <input type="submit" value="Meklēt">
         </form>
 
@@ -94,12 +107,21 @@
             </tr>
         <?php
 
-          // filter by status results
-          if(array_key_exists('status',$_POST)){
-            require_once "functions/filterstatus.php";
-            $projects = getProjectsthatstatus($_POST["status"]);
+          // filter results
+          if(array_key_exists('financer',$_POST) || array_key_exists('status',$_POST)){
+            if(!array_key_exists('financer',$_POST)){
+              $finanval = "";
+            }else{
+              $finanval = $_POST["financer"];
+            }
+            if(!array_key_exists('status',$_POST)){
+              $statusval = "";
+            }else{
+              $statusval = $_POST["status"];
+            }
+            require_once "functions/filter.php";
+            $projects = getProjectsthatstatus($statusval, $finanval);
           }
-
 
 
 
@@ -133,29 +155,6 @@
          </script>
 
 
-
-
-
-<!-- <label for="x">I am looking for:</label>
-<select id="x">
-  <option value="t1">Tag 1</option>
-  <option value="t2">Tag 2</option>
-  <option value="t3">Tag 3</option>
-</select>
-
-<label for="y">That has:</label>
-<select id="y">
-  <option value="t4">Tag 4</option>
-  <option value="t5">Tag 5</option>
-  <option value="t6">Tag 6</option>
-</select>
-
-<label for="z">and is:</label>
-<select id="z">
-  <option value="t7">Tag 7</option>
-  <option value="t8">Tag 8</option>
-  <option value="t9">Tag 9</option>
-</select> -->
 
     </body>
 </html>

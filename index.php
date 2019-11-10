@@ -53,7 +53,23 @@
       <?php
         require_once "functions/function.php";
         $projects = getProjects("");
+        // search and filter results
+        if(array_key_exists('search',$_POST) || array_key_exists('status',$_POST) || array_key_exists('financer',$_POST)){
+          if(!array_key_exists('status',$_POST)){
+            $statusval="";
+          }else{
+            $statusval=$_POST["status"];
+          }
+          if(!array_key_exists('financer',$_POST)){
+            $finanval="";
+          }else{
+            $finanval=$_POST["financer"];
+          }
+          require_once "functions/searchfilter.php";
+          $projects = getProjectscontaining($finanval, $statusval, $_POST["search"]);
+        }
        ?>
+  
     </head>
 
 
@@ -66,7 +82,7 @@
         <br>
 
 
-        <!-- filter -->
+        <!-- filter forms -->
         <form method="post" class="filter">
           Filtrēt: <br> <br>
           Pēc statusa <br> <br>
@@ -88,24 +104,31 @@
           <input type="radio" name="financer" value="NORVĒĢU FINANŠU INSTRUMENTS" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'NORVĒĢU FINANŠU INSTRUMENS')) echo ' checked="checked"';?>> NFI<br>
           <input type="radio" name="financer" value="Valsts" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'Valsts')) echo ' checked="checked"';?>> Valsts<br> <br>
           
+          <input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
+          
           <input type="submit" value="Filtrēt">
         </form>
 
         <br>
 
-        <!-- clearing filters -->
-        <form method="post">
+        <!-- clearing filters form -->
+        <form method="post" class="filter">
           <input name="status" value="" type="hidden">
           <input name="financer" value="" type="hidden">
+          <input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
           <input type="submit" value="Notīrīt filtrus">
         </form>
 
         <!-- Search form -->
         <form method="post" class="search-field">
               Meklēt pēc nosaukuma<br>
-              <input type="text" size="30" placeholder="Sāc rakstīt" name="search" value="<?php echo isset($_post['search']) ? $_POST['search'] : '' ?>">
+              <input type="text" size="30" placeholder="Sāc rakstīt" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
+              <input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
+              <input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
               <input type="submit" value="Meklēt">
         </form>
+
+
 
         <br>
         <table class="project-table" align="center">
@@ -115,31 +138,6 @@
                 <th>Īstenošanas laiks</th>
             </tr>
         <?php
-
-          // filter results
-          if(array_key_exists('status',$_POST) && array_key_exists('financer',$_POST)){
-            require_once "functions/filter.php";
-            $projects = getProjectsthatstatus($_POST["status"], $_POST["financer"]);
-          }
-          
-          if(array_key_exists('status',$_POST) && !array_key_exists('financer',$_POST)){
-            require_once "functions/filter.php";
-            $projects = getProjectsthatstatus($_POST["status"], "");
-          }
-
-          if(!array_key_exists('status',$_POST) && array_key_exists('financer',$_POST)){
-            require_once "functions/filter.php";
-            $projects = getProjectsthatstatus("", $_POST["financer"]);
-          }
-
-
-
-          // search results
-          if(array_key_exists('search',$_POST)){
-            require_once "functions/search.php";
-            $projects = getProjectscontaining($_POST["search"]);
-          }
-
           for ($i = 0; $i<count($projects); $i++){
            
             echo "<tr class='entry' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'>";
@@ -150,8 +148,6 @@
           };
          ?>
          </table>
-
-
 
 
          <!-- table row linking to individual view -->

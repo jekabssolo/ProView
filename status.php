@@ -5,6 +5,7 @@
           require_once "functions/function.php";
           $projects = getProjects($_GET['id']);
           $completion = completionStatusRow($_GET['id']);
+          $updateComments = updateLog($_GET['id']);
           require_once "blocks/head.php"; 
         ?>
     </head>
@@ -24,7 +25,8 @@
           ?>
           <a class='selected'>Statuss</a>
         </div>
-      </div>      
+      </div>  
+
       <h1>Projekta statuss</h1>
       <div id="progressBorder">
         <?php echo '<div id="progressBar" style="width:'.$completion.'"></div>' ?>
@@ -36,7 +38,24 @@
         <div class="progressStatus"><h2>Aktīvs</h2></div>
         <div class="progressStatus"><h2>Arhivēts</h2></div>
       </div>
+
       <h1>Update log</h1>
+      <div id="updateLog">
+        <h2 class='updateData'>
+          <?php 
+          for ($i = 0; $i< count($updateComments); $i++){
+            echo $updateComments[$i]["Date"];
+          ?>
+          <?php echo $updateComments[$i]["Comments"];
+          ?>
+          </br> 
+          <?php 
+          };
+          ?>
+      </div>
       <h1>Budget Overview</h1>
+      <div id="budgetPie">
+      <svg ><script>budgetArc(<?php echo $projects["BudgetSpent"];?>,<?php echo $projects["Budget"];?>);</script></svg>
+      </div>
     </body>
 </html>

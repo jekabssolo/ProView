@@ -34,9 +34,34 @@
     $result = mysqli_query($mysqli, $query);
     closeDB();
     $status = mysqli_fetch_assoc($result);
+    if ($status["Status"] == "Iesniegts"){
+      $barWidth = "0%";
+      return $barWidth;
+    };
+    if ($status["Status"] == "Balsošana"){
+      $barWidth = "19.5%";
+      return $barWidth;
+    };
+    if ($status["Status"] == "Plānošana"){
+      $barWidth = "50%";
+      return $barWidth;
+    };
     if ($status["Status"] == "Aktīvs"){
-      $barWidth = "25%";
+      $barWidth = "69.5%";
+      return $barWidth;
+    };
+    if ($status["Status"] == "Arhivēts"){
+      $barWidth = "99.6%";
       return $barWidth;
     }
+  }
+
+  function updateLog($id){
+    global $mysqli;
+    connectDB();
+    $query = "SELECT Date, Comments FROM atjauninajumi WHERE projectID = ".$id;    
+    $result = mysqli_query($mysqli, $query);
+    closeDB();
+    return resultToArray($result);
   }
  ?>

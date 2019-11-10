@@ -10,7 +10,7 @@
     <body>
         <h1>ProView Bauska</h1>
         <?php
-          for ($i = 0; $i<2; $i++){
+          for ($i = 0; $i< count($projects); $i++){
             echo "<section class='b-content'>";
             echo "<div class='wrap'>";
             echo "<article class='b-article'>";

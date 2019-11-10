@@ -1,6 +1,5 @@
 <?php
   require_once "connect.php";
-  require_once "phpCSS.php";
 
   function getProjects($id) {
     global $mysqli;
@@ -35,6 +34,9 @@
     $result = mysqli_query($mysqli, $query);
     closeDB();
     $status = mysqli_fetch_assoc($result);
-    completionRow($status);
+    if ($status["Status"] == "Aktīvs"){
+      $barWidth = "25%";
+      return $barWidth;
+    }
   }
  ?>

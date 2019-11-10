@@ -2,4 +2,3 @@
 <meta charset="utf-8">
 <title><?php echo $projects["Name"]; ?></title>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel='stylesheet' type='text/css' href='../functions/phpCSS.php' />

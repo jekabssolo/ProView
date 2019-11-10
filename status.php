@@ -25,18 +25,16 @@
           <a class='selected'>Statuss</a>
         </div>
       </div>      
-      <h1>Project completion</h1>
-      <h1 class='header-1'>
-        <?php echo $completion["Status"]; ?>
-      </h1>
+      <h1>Projekta statuss</h1>
       <div id="progressBorder">
-        <div id="progressBar"></div>
+        <?php echo '<div id="progressBar" style="width:'.$completion.'"></div>' ?>
       </div>
-      <div id="progressTitle">
-          <h2>Voting</h2>
-          <h2>Planning</h2>
-          <h2>Active</h2>
-          <h2>Completed</h2>
+      <div id="statusWrapper">
+        <div class="progressStatus"><h2>Iesniegts</h2></div>
+        <div class="progressStatus"><h2>Balsošana</h2></div>
+        <div class="progressStatus"><h2>Plānošana</h2></div>
+        <div class="progressStatus"><h2>Aktīvs</h2></div>
+        <div class="progressStatus"><h2>Arhivēts</h2></div>
       </div>
       <h1>Update log</h1>
       <h1>Budget Overview</h1>

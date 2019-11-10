@@ -1,6 +1,9 @@
+body{
+  margin: 0px;
+}
 #progressBorder{
     height: 15px;
-    width: 700px;
+    width: 99.6%;
     background-color: transparent;
     border: 2px solid black;
 }
@@ -9,9 +12,19 @@
     width: 300px;
     background-color: green;
 }
-#progressTitle h2{
+#statusWrapper div{
     display: inline-block;
-    margin: 10px 140px 0 0;
+    width: 19.5%;
+}
+#statusWrapper div:last-child, #statusWrapper div:nth-child(4){
+  display: inline-block;
+  width: 19.5%;
+  text-align: right;
+}
+#statusWrapper div:nth-child(3){
+  display: inline-block;
+  width: 19.5%;
+  text-align: center;
 }
 /* Dropdown style */
   /* The dropdown container */

@@ -87,8 +87,9 @@
           }else{
             $entrysort=$_POST["entrysort"];
           }
+          $searchval = preg_replace("/[']/", "", $_POST["search"]);
           require_once "functions/searchfilter.php";
-          $projects = getProjectscontaining($finanval, $statusval, $_POST["search"], $budgetsort, $entrysort);
+          $projects = getProjectscontaining($finanval, $statusval, $searchval, $budgetsort, $entrysort);
         }
        ?>
   
@@ -139,14 +140,13 @@
           <input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
           <input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
           <input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
-          
           <input type="submit" value="Notīrīt filtrus">
         </form>
 
         <!-- Search form -->
         <form method="post" class="search-field">
               Meklēt pēc nosaukuma<br>
-              <input type="text" size="30" placeholder="Sāc rakstīt" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
+              <input type="text" size="30" placeholder="Sāc rakstīt" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>" maxlength="65534">
               <input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
               <input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
               <input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
@@ -161,7 +161,7 @@
             <!-- Sorting by budget -->
             Pēc budžeta<br>
             <select size="1" name="budgetsort" onchange="sortsubmit()">
-              <option value='' selected>Kārtot</option>
+              <option value='' selected>--</option>
               <option value='ASC' <?php echo isset($_POST['budgetsort']) && $_POST['budgetsort'] == 'ASC' ? 'selected' : '' ?>>Mazākais vispirms</option>
               <option value='DESC' <?php echo isset($_POST['budgetsort']) && $_POST['budgetsort'] == 'DESC' ? 'selected' : '' ?>>Lielākais vispirms</option>
             </select>
@@ -169,7 +169,7 @@
             <!-- Sorting by entry date -->
             Pēc ievietošanas datuma<br>
             <select size="1" name="entrysort" onchange="sortsubmit()">
-              <option value='' selected>Kārtot</option>
+              <option value='' selected>--</option>
               <option value='ASC' <?php echo isset($_POST['entrysort']) && $_POST['entrysort'] == 'ASC' ? 'selected' : '' ?>>Jaunākie vispirms</option>
               <option value='DESC' <?php echo isset($_POST['entrysort']) && $_POST['entrysort'] == 'DESC' ? 'selected' : '' ?>>Senākie vispirms</option>
             </select>

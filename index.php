@@ -198,6 +198,10 @@
             echo "<td>".date("d.m.Y.", strtotime($projects[$i]["StartDate"])), " - ", date("d.m.Y.", strtotime($projects[$i]["FinishDate"])),"</td>";
             echo "</tr>";  
           };
+          if (count($projects) == 0){
+            echo "<tr><td colspan='3' align='center'>Nekas netika atrasts</td></tr>";
+          }
+          
          ?>
          </table>
 

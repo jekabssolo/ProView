@@ -2,6 +2,9 @@
 <html>
     <head>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>function sortsubmit(){document.getElementById("sorting").submit();}</script>
+    <script>function filtersubmit(){document.getElementById("filtering").submit();}</script>
+
     <style>
       .project-table{
         position: absolute;
@@ -10,7 +13,7 @@
         width: 65%;
         font-size: 110%;
         top: 25%;
-        left: 20%;
+        left: 15%;
       }
       .project-table tr:nth-child(even){background-color: #f2f2f2;}
       .project-table tr:hover {background-color: #ddd;}
@@ -37,12 +40,19 @@
 
       .search-field{
         position: absolute;
-        left: 23%;
+        left: 20%;
         top: 15%;
       }
-      .filter{
+      .filter-field{
         position: sticky;
+        left: 0%;
       }
+      .sort-field{
+        position: absolute;
+        right: 3%;
+        top: 22%
+      }
+
 
     </style>
     
@@ -53,8 +63,10 @@
       <?php
         require_once "functions/function.php";
         $projects = getProjects("");
-        // search and filter results
-        if(array_key_exists('search',$_POST) || array_key_exists('status',$_POST) || array_key_exists('financer',$_POST)){
+
+
+        // search and filter and sort results
+        if(array_key_exists('search',$_POST) || array_key_exists('status',$_POST) || array_key_exists('financer',$_POST) || array_key_exists('budgetsort',$_POST) || array_key_exists('entrysort',$_POST)){
           if(!array_key_exists('status',$_POST)){
             $statusval="";
           }else{
@@ -65,8 +77,18 @@
           }else{
             $finanval=$_POST["financer"];
           }
+          if(!array_key_exists('budgetsort',$_POST)){
+            $budgetsort="";
+          }else{
+            $budgetsort=$_POST["budgetsort"];
+          }
+          if(!array_key_exists('entrysort',$_POST)){
+            $entrysort="";
+          }else{
+            $entrysort=$_POST["entrysort"];
+          }
           require_once "functions/searchfilter.php";
-          $projects = getProjectscontaining($finanval, $statusval, $_POST["search"]);
+          $projects = getProjectscontaining($finanval, $statusval, $_POST["search"], $budgetsort, $entrysort);
         }
        ?>
   
@@ -79,11 +101,11 @@
 
 
         <h1 style="text-align:center;">ProView Bauska</h1>
-        <br>
+
 
 
         <!-- filter forms -->
-        <form method="post" class="filter">
+        <form method="post" class="filter-field"  id="filtering" onchange="filtersubmit()">
           Filtrēt: <br> <br>
           Pēc statusa <br> <br>
           <input type="radio" name="status" value="Aktīvs" <?php if((isset($_POST['status']) && $_POST['status'] == 'Aktīvs')) echo ' checked="checked"';?> > Aktīvs<br>
@@ -105,17 +127,19 @@
           <input type="radio" name="financer" value="Valsts" <?php if((isset($_POST['financer']) && $_POST['financer'] == 'Valsts')) echo ' checked="checked"';?>> Valsts<br> <br>
           
           <input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
-          
-          <input type="submit" value="Filtrēt">
+          <input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
+          <input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
         </form>
 
-        <br>
 
         <!-- clearing filters form -->
-        <form method="post" class="filter">
+        <form method="post" class="filter-field">
           <input name="status" value="" type="hidden">
           <input name="financer" value="" type="hidden">
           <input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
+          <input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
+          <input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
+          
           <input type="submit" value="Notīrīt filtrus">
         </form>
 
@@ -125,12 +149,40 @@
               <input type="text" size="30" placeholder="Sāc rakstīt" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
               <input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
               <input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+              <input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
+              <input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
               <input type="submit" value="Meklēt">
         </form>
 
 
+        <!-- Sorting form -->
+        <form method="post" class="sort-field"  id="sorting">
+            <br>Kārtot:<br><br>
+            <!-- Sorting by budget -->
+            Pēc budžeta<br>
+            <select size="1" name="budgetsort" onchange="sortsubmit()">
+              <option value='' selected>Kārtot</option>
+              <option value='ASC' <?php echo isset($_POST['budgetsort']) && $_POST['budgetsort'] == 'ASC' ? 'selected' : '' ?>>Mazākais vispirms</option>
+              <option value='DESC' <?php echo isset($_POST['budgetsort']) && $_POST['budgetsort'] == 'DESC' ? 'selected' : '' ?>>Lielākais vispirms</option>
+            </select>
+            <br><br>
+            <!-- Sorting by entry date -->
+            Pēc ievietošanas datuma<br>
+            <select size="1" name="entrysort" onchange="sortsubmit()">
+              <option value='' selected>Kārtot</option>
+              <option value='ASC' <?php echo isset($_POST['entrysort']) && $_POST['entrysort'] == 'ASC' ? 'selected' : '' ?>>Jaunākie vispirms</option>
+              <option value='DESC' <?php echo isset($_POST['entrysort']) && $_POST['entrysort'] == 'DESC' ? 'selected' : '' ?>>Senākie vispirms</option>
+            </select>
+            
+            <input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
+            <input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+            <input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
+        </form>
+
 
         <br>
+
+        <!-- results table -->
         <table class="project-table" align="center">
         <tr class="header">
                 <th>Nosaukums</th>

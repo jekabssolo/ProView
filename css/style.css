@@ -100,11 +100,11 @@ body{
   display: inline-block;
 }
 
-/*Budget pies*/
-#budgetPie{
-  height: 300px;
+#budgetChart{
+  text-align: center;
 }
-#budgetPie svg{
-  width: 300px;
-  height: 200px;
+#budgetPie, #allBudgetPie{
+  height: 500px;
+  width: 49%;
+  display: inline-block;
 }

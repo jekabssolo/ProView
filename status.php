@@ -54,8 +54,22 @@
           ?>
       </div>
       <h1>Budget Overview</h1>
-      <div id="budgetPie">
-      <svg ><script>budgetArc(<?php echo $projects["BudgetSpent"];?>,<?php echo $projects["Budget"];?>);</script></svg>
+      <div id="budgetChart">
+        <div id="budgetPie">
+          <script>budgetChart([
+          ['Budžeta veids', 'Daudzums eiro'],
+          ['Iztērēts',     <?php echo $projects['BudgetSpent']?>],
+          ['Kopējs projekta budžets', <?php echo $projects['Budget']?>]
+          ]);</script>
+        </div>
+
+        <div id="allBudgetPie">
+          <script>allBudgetChart([
+          ['Budžeta veids', 'Daudzums eiro'],
+          ['Šī projekta budžets',     <?php echo $projects['BudgetSpent']?>],
+          ['Visu projektu budžets', <?php echo budgetSum();?>]
+          ]);</script>
+        </div>
       </div>
     </body>
 </html>

@@ -64,4 +64,18 @@
     closeDB();
     return resultToArray($result);
   }
+
+  function budgetSum(){
+    global $mysqli;
+    connectDB();
+    $query = "SELECT Budget FROM projekti";    
+    $result = mysqli_query($mysqli, $query);
+    closeDB();
+    $budgets = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $allBudget = 0;
+    for($i = 0; $i < count($budgets); $i++){
+      $allBudget += $budgets[$i]["Budget"];
+    }
+    return $allBudget;
+  }
  ?>

@@ -1,33 +1,35 @@
-function budgetArc(spentBudget, totalBudget){
-    var data = [spentBudget, totalBudget];
+google.charts.load('current', {'packages':['corechart']});
+function budgetChart(budget){
 
-    var svg = d3.select("svg"),
-        width = 300,
-        height = 200,
-        radius = Math.min(width, height) / 2,
-        g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    google.charts.setOnLoadCallback(drawBudgetChart);
+    function drawBudgetChart() {
 
-    var color = d3.scaleOrdinal(['#4daf4a','#377eb8','#ff7f00','#984ea3','#e41a1c']);
+        var data = google.visualization.arrayToDataTable(budget);
 
-    // Generate the pie
-    var pie = d3.pie();
+        var options = {
+        title: 'Šī projekta budžets',
+        colors: ['red', 'green']
+        };
 
-    // Generate the arcs
-    var arc = d3.arc()
-                .innerRadius(0)
-                .outerRadius(radius);
+        var chart = new google.visualization.PieChart(document.getElementById('budgetPie'));
 
-    //Generate groups
-    var arcs = g.selectAll("arc")
-                .data(pie(data))
-                .enter()
-                .append("g")
-                .attr("class", "arc")
+        chart.draw(data, options);
+    }
+};
 
-    //Draw arc paths
-    arcs.append("path")
-        .attr("fill", function(d, i) {
-            return color(i);
-        })
-        .attr("d", arc);
-}
+function allBudgetChart(budget){
+    google.charts.setOnLoadCallback(dravAllBudgetChart);
+    function dravAllBudgetChart() {
+
+        var data = google.visualization.arrayToDataTable(budget);
+
+        var options = {
+        title: 'Kopējais budžets',
+        colors: ['red', 'green']
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('allBudgetPie'));
+
+        chart.draw(data, options);
+    }
+};

@@ -1,17 +1,25 @@
-<?php
-   ob_start();
-   session_start();
-?>
-
-<?
-   // error_reporting(E_ALL);
-   // ini_set("display_errors", 1);
-?>
-
 <html lang = "en">
    
    <head>
-      <title>Admin Login</title>
+      <title>Administrēšana</title>
+      <?php session_start(); /* Starts the session */
+        /* Check Login form submitted */if(isset($_POST['Submit'])){
+        /* Define username and associated password array */$logins = array('admin' => 'admin');
+
+        /* Check and assign submitted Username and Password to new variable */$Username = isset($_POST['Username']) ? $_POST['Username'] : '';
+        $Password = isset($_POST['Password']) ? $_POST['Password'] : '';
+
+        /* Check Username and Password existence in defined array */if (isset($logins[$Username]) && $logins[$Username] == $Password){
+        /* Success: Set session variables and redirect to Protected page  */$_SESSION['UserData']['Username']=$logins[$Username];
+        $_SESSION['start'] = time();
+        $_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
+        header("location:admin.php");
+        exit;
+        } else {
+        /*Unsuccessful attempt: Set error message */$msg="<span style='color:red'>Nepareizs lietotājvārds un/vai parole!</span>";
+        }
+        }
+        ?>
       
       <style>
          body {
@@ -77,44 +85,22 @@
       
       <h2>Projektu Administrēšana</h2>
               
-         <?php
-            $msg = '';
-            
-            if (isset($_POST['login']) && !empty($_POST['username']) 
-               && !empty($_POST['password'])) {
-				
-               if ($_POST['username'] == 'admin' && 
-                  $_POST['password'] == 'admin') {
-                  $_SESSION['valid'] = true;
-                  $_SESSION['timeout'] = time();
-                  $_SESSION['username'] = 'admin';
-                  
-                  echo 'You have entered valid use name and password';
-                  header("Location: /index.php"); 
-                  exit();
-               }else {
-                  $msg = 'Wrong username or password';
-               }
-            }
-         ?>
       
       
       <div class = "container">
-      
-         <form class = "form-signin" role = "form" 
-            action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); 
-            ?>" method = "post">
-            <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
-            <input type = "text" class = "form-control" 
-               name = "username" placeholder = "lietotājvārds" 
-               required autofocus><br>
-            <input type = "password" class = "form-control"
-               name = "password" placeholder = "parole" required>
-               <br>
-            <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
-               name = "login">Login</button>
-         </form>
-			
+
+
+
+			<form action="" method="post" name="Login_Form" class = "form-signin">
+        <?php if(isset($msg)){?>
+        <h4 class = "form-signin-heading"><?php echo $msg;?>
+        <?php } ?>
+        <br> <br>
+         <input name="Username" type="text" class = "form-control" placeholder = "lietotājvārds" required autofocus>
+         <input name="Password" type="password" class = "form-control" placeholder = "parole" required>
+         <br>
+        <input name="Submit" type="submit" value="Login" class = "btn btn-lg btn-primary btn-block">
+    </form>
          
       </div> 
       

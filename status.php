@@ -3,25 +3,26 @@
     <head>
         <?php 
           require_once "functions/function.php";
-          $projects = getProjects($_GET['id']);
-          $completion = completionStatusRow($_GET['id']);
-          $updateComments = updateLog($_GET['id']);
+          $projectData = dataToVariables($_GET['id']);
+          $completion = completionStatusRow($projectData[1]);
+          $updateComments = $projectData[4];
+          $budgetSpent = $projectData[2];
+          $projectBudget = $projectData[3];
           require_once "blocks/head.php"; 
         ?>
     </head>
     <body>
       <h1 class='header-1'>
-        <?php echo $projects["Name"]; ?>
+        <?php echo $projectData[0]; ?>
       </h1>
       <div class='dropdown'>
         <button class='dropbtn'>
           Sekcija
           <i class='fa fa-caret-down'></i>
         </button>
-        <div class='dropdown-content'>
-          
+        <div class='dropdown-content'>          
           <?php 
-            echo "<a href='individualAbout.php?id=".$projects["ID"]."'>Par projektu</a>";
+            echo "<a href='individualAbout.php?id=".$_GET["id"]."'>Par projektu</a>";
           ?>
           <a class='selected'>Statuss</a>
         </div>
@@ -43,34 +44,35 @@
       <div id="updateLog">
         <h2 class='updateData'>
           <?php 
-          for ($i = 0; $i< count($updateComments); $i++){
-            echo $updateComments[$i]["Date"];
-          ?>
-          <?php echo $updateComments[$i]["Comments"];
+            foreach($updateComments as $keypair => $valuePair){
+              echo $keypair;
+          ?>&nbsp<?php      
+              echo $valuePair;
           ?>
           </br> 
           <?php 
-          };
+            };
           ?>
+        </h2>
       </div>
       <h1>Budget Overview</h1>
       <div id="budgetChart">
         <div id="budgetPie">
           <script>budgetChart([
           ['Budžeta veids', 'Daudzums eiro'],
-          ['Iztērēts',     <?php echo $projects['BudgetSpent']?>],
-          ['Kopējs projekta budžets', <?php echo $projects['Budget']?>]
+          ['Iztērēts',     <?php echo $budgetSpent?>],
+          ['Kopējs projekta budžets', <?php echo $projectBudget?>]
           ]);</script>
         </div>
 
         <div id="allBudgetPie">
           <script>allBudgetChart([
           ['Budžeta veids', 'Daudzums eiro'],
-          ['Šī projekta budžets',     <?php echo $projects['BudgetSpent']?>],
+          ['Šī projekta budžets',     <?php echo $budgetSpent?>],
           ['Visu projektu budžets', <?php echo budgetSum();?>]
           ]);</script>
         </div>
-        <p><?php dataToVariables(8)?></p>
+        <p><?php dataToVariables($_GET["id"])?></p>
       </div>
     </body>
 </html>

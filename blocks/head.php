@@ -1,6 +1,6 @@
 <?php require_once "functions/function.php"; ?>
 <meta charset="utf-8">
-<title><?php echo $projects["Name"]; ?></title>
+<title><?php echo $projectData[0]; ?></title>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 <!-- Load d3.js & color scale -->
 <script src="https://d3js.org/d3.v4.js"></script>

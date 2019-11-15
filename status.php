@@ -70,6 +70,7 @@
           ['Visu projektu budžets', <?php echo budgetSum();?>]
           ]);</script>
         </div>
+        <p><?php dataToVariables(8)?></p>
       </div>
     </body>
 </html>

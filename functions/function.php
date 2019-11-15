@@ -78,4 +78,18 @@
     }
     return $allBudget;
   }
+
+  function dataToVariables($id){
+    global $mysqli;
+    connectDB();
+    $query = "SELECT projekti.Name, projekti.Status, atjauninajumi.Date, atjauninajumi.Comments, finansetajs.* 
+    FROM projekti
+    LEFT JOIN finansetajs ON projekti.ID = finansetajs.project_id
+    LEFT JOIN atjauninajumi ON projekti.ID = atjauninajumi.projectID
+    WHERE projekti.ID =".$id;    
+    $result = mysqli_query($mysqli, $query);
+    closeDB();
+    $dataR = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    print_r($dataR);
+  }
  ?>

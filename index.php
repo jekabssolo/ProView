@@ -3,7 +3,16 @@
     <head>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>function sortsubmit(){document.getElementById("sorting").submit();}</script>
-    <script>function filtersubmit(){document.getElementById("filtering").submit();}</script>
+    <script>function filtersubmit(){document.getElementById("filtering").submit();}
+    </script>
+             <!-- table row linking to individual view -->
+             <script>
+         jQuery(document).ready(function($) {
+            $('*[data-href]').on('click', function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->  
     <style>
       .project-table{
@@ -67,7 +76,7 @@
 
 
         // search and filter and sort results
-        if(array_key_exists('search',$_POST) || array_key_exists('status',$_POST) || array_key_exists('financer',$_POST) || array_key_exists('budgetsort',$_POST) || array_key_exists('entrysort',$_POST)){
+        if(!empty($_POST)){
           if(!array_key_exists('status',$_POST)){
             $statusval="";
           }else{
@@ -227,16 +236,6 @@
           
          ?>
          </table>
-
-
-         <!-- table row linking to individual view -->
-         <script>
-         jQuery(document).ready(function($) {
-            $('*[data-href]').on('click', function() {
-                window.location = $(this).data("href");
-            });
-        });
-         </script>
 
 
 

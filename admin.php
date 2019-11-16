@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <?php session_start(); /* Starts the session */
+      if(!isset($_SESSION['UserData']['Username'])){
+      header("location:login.php");
+      exit;
+      }else {
+        $now = time();
+        if ($now > $_SESSION['expire']) {
+          session_destroy();
+          echo "Jūsu sesija ir beigusies! <a href='/login.php'>Ieiet atpakaļ</a>";
+      }
+    }
+    ?>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>function sortsubmit(){document.getElementById("sorting").submit();}</script>
-    <script>function filtersubmit(){document.getElementById("filtering").submit();}
-    </script>
+    <script>function filtersubmit(){document.getElementById("filtering").submit();}</script>
              <!-- table row linking to individual view -->
              <script>
          jQuery(document).ready(function($) {
@@ -14,12 +25,19 @@
         });
     </script>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+      .logout{
+        position: fixed;
+        right: 5%;
+        top: 2%;
+        color: #0645AD;
+      }
       .project-table{
     position: absolute;
     border-collapse: collapse;
     border: 1px solid black;
-    width: 65%;
+    width: 70%;
     font-size: 110%;
     top: 25%;
     left: 20%;
@@ -67,7 +85,7 @@
 
     </style>
     
-    <title>Projekti</title>
+    <title>Administrēšana</title>
 
 
       <?php
@@ -113,7 +131,8 @@
 
         <h1 style="text-align:center;">ProView Bauska</h1>
 
-
+        <!-- Logout field -->
+        <a class="logout" href="logout.php">Iziet!</a>
 
         <!-- filter forms -->
         <form method="post" class="filter-field"  id="filtering">
@@ -220,14 +239,16 @@
                 <th>Nosaukums</th>
                 <th>Statuss</th>
                 <th>Īstenošanas laiks</th>
+                <th>Rediģēt</th>
             </tr>
         <?php
           for ($i = 0; $i<count($projects); $i++){
            
-            echo "<tr class='entry' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'>";
-            echo "<td>", $projects[$i]["Name"], "</td>";
-            echo "<td>".$projects[$i]["Status"]."</td>";
-            echo "<td>".date("d.m.Y.", strtotime($projects[$i]["StartDate"])), " - ", date("d.m.Y.", strtotime($projects[$i]["FinishDate"])),"</td>";
+            echo "<tr class='entry'>";
+            echo "<td data-href='/individualAboutAdmin.php?id=".$projects[$i]["ID"]."'>", $projects[$i]["Name"], "</td>";
+            echo "<td data-href='/individualAboutAdmin.php?id=".$projects[$i]["ID"]."'>".$projects[$i]["Status"]."</td>";
+            echo "<td data-href='/individualAboutAdmin.php?id=".$projects[$i]["ID"]."'>".date("d.m.Y.", strtotime($projects[$i]["StartDate"])), " - ", date("d.m.Y.", strtotime($projects[$i]["FinishDate"])),"</td>";
+            echo "<td style='text-align:center' data-href='/individualEdit.php?id=".$projects[$i]["ID"]."'><i class='fa fa-edit'></i>";
             echo "</tr>";  
           };
           if (count($projects) == 0){

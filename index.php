@@ -64,6 +64,10 @@
     position: sticky;
     left: 0%;
   }
+  #admin-button{
+    position: absolute;
+    right: 2%
+  }
 
     </style>
     
@@ -110,6 +114,7 @@
     
     <body>
 
+        <button id="admin-button" data-href="/admin.php">Administrēšana</button>
 
         <h1 style="text-align:center;">ProView Bauska</h1>
 

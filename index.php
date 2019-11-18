@@ -49,7 +49,7 @@
 
   .search-field{
     position: absolute;
-    left: 25%;
+    left: 0%;
     top: 15%;
   }
   .filter-field{

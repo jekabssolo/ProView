@@ -1,1 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&display=swap&subset=latin-ext')
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&display=swap&subset=latin-ext');
+
+:root {
+    --activeButton: #219653;
+    --archiveButton: #F2994A;
+    --white: #FFFFFF;
+    --Gray5: #E0E0E0;
+    --clearButtonText: #EB5757;
+    --clearButtonBody: rgba(235, 87, 87, .25);
+    --clearButtonInactiveG6: #F2F2F2;
+}

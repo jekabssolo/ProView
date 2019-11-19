@@ -106,11 +106,13 @@
   }
 
   function moneyToInt($amount){
-    if ($amount < 0){
-      $amount = $amount * -1;
-    }
-    $result = intval($amount*100);
-    return $result;
+    if($amount){
+      if ($amount < 0){
+        $amount = $amount * -1;
+      }
+      $result = intval($amount*100);
+      return $result;
+    };
   }
 
   function financiers(){

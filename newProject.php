@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="lv" dir="ltr">
   <head>
-  <script>
-    function saveproject(){
-      document.getElementById("changes").submit();
-    };
-    function deleteproject(){
-      var conf = confirm('Vai tiešām vēlaties izdzēst projektu?');
-      if(conf){
-        document.getElementById("delete").submit();
-      };
-    }
-  </script>  
   <title>Jauns projekts</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="css/buttons.css" rel="stylesheet">
@@ -36,11 +25,6 @@
       $financierList = financiers();
     ?>
  <?php
-    if (!empty($_POST['Delete'])){
-      require_once "functions/delete.php";
-      deleteProject($_GET["id"]);
-      header("location:admin.php");
-    }
     $financer = "Pašvaldība";
     $status = "Iesniegts";
   ?>
@@ -48,17 +32,8 @@
   <body>
     <a class="back-button" href="admin.php"><span>Visi Projekti</span></a>
 
-      <!-- succesful update message -->
-      <div id="success-message"><?php if (isset($response)){echo $response;}?></div>
-
       <!-- Logout field -->
       <a class="logout" href="logout.php">Iziet!</a>      
-
-      <!-- delete button and form -->
-      <i class='fa fa-trash' id="delete-bttn" onclick="deleteproject()"></i>
-      <form method="post" id="delete">
-        <input type="hidden" name="Delete" value="true">
-      </form>
       <hr>
       <section class='b-content'>
         <div class='wrap'>
@@ -167,7 +142,7 @@
               <input name="CoordinatorContacts" type="text" size="25" maxlength="21844" value="">
               <br><br>
               <!-- saving button -->
-              <input class='fa fa-save' id="save" type="Submit">
+              <button class="btn" type="Submit"><i class='fa fa-save' id="save"></i></button>              
               <hr>
             </form>
           </article>

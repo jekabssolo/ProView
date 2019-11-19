@@ -20,6 +20,10 @@ color: #0645AD;
   font-size: xx-large;
   cursor: pointer;
 }
+.btn{
+  background-color: transparent;
+  border: 0px;
+}
 #delete-bttn{
   position: absolute;
   top: 2%;

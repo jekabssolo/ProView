@@ -8,12 +8,6 @@
       $title = $projects["Name"];
       require_once "blocks/head.php";
      ?>
-     <?php
-      function intToMoney($amount){
-      $money = floatval($amount) / 100;
-      return $money;
-      }
-    ?>
   </head>
   <body>
     <a class="back-button" href="index.php"><span>Visi Projekti</span></a>

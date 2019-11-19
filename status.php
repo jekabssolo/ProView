@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Load d3.js & color scale -->
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <?php 
           require_once "functions/function.php";
           $projectData = dataToVariables($_GET['id']);
@@ -15,6 +19,7 @@
       <h1 class='header-1'>
         <?php echo $projectData[0]; ?>
       </h1>
+      <a class="back-button" href="admin.php"><span>Visi Projekti</span></a>
       <div class='dropdown'>
         <button class='dropbtn'>
           Sekcija

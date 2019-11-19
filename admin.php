@@ -132,7 +132,7 @@
         <h1 style="text-align:center;">ProView Bauska</h1>
 
         <!-- Logout field -->
-        <a class="logout" href="logout.php">Iziet!</a>
+        <a class="logout" href="logout.php">Iziet</a>
 
         <!-- filter forms -->
         <form method="post" class="filter-field"  id="filtering">

@@ -3,7 +3,7 @@
     require_once "function.php";    
     $financierList = financiers();
     
-  
+    /*Get values from filled form*/
     $name = $_POST["Name"];
     $financer = $_POST["Financer"];
     $status = $_POST["Status"];
@@ -24,9 +24,11 @@
     function saveNewproject($financierList, $name, $financer, $status, $number, $sam, $budget, $budgetspent, $purpose, $activities, $startdate, $finishdate, $cname, $ccontacts){
       global $mysqli;
       connectDB();
+      /*Check if required fields are filled. If not provide link to previous field*/
       if($name == '' or $status == '' or $number == '' or $budget == '' or $purpose == '' or $cname == '' or $ccontacts == ''){
         echo "Aizpildiet visus nepieciešamos laukus!";
-      ?><a href="javascript:history.go(-1)">Atpakaļ pie jaunā projekta.</a><?php  
+      ?><a href="javascript:history.go(-1)">Atpakaļ pie jaunā projekta.</a><?php 
+      /*Insert values in projekti table in DB*/ 
       }else{
         $query = "INSERT INTO projekti (Name, Financer, Status, Number, SAM, Budget, BudgetSpent, Purpose, Activities, StartDate, FinishDate, CoordinatorName, CoordinatorContacts)
         VALUES ('$name', '$financer', '$status', '$number', '$sam', $budget, $budgetspent, '$purpose', '$activities', '$startdate', '$finishdate', '$cname', '$ccontacts')";
@@ -39,6 +41,7 @@
       }
     };   
 
+    /*Get financiers and values into strings to later insert them in query*/
     function saveFinancier($projectNumber, $financierList){
       $financierNames = "";
       $financierValues = "";
@@ -66,7 +69,8 @@
       echo $queryFinancier;
       echo('Project ID=');
       print_r($projectID);
-      
+
+      /*When done send to the main project page with admin access*/
       header("location:../admin.php");
       exit;
     };

@@ -1,6 +1,32 @@
 body{
   margin: 0px;
 }
+/*Logout*/
+.logout{
+position: absolute;
+right: 5%;
+top: 3%;
+color: #0645AD;
+}
+#success-message{
+  position: absolute;
+  top: 3%;
+  right: 17%;
+}
+#save{
+  position: absolute;
+  top: 2%;
+  right: 13%;
+  font-size: xx-large;
+  cursor: pointer;
+}
+#delete-bttn{
+  position: absolute;
+  top: 2%;
+  right: 10%;
+  font-size: xx-large;
+  cursor: pointer;
+}
 
 /* Dropdown style */
 /* The dropdown container */

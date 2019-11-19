@@ -50,7 +50,6 @@
     }
   }
 
-
   function budgetSum(){
     global $mysqli;
     connectDB();
@@ -100,6 +99,7 @@
     };
     return [$projectName, $projectStatus, $budgetSpent, $projectBudget, $updateDate, $financier];
   }
+  
   function intToMoney($amount){
     $money = floatval($amount) / 100;
     return $money;

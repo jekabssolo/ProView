@@ -19,7 +19,7 @@
       <h1 class='header-1'>
         <?php echo $projectData[0]; ?>
       </h1>
-      <a class="back-button" href="admin.php"><span>Visi Projekti</span></a>
+      <a class="back-button" href="index.php"><span>Visi Projekti</span></a>
       <div class='dropdown'>
         <button class='dropbtn'>
           Sekcija
@@ -65,16 +65,16 @@
         <div id="budgetPie">
           <script>budgetChart([
           ['Budžeta veids', 'Daudzums eiro'],
-          ['Iztērēts',     <?php echo $budgetSpent?>],
-          ['Kopējs projekta budžets', <?php echo $projectBudget?>]
+          ['Iztērēts', <?php echo $budgetSpent?>],
+          ['Atlikušais projekta budžets', <?php echo $projectBudget - $budgetSpent?>]
           ]);</script>
         </div>
-
-        <div id="allBudgetPie">
+        
+        <div id="allBudgetPie">        
           <script>allBudgetChart([
           ['Budžeta veids', 'Daudzums eiro'],
-          ['Šī projekta budžets',     <?php echo $budgetSpent?>],
-          ['Visu projektu budžets', <?php echo budgetSum();?>]
+          ['Šī projekta budžets', <?php echo $projectBudget?>],
+          ['Visu projektu budžets', <?php echo budgetSum($projectBudget)?>]
           ]);</script>
         </div>
         <p><?php dataToVariables($_GET["id"])?></p>

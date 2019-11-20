@@ -50,7 +50,7 @@
     }
   }
 
-  function budgetSum(){
+  function budgetSum($projectBudget){
     global $mysqli;
     connectDB();
     $query = "SELECT Budget FROM projekti";    
@@ -61,7 +61,7 @@
     for($i = 0; $i < count($budgets); $i++){
       $allBudget += $budgets[$i]["Budget"];
     }
-    return $allBudget;
+    return $allBudget-$projectBudget;
   }
 
   function dataToVariables($id){

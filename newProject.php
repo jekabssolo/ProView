@@ -30,7 +30,7 @@
   ?>
   </head>
   <body>
-    <a class="back-button" href="admin.php"><span>Visi Projekti</span></a>
+  <a class="back-button" href="index.php"><span>Visi Projekti</span></a>
 
       <!-- Logout field -->
       <a class="logout" href="logout.php">Iziet!</a>      

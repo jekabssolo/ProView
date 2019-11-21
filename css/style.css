@@ -117,6 +117,20 @@ color: #0645AD;
   width: 19.5%;
   text-align: center;
 }
+#barChartWrapper{  
+  width: 100%;
+}
+#projectsByFinancier{
+  display: inline-block;
+  width: 49%;
+}
+#moneyByFinancier{
+  display: inline-block;
+  width: 49%;
+}
+#projectsInSection{
+  height: 310px;
+}
 
 /*Update Log*/
 #updateLog{

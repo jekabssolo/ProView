@@ -45,7 +45,7 @@
         <div class="progressStatus"><h2>Arhivēts</h2></div>
       </div>
 
-      <h1>Update log</h1>
+      <h1>Atjauninājumi</h1>
       <div id="updateLog">
         <h2 class='updateData'>
           <?php 
@@ -60,7 +60,7 @@
           ?>
         </h2>
       </div>
-      <h1>Budget Overview</h1>
+      <h1>Budžeta pārskats</h1>
       <div id="budgetChart">
         <div id="budgetPie">
           <script>budgetChart([

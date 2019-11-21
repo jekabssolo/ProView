@@ -5,7 +5,6 @@ function budgetChart(budget){
     function drawBudgetChart() {
 
         var data = google.visualization.arrayToDataTable(budget);
-
         var options = {
         title: 'Šī projekta budžets',
         colors: ['red', 'green']
@@ -18,9 +17,8 @@ function budgetChart(budget){
 };
 
 function allBudgetChart(budget){
-    google.charts.setOnLoadCallback(dravAllBudgetChart);
-    function dravAllBudgetChart() {
-
+    google.charts.setOnLoadCallback(drawAllBudgetChart);
+    function drawAllBudgetChart() {
         var data = google.visualization.arrayToDataTable(budget);
 
         var options = {

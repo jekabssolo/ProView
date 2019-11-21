@@ -50,8 +50,7 @@
     }
   }
 
-
-  function budgetSum(){
+  function budgetSum($projectBudget){
     global $mysqli;
     connectDB();
     $query = "SELECT Budget FROM projekti";    
@@ -62,7 +61,7 @@
     for($i = 0; $i < count($budgets); $i++){
       $allBudget += $budgets[$i]["Budget"];
     }
-    return $allBudget;
+    return $allBudget-$projectBudget;
   }
 
   function dataToVariables($id){
@@ -100,4 +99,31 @@
     };
     return [$projectName, $projectStatus, $budgetSpent, $projectBudget, $updateDate, $financier];
   }
+  
+  function intToMoney($amount){
+    $money = floatval($amount) / 100;
+    return $money;
+  }
+
+  function moneyToInt($amount){
+    if($amount){
+      if ($amount < 0){
+        $amount = $amount * -1;
+      }
+      $result = intval($amount*100);
+      return $result;
+    };
+  }
+
+  function financiers(){
+    global $mysqli;
+    connectDB();
+    $query = "SELECT * FROM finansetajs";    
+    $result = mysqli_query($mysqli, $query);
+    closeDB();
+    $financierArray = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $financierArray =  array_slice($financierArray[0],2);
+    return $financierArray;
+  }
+  
  ?>

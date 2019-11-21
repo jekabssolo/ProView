@@ -19,11 +19,6 @@
 			$projects = getProjects($_GET['id']);
 			$title = $projects["Name"];
 			require_once "blocks/head.php";
-
-			function intToMoney($amount){
-				$money = floatval($amount) / 100;
-				return $money;
-			}
 		?>
 	</head>
 	<body>

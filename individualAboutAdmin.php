@@ -16,12 +16,6 @@
       $title = $projects["Name"];
       require_once "blocks/head.php";
      ?>
-     <?php
-      function intToMoney($amount){
-      $money = floatval($amount) / 100;
-      return $money;
-      }
-    ?>
     <?php session_start(); /* Starts the session */
     if(!isset($_SESSION['UserData']['Username'])){
     header("location:login.php");

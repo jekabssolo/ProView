@@ -1,0 +1,192 @@
+html, body {
+    margin: 0;
+    background: #F2F2F2;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+table .header {
+    background: #F2F2F2;
+}
+
+.table-column {
+    padding: 2rem !important;
+}
+
+td {
+    cursor: pointer;
+}
+
+.status-text {
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 7px;
+    text-transform: uppercase;
+}
+
+.search-container {
+    border: 2px solid #EDEDED;
+    border-radius: 50px;
+}
+
+.search-icon {
+    margin-left: 15px;
+    width: 15px;
+    height: 15px;
+}
+
+.search-form {
+    border: none;
+    padding: 5px;
+    width: calc(100% - 50px);
+}
+
+.search-form:focus {
+    outline: none;
+}
+
+.project-search-table {
+    width: 50%;
+}
+
+.projects-title-column {
+    width: 50%;
+}
+
+.col2-style {
+    height: 40px;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.title-container {
+    margin: 5px!important;
+    margin-top: 40px!important;
+}
+
+.title-style {
+    font-weight: bold;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+.img-style {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+header {
+    background: white;
+    height: 120px;
+    margin-bottom: 30px;
+}
+
+header .container {
+    height: inherit;
+}
+
+header .container .row {
+    height: inherit;
+}
+
+header .col {
+    height: inherit;
+    position: relative;
+}
+
+header .col div {
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.header-left {
+    left: 15px;
+    font-weight: bold;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.header-right {
+    right: 15px;
+}
+
+.header-center {
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header-logo {
+    height: inherit;
+}
+
+.admin-button {
+    background: #E0E0E0;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 7px;
+}
+
+.admin-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.select-container {
+    width: 100%;
+}
+
+.clear-button {
+    color: white;
+    background: #EA565C;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.custom-select {
+    margin: 5px;
+}
+
+.select-container div {
+    margin: 0 auto;
+    width: 75%;
+}
+
+.no-margin {
+    padding: 0!important;
+}
+
+.individual-main-container {
+    padding: 50px!important;
+}
+
+.coordination-text {
+    display: inline-block;
+}
+
+.coordination-name {
+    color: #828282;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.coordination-tel {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.avatar-icon {
+    vertical-align: super;
+}
+
+.individual-icon {
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}

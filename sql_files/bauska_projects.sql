@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 12, 2019 at 09:49 PM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 19, 2019 at 11:35 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,21 +28,15 @@ SET time_zone = "+00:00";
 -- Table structure for table `atjauninajumi`
 --
 
-CREATE TABLE `atjauninajumi` (
-  `ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `atjauninajumi`;
+CREATE TABLE IF NOT EXISTS `atjauninajumi` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Date` date NOT NULL,
   `Comments` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `projectID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `atjauninajumi`
---
-
-INSERT INTO `atjauninajumi` (`ID`, `Date`, `Comments`, `projectID`) VALUES
-(9, '2019-11-12', 'Test of new relations1', 8),
-(10, '2019-11-03', 'Test of new realtions 33', 9),
-(11, '2019-11-01', 'Very first test', 8);
+  `projectID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `projectID` (`projectID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -48,24 +44,23 @@ INSERT INTO `atjauninajumi` (`ID`, `Date`, `Comments`, `projectID`) VALUES
 -- Table structure for table `finansetajs`
 --
 
-CREATE TABLE `finansetajs` (
-  `ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `finansetajs`;
+CREATE TABLE IF NOT EXISTS `finansetajs` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
-  `ERAF` int(11) NOT NULL DEFAULT '0',
-  `RSF` int(11) NOT NULL DEFAULT '0',
-  `KF` int(11) NOT NULL DEFAULT '0',
-  `ELFLA` int(11) NOT NULL DEFAULT '0',
-  `municipality` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `finansetajs`
---
-
-INSERT INTO `finansetajs` (`ID`, `project_id`, `ERAF`, `RSF`, `KF`, `ELFLA`, `municipality`) VALUES
-(4, 8, 0, 0, 0, 55330833, 7692678),
-(5, 9, 0, 0, 0, 55326072, 8206761),
-(6, 10, 46479846, 7167220, 0, 0, 0);
+  `Municipality` bigint(11) DEFAULT NULL,
+  `Cits` bigint(11) DEFAULT NULL,
+  `ELFLA` bigint(11) DEFAULT NULL,
+  `ERAF` bigint(11) DEFAULT NULL,
+  `ESF` bigint(11) DEFAULT NULL,
+  `KF` bigint(11) DEFAULT NULL,
+  `KPFI` bigint(11) DEFAULT NULL,
+  `LAT-LIT` bigint(11) DEFAULT NULL,
+  `NFI` bigint(11) DEFAULT NULL,
+  `Valsts` bigint(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `project_id` (`project_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -73,124 +68,65 @@ INSERT INTO `finansetajs` (`ID`, `project_id`, `ERAF`, `RSF`, `KF`, `ELFLA`, `mu
 -- Table structure for table `projekti`
 --
 
-CREATE TABLE `projekti` (
-  `ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `projekti`;
+CREATE TABLE IF NOT EXISTS `projekti` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` text COLLATE utf8_latvian_ci NOT NULL,
   `Financer` text COLLATE utf8_latvian_ci NOT NULL,
   `Status` text COLLATE utf8_latvian_ci NOT NULL,
-  `Number` text COLLATE utf8_latvian_ci NOT NULL,
-  `SAM` text COLLATE utf8_latvian_ci NOT NULL,
-  `Budget` int(11) DEFAULT NULL,
-  `Purpose` text COLLATE utf8_latvian_ci NOT NULL,
-  `Activities` text COLLATE utf8_latvian_ci NOT NULL,
-  `StartDate` date NOT NULL,
-  `FinishDate` date NOT NULL,
-  `CoordinatorName` text COLLATE utf8_latvian_ci NOT NULL,
-  `CoordinatorContacts` text COLLATE utf8_latvian_ci NOT NULL,
-  `BudgetSpent` int(11) DEFAULT '0',
-  `BudgetMunicipality` int(11) DEFAULT NULL,
-  `BudgetOther` int(11) DEFAULT NULL,
-  `BudgetELFLA` int(11) DEFAULT NULL,
-  `BudgetERAF` int(11) DEFAULT NULL,
-  `BudgetESF` int(11) DEFAULT NULL,
-  `BudgetKF` int(11) DEFAULT NULL,
-  `BudgetKPFI` int(11) DEFAULT NULL,
-  `BudgetLAT-LIT` int(11) DEFAULT NULL,
-  `BudgetNor` int(11) DEFAULT NULL,
-  `BudgetCountry` int(11) DEFAULT NULL,
-  `Entry` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
+  `Number` text COLLATE utf8_latvian_ci,
+  `SAM` text COLLATE utf8_latvian_ci,
+  `Budget` bigint(11) DEFAULT NULL,
+  `Purpose` text COLLATE utf8_latvian_ci,
+  `Activities` text COLLATE utf8_latvian_ci,
+  `StartDate` date DEFAULT NULL,
+  `FinishDate` date DEFAULT NULL,
+  `CoordinatorName` text COLLATE utf8_latvian_ci,
+  `CoordinatorContacts` text COLLATE utf8_latvian_ci,
+  `BudgetSpent` bigint(11) DEFAULT '0',
+  `Entry` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`),
+  KEY `ID` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
 
 --
 -- Dumping data for table `projekti`
 --
 
-INSERT INTO `projekti` (`ID`, `Name`, `Financer`, `Status`, `Number`, `SAM`, `Budget`, `Purpose`, `Activities`, `StartDate`, `FinishDate`, `CoordinatorName`, `CoordinatorContacts`, `BudgetSpent`, `BudgetMunicipality`, `BudgetOther`, `BudgetELFLA`, `BudgetERAF`, `BudgetESF`, `BudgetKF`, `BudgetKPFI`, `BudgetLAT-LIT`, `BudgetNor`, `BudgetCountry`, `Entry`) VALUES
-(8, 'Bauskas novada pašvaldības grants ceļu pārbūve Mežotnes pagastā', 'ELFLA', 'Aktīvs', 'Nr. 18-06-A00702-000065', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos”', 63023511, 'Projekta mērķis ir veikt grants ceļa „Mežotne – Bajāri – A1”  posma pārbūvi 2,497 km garumā, grants ceļa “Bērzu muiža – Ciņi – Internātvidusskola” posma pārbūvi 2,375 km garumā un grants ceļa “Līdumnieki – Mežstrautnieki” posma pārbūvi 1,231 km garumā.', 'Projektā paredzēts atjaunot ceļa konstrukciju 6,103 km garā posmā ar platumu 3,50 m līdz 5,50 m, nodrošinot ūdens noteci no brauktuves. Tai tiks veidots vismaz 3% liels šķērskritums uz nogāzes pusi vai atbilstoši šķērsprofilu elementiem. Lietus ūdeni paredzēts uztvert esošajos un projektējamajos sāngrāvjos vai ievalkās, caurtekās zem ceļa un nobrauktuvēm un meliorācijas drenāžas sistēmās. Segas konstrukcijas aprēķini veikti ņemot vērā ģeoloģisko izpēti. Pastiprinot slāni ar nesaistītu minerālmateriālu maisījumu 0/32s un atsevišķās vietās atjaunojot salizturīgo slāni, konstrukcija tiks pastiprināta līdz 120 MPa.', '2018-07-25', '2020-08-15', 'Jolanta Kalinka', '+37163922400', 31511756, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-12 23:35:29'),
-(9, 'Bauskas novada pašvaldības grants ceļu pārbūve Īslīces pagastā', 'ELFLA', 'Aktīvs', 'Nr. 18-06-A00702-000061', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos”', 63532833, 'Projekta mērķis ir veikt grants ceļa „Stiebriņi – Zeltiņi”  posma pārbūvi 2,960 km garumā, grants ceļa “Karaļi – Kakti” posma pārbūvi 1,682 km garumā, grants ceļa “Vējdzirnavas – Stērstiņi” posma pārbūvi 2,855 km garumā un grants ceļa “Īslīči – Pāce” posma pārbūvi 0,804km. ', 'Projektā paredzēts atjaunot ceļa konstrukciju 8,301 km garā posmā ar platumu 3,50 m līdz 5,50 m, nodrošinot ūdens noteci no brauktuves. Tai tiks veidots vismaz 3% liels šķērskritums uz nogāzes pusi vai atbilstoši šķērsprofilu elementiem. Lietus ūdeni paredzēts uztvert esošajos un projektējamajos sāngrāvjos vai ievalkās, caurtekās zem ceļa un nobrauktuvēm un meliorācijas drenāžas sistēmās. Segas konstrukcijas aprēķini veikti ņemot vērā ģeoloģisko izpēti. Pastiprinot slāni ar nesaistītu minerālmateriālu maisījumu 0/32s un atsevišķās vietās atjaunojot salizturīgo slāni, konstrukcija tiks pastiprināta līdz 120 MPa.', '2018-07-25', '2020-08-09', 'Jolanta Kalinka', '+37163922400', 31766417, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-12 23:36:46'),
-(10, 'Teritorijas revitalizācija Codes pagastā, rekonstruējot vietējā autoceļa posmu', 'ERAF', 'Arhivēts', '5.6.2.0./17/I/011', '5.6.2.specifiskā atbalsta mērķis „Teritoriju revitalizācija, reģenerējot degradētās teritorijas atbilstoši pašvaldību integrētajām attīstības programmām”', 43913755, 'Projekta mērķis ir degradētās teritorijas atjaunošana Codes pagastā, pārbūvējot autoceļa posmu, atbilstoši pašvaldības attīstības prioritātei pievilcīga un droša dzīves un darba vide. ', 'Codes pagasta pašvaldības autoceļa „A7-Rotkalni-A7 šoseja” posma no A7 šosejas 1.081 km garumā pārbūve; būvuzraudzība; autoruzraudzība.\r\n\r\nProjekta rezultāti - 2,7 ha teritorijas revitalizācija, izveidotas  jaunas darbavietas, ieguldītas 1 208 253.28  EUR privātās investīcijas. ', '2018-04-09', '2018-09-30', 'Ilze Tijone', '63922233; 20213021', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-12 23:37:49');
+INSERT INTO `projekti` (`ID`, `Name`, `Financer`, `Status`, `Number`, `SAM`, `Budget`, `Purpose`, `Activities`, `StartDate`, `FinishDate`, `CoordinatorName`, `CoordinatorContacts`, `BudgetSpent`, `Entry`) VALUES
+(1, 'Bauskas novada pašvaldības grants ceļu pārbūve Mežotnes pagastā', 'ELFLA', 'Aktīvs', '18-06-A00702-000065', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos”', 63023511, 'Projekta mērķis ir veikt grants ceļa „Mežotne – Bajāri – A1”  posma pārbūvi 2,497 km garumā, grants ceļa “Bērzu muiža – Ciņi – Internātvidusskola” posma pārbūvi 2,375 km garumā un grants ceļa “Līdumnieki – Mežstrautnieki” posma pārbūvi 1,231 km garumā. ', 'Projektā paredzēts atjaunot ceļa konstrukciju 6,103 km garā posmā ar platumu 3,50 m līdz 5,50 m, nodrošinot ūdens noteci no brauktuves. Tai tiks veidots vismaz 3% liels šķērskritums uz nogāzes pusi vai atbilstoši šķērsprofilu elementiem. Lietus ūdeni paredzēts uztvert esošajos un projektējamajos sāngrāvjos vai ievalkās, caurtekās zem ceļa un nobrauktuvēm un meliorācijas drenāžas sistēmās. Segas konstrukcijas aprēķini veikti ņemot vērā ģeoloģisko izpēti. Pastiprinot slāni ar nesaistītu minerālmateriālu maisījumu 0/32s un atsevišķās vietās atjaunojot salizturīgo slāni, konstrukcija tiks pastiprināta līdz 120 MPa.', '2018-07-25', '2020-08-15', 'Jolanta Kalinka', '63922400', 31511756, '2019-11-20 01:34:08'),
+(2, 'Bauskas novada pašvaldības grants ceļu pārbūve Īslīces pagastā', 'ELFLA', 'Aktīvs', '18-06-A00702-000061', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos”', 63532833, 'Projekta mērķis ir veikt grants ceļa „Stiebriņi – Zeltiņi”  posma pārbūvi 2,960 km garumā, grants ceļa “Karaļi – Kakti” posma pārbūvi 1,682 km garumā, grants ceļa “Vējdzirnavas – Stērstiņi” posma pārbūvi 2,855 km garumā un grants ceļa “Īslīči – Pāce” posma pārbūvi 0,804km.', 'Projektā paredzēts atjaunot ceļa konstrukciju 8,301 km garā posmā ar platumu 3,50 m līdz 5,50 m, nodrošinot ūdens noteci no brauktuves. Tai tiks veidots vismaz 3% liels šķērskritums uz nogāzes pusi vai atbilstoši šķērsprofilu elementiem. Lietus ūdeni paredzēts uztvert esošajos un projektējamajos sāngrāvjos vai ievalkās, caurtekās zem ceļa un nobrauktuvēm un meliorācijas drenāžas sistēmās. Segas konstrukcijas aprēķini veikti ņemot vērā ģeoloģisko izpēti. Pastiprinot slāni ar nesaistītu minerālmateriālu maisījumu 0/32s un atsevišķās vietās atjaunojot salizturīgo slāni, konstrukcija tiks pastiprināta līdz 120 MPa.', '2018-07-25', '2020-08-09', 'Jolanta Kalinka', '63922400', 31766417, '2019-11-20 01:34:08'),
+(3, 'Bauskas novada pašvaldības grants ceļu pārbūve Codes pagastā', 'ELFLA', 'Aktīvs', '18-06-A00702-000040', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos”', 53647066, 'Projekta mērķis ir veikt Bauskas novada Codes pagasta grants ceļa „Vizbulītes – Klidziņi”  posma pārbūvi 2,677 km garumā, grants ceļa “A7 šoseja – Viduči”  posma pārbūvi 2,977 km garumā un grants ceļa “A7 šoseja – Greizsili”  posma pārbūvi 1,984 km garumā.', 'Projektā paredzēts atjaunot ceļa konstrukciju 7,638 km garā posmā ar platumu 3,50 m līdz 5,50 m, nodrošinot ūdens noteci no brauktuves. Tai tiks veidots vismaz 3% liels šķērskritums uz nogāzes pusi vai atbilstoši šķērsprofilu elementiem. Lietus ūdeni paredzēts uztvert esošajos un projektējamajos sāngrāvjos vai ievalkās, caurtekās zem ceļa un nobrauktuvēm un meliorācijas drenāžas sistēmās. Segas konstrukcijas aprēķini veikti ņemot vērā ģeoloģisko izpēti. Pastiprinot slāni ar nesaistītu minerālmateriālu maisījumu 0/32s un atsevišķās vietās atjaunojot salizturīgo slāni, konstrukcija tiks pastiprināta līdz 120 MPa.', '2018-06-14', '2020-06-26', 'Jolanta Kalinka', '63922400', 26823533, '2019-11-20 01:34:08'),
+(4, 'Bauskas novada pašvaldības grants ceļu pārbūve Vecsaules pagastā', 'ELFLA', 'Aktīvs', NULL, NULL, 189531371, 'Projekta mērķis ir veikt Bauskas novada Vecsaules pagasta grants ceļu “Zvejnieki – Baltā muiža” pārbūvi 2,418 km garumā, “Leriķi –Lejkristi” pārbūvi 0,765 km garumā, “Vecsaules skola – Kārkli - Vekmaņi” pārbūvi 4,359 km garumā un “Kaģeni - Villeni - Kārkli” pārbūvi 2,318 km garumā.', 'Paredzēta četru ceļu posmu pārbūve, atjaunojot grants ceļa konstrukciju 9,86 km garumā ar platumu 3,50 m līdz 5,50 m, nodrošinot ūdens noteci no brauktuves. Lietus ūdeni paredzēts uztvert esošajos un projektējamajos sāngrāvjos vai ievalkās, caurtekās zem ceļa un nobrauktuvēm un meliorācijas drenāžas sistēmās.', '2018-11-14', '2019-07-31', 'Jolanta Kalinka', '63922400', 94765686, '2019-11-20 01:34:08'),
+(5, 'Bauskas novada pašvaldības grants ceļu pārbūve Ceraukstes pagastā', 'ELFLA', 'Aktīvs', '18-06-A00702-000043', ' ', 97469249, 'Projekta mērķis ir veikt Bauskas novada Ceraukstes pagasta ceļa  „Lidlauka iela – Lielzeltiņi”  posma izbūvi 0,415 km garumā, grants ceļa “Griķu skola – Čugas – Dane”” posma pārbūvi 3,946 km garumā un grants ceļa “A7 – Ziedoņi – Kociņi - Bērzaiņi” posma pārbūvi 5,442 km garumā.', NULL, '2018-06-14', '2020-07-05', 'Jolanta Kalinka', '371 20213021', 48734625, '2019-11-20 01:34:08'),
+(6, 'Mobilā darba ar jaunatni sistēmas attīstīšana Bauskas novadā', 'Valsts', 'Aktīvs', '2-25/241', NULL, 658060, 'Mobilā darba ar jaunatni sistēmas attīstīšana Bauskas novadā, nodrošinot vietējā un valsts līmeņa jaunatnes politikas plānošanas dokumentos noteikto mērķu sasniegšanu.', '1. Mobilā darba īstenošana Bauskas novada Codes pagastā. Mobilais darbs norisināsies piecus mēnešus vienu reizi nedēļā- pirmdienās laikā no plkst. 17.00-20.00.\n\n2. Mobilā darba īstenošana Bauskas novada Īslīces pagastā. Mobilais darbs norisināsies piecus mēnešus vienu reizi nedēļā- otrdienās laikā no plkst. 17.00-20.00.\n\n3. Mobilā darba īstenošana Bauskas novada Ceraukstes pagastā. Mobilais darbs norisināsies piecus mēnešus vienu reizi nedēļā- trešdienās laikā no plkst. 17.00-20.00.\n\nMobilā darba ietvaros, vienu reizi nedēļā divi mobilā darba īstenotāji dosies uz pagastiem, lai darbotos ar konkrēto pagastu jauniešiem, kopā gatavotu ēst, organizētu aktivitātes, vadītu neformālās izglītības un fiziskās aktivitātes.', '2018-12-07', '2019-08-01', 'Liene Rotberga', '29274437, e-pasts: liene.rotberga@bauska.lv', 329030, '2019-11-20 01:34:08'),
+(7, 'Pilskalna ielas pārbūve', 'Pašvaldība', 'Aktīvs', '3.14.7', NULL, 200057710, 'Ielas tehniskā stāvokļa un satiksmes drošības uzlabošana izbūvējot gājēju/velosipēdu celiņu, jo esošā brauktuves seguma ekspluatācijas kalpošanas laika resursi izsmelti un pārvietošanās pa ielu ir apgrūtināta.', 'Pilskalna ielas izbūvei ir paredzēts:  \n•brauktuves garums 1270 m, platums 6m;\n•konstruējamo ietvju garums-545 m, platums no 1,50 līdz 2,30m;\n•konstruējamo gājēju/velosipēdu celiņu platums no 2,60 līdz 3,10 m;\n•brauktuves asfalta segas konstrukcija divās kārtās;\n•nobrauktuvju, gājēju ietves un veloceliņa izbūve ar betona bruģa segumu;\n•caurteku izbūve 86,5 m;\n•ŪKT tīklu izbūve 362,4 m;\n•LKT tīklu izbūve 686 m;\n•apgaismojuma kabeļu ieguldīšana110 m;\n•VST tīklu izbūve  2286 m.', '2018-11-21', '2020-07-21', 'Laima Berga', '37120283888', 100028855, '2019-11-20 01:34:08'),
+(8, 'Bauskas industriālās teritorijas attīstība, reģenerējot degradētās teritorijas', 'ERAF', 'Aktīvs', '5.6.2.0/17/I/021', 'SAM: 5.6.2.specifisko atbalsta mērķi „Teritoriju revitalizācija, reģenerējot degradētās teritorijas atbilstoši pašvaldību integrētajām attīstības programmām’', 324539615, 'Projektā plānotie rezultāti: degradētās teritorijas attīstība 9 ha apjomā, izveidotas 37 jaunas darbavietas un ieguldītas 1829561,07 EUR privātās investīcijas.', 'A/C A7 Lidlauka un Pūriņu ielas krustojuma izbūve: 263 m;\n•Lidlauka ielas pilnas ceļa segas konstrukcijas izbūve: 1257,00 m (neskaitot mazās nobrauktuves);\n•Lietus ūdens kanalizācijas maģistrālo vadu izbūve: 440,90 m;\n•Apgaismojuma balstu pamatu un apgaismojuma izbūve: 37.gab;\n•Ārējo elektrisko tīklu izbūve 1300 m;\n•Sakaru kanalizācijas cauruļu ieguldīšana tranšejā 2941 m;\n•Ūdensapgādes izbūve: 3477,30  m;\n•Sadzīves kanalizācijas maģistrālo vadu izūve: 1435,50 m;\n•Kanalizācijas spiedvads 969,80 m;\n•Sadales gāzes vada izbūve 1611,50 m.', '2018-08-10', '2020-08-09', 'Ilze Tijone', ' 371 20213021 ', 162269808, '2019-11-20 01:34:08'),
+(9, 'Plānveida ilgtermiņa darba ar jaunatni īstenošana Bauskas novadā', 'Valsts', 'Aktīvs', ' NR. 2-25/25', NULL, 306886, 'Sekmēt plānveida ilgtermiņa darba ar jaunatni īstenošanu Bauskas novadā, nodrošinot vietējā un nacionālā līmeņa jaunatnes politikas plānošanas dokumentos noteikto mērķu sasniegšanu.\n\n ', '1.Organizēt apmācības jaunatnes darbiniekiem un citiem ieinteresētajiem aktīvistiem profesionālās pilnveides un metodiskās vadības nodrošināšanai;\n\n2.Pieredzes apmaiņas braucienu organizēšana uz Aizputes, Jelgavas un Iecavas jauniešu mājās/centriem, lai veicinātu sadarbību jaunatnes politikas nozarē Latvijā;\n\n3.Jauniešu foruma “Radu rītdienu šodien” organizēšana darba ar jaunatni pilnveidošanai Bauskas novada pašvaldībā.', '2018-06-01', '2019-05-31', 'Liene Rotberga', ' 29274437, e-pasts: liene.rotberga@bauska.lv  ', 153443, '2019-11-20 01:34:08'),
+(10, 'Publisko ūdeņu vides pieejamības nodrošināšana Bauskas pilsētā', 'Cits', 'Aktīvs', '1-08/95/2018', 'Valsts budžeta programmas „Vides aizsardzības fonds” apakšprogramma „Vides aizsardzības projekti”.', 13104300, 'Projekta mērķis ir esošās infrastruktūras atjaunošana un teritorijas labiekārtošana publisko ūdeņu vides pieejamības nodrošināšanai Dambja ielā, lai veicinātu nozīmīga dabas mantojuma integrētu attīstību un sasniegtu ar to saistītos Bauskas novada Attīstības programmā 2012.-2018.gadam plānotos darbības rezultātus.', 'Esošās infrastruktūras atjaunošana un teritorijas labiekārtošana publisko ūdeņu vides pieejamības nodrošināšanai Dambja ielā.', '2018-05-02', '2019-04-30', 'Ilze Munda, Dace Platonova  ', '63921942', 6552150, '2019-11-20 01:34:08'),
+(11, 'Zaļās infrastruktūras pilnveidošana zemieņu upju ainavā (ENGRAVE)', 'LAT-LIT', 'Aktīvs', 'LLI-291', 'Interreg V-A Latvijas - Lietuvas Pārrobežu sadarbības programma 2014-2020', 58330034, 'Projekta mērķis ir uzlabot upju veidoto zaļo infrastruktūru, iekļaujot ekosistēmas un ainavu konceptus plānošanā, kā arī demonstrējot zemieņu upju integrētās apsaimniekošanas pasākumu nozīmīgumu vietējā un reģionālā mērogā.', 'Bauskas novada pašvaldības lokālā ainavu un zaļās infrastruktūras plāna izstrāde;\n•aizaugušo ūdensceļu tīrīšana ar pļāvēju-amfībiju gar Mūsas un Mēmeles upju krastiem Bauskas novada pašvaldībā.', '2018-05-01', '2020-04-30', 'Ilze Munda, Dace Platonova ', '63921942; www.latlit.eu; www.europa.eu ', 29165017, '2019-11-20 01:34:08'),
+(12, 'Baltijas enerģētikas teritorijas- plānošanas perspektīvas', 'Cits', 'Aktīvs', ' ', NULL, 13718300, 'Projekta mērķis ir Izveidot ilgtspējīgu saikni starp nepieciešamību paaugstināt atjaunojamo resursu ražošanu un pielietošanu, un šīs tematikas iekļaušanu attīstības plānošanas un telpiskās plānošanas procesos un dokumentos, lai veicinātu un nodrošinātu ES vides un enerģētikas politiku realizāciju projekta partneru reģionos. Veicināt sadarbību starp projektā iesaistītajām institūcijām.', 'Projektā īstenojamās darbības saistītas ar atjaunojamo energoresursu plānošanu, izmantošanu, iesaistīto institūciju kapacitātes celšanu. 16 pašvaldībās tiks izstrādāti Enerģētikas Rīcības plāni – Jelgavas novadā, Dobeles novadā, Ozolnieku novadā, Auces novadā, Bauskas novadā, Iecavas novadā, Aknīstes novadā, Pļaviņu novadā, Jaunjelgavas novadā, Salas novadā, Tērvetes novadā, Krustpils novadā, Aizkraukles novadā, Jēkabpils novadā, Rundāles novadā, Viesītes novadā.', '2016-03-01', '2019-02-28', 'Raitis Madžulis', NULL, 6859150, '2019-11-20 01:34:08'),
+(13, 'Nozīmīga kultūrvēsturiskā mantojuma saglabāšana un attīstība kultūras tūrisma piedāvājuma pilnveidošanai Zemgales reģionā', 'ERAF', 'Aktīvs', '5.5.1.0/17/I/002', '5.5.1. specifiskā atbalsta mērķis „Saglabāt, aizsargāt un attīstīt nozīmīgu kultūras un dabas mantojumu, kā arī attīstīt ar to saistītos pakalpojumus', 116507554, 'Saglabāt, aizsargāt un attīstīt nozīmīgu kultūrvēsturisko mantojumu Zemgalē, atjaunojot valsts nozīmes kultūras pieminekļus Jelgavā, Dobelē, Bauskā, veidojot tajos jaunus, savstarpēji papildinošus tūrisma pakalpojumus, tādējādi nodrošinot to sociālekonomiskā potenciāla attīstību un integrāciju vietējās ekonomikas struktūrā atbilstoši Jelgavas pilsētas, Bauskas un Dobeles novadu attīstības programmām.', 'Projekta darbības Bauskas novada pašvaldībā: valsts nozīmes arhitektūras pieminekļa - Bauskas pilsdrupu konservācijas 3.kārta (centrālais tornis, mazais vārtu tornis un pieguļošās sienas) un Bauskas pilskalna ziemeļu nogāzes nostiprināšanas un rehabilitācijas būvdarbi, jaunu pakalpojumu izveide;\n\nProjekta rezultātā: \n\n-atbalstīto kultūras un dabas mantojuma objektu un tūrisma objektu apmeklējumu skaita paredzamais pieaugums 2023.gadā, salīdzinot ar 2015.gadu – 41 500 apmeklējumi;\n\n-atbalstīto dabas un kultūras mantojuma objektu skaits – 2 dabas un kultūras mantojuma objekti;\n\n-jaunradīto pakalpojumu skaits atbalstītajos kultūras un dabas mantojuma objektos – 11 pakalpojumi.', '2017-11-01', '2020-06-30', 'Ilze Tijone, Māris Skanis', 'maris.skanis@bauska.lv, Ilze Tijone, ilze.tijone@bauska.lv, 639 22233 ', 58253777, '2019-11-20 01:34:08'),
+(14, 'Bauskas novada pašvaldības grants ceļu pārbūve Gailīšu pagastā', 'ELFLA', 'Aktīvs', '17-06-A00702-000046', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos', 33280532, 'Projekta mērķis ir veikt Bauskas novada Gailīšu pagasta grants ceļa „Īslīces ”Mazanniņas” pagrieziens uz Pāci” posma pārbūvi 1.682 km garumā un grants ceļa „Dzeltenais krogs - Pāce” posma pārbūvi 4.272 km garumā.', 'Paredzēta divu ceļu posmu pārbūve, atrisinot ūdens atvadi no ceļa klātnes, nodrošinot segas ilgizturību un uzlabojot satiksmes drošību, lai atbilstu Latvijas Republikas normatīvajos aktos noteiktajām prasībām un standartiem.\n\nGrants ceļa „Īslīces ”Mazanniņas” pagrieziens uz Pāci” posmam projektā paredzēts:\n•atjaunot ceļa konstrukciju 1.682 km garā posmā ar platumu 5.00 m un 5.50 m;\n•pacelt ceļa segumu ~ 20 cm virs esošā reljefa;\n•izveidot brauktuvei divpusēju 3.00% lielu šķērskritumu ar minerālmateriālu segumu;\n•projektēt sāngrāvjus vai ievalkas, caurtekas zem ceļa un meliorācijas drenāžas sistēmas lietus ūdens novadīšanai', '2017-08-01', '2019-08-01', 'Jolanta Kalinka', '63922400', 16640266, '2019-11-20 01:34:08'),
+(15, 'Bauskas novada pašvaldības grants ceļu pārbūve Brunavas pagastā', 'ELFLA', 'Aktīvs', 'Bauskas novada pašvaldības grants ceļu pārbūve Brunavas pagastā', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam pasākums „Pamatpakalpojumi un ciematu atjaunošana lauku apvidos”.', 124593821, 'Projekta mērķis ir veikt Bauskas novada Brunavas pagasta grants ceļa „Stūrmaņi – Ķirķeļu kapi” posma pārbūvi 2.762 km garumā, grants ceļa „Saulītes - Lobgale” posma pārbūvi 2.734 km garumā, grants ceļa „Ķirķeļu kapi - Silenieki” posma pārbūvi 1.163 km garumā, grants ceļa „Ezeriņi - Zītari” posma pārbūvi 0.952 km garumā un grants ceļa „Ērgļi - Saules” posma pārbūvi 1.639 km garumā.', 'Projektā paredzētās darbības – atjaunot ceļa konstrukciju 9.25 km garā posmā ar platumu 3.50 m līdz 5.50 m, nodrošināt ūdens noteci no brauktuves.\n\nProjektā paredzēta:\n•grants ceļa „Stūrmaņi – Ķirķeļu kapi” posma pārbūve 2.762 km garumā;\n•grants ceļa „Saulītes - Lobgale” posma pārbūve 2.734 km garumā;\n•grants ceļa „Ķirķeļu kapi - Silenieki” posma pārbūve 1.163 km garumā;\n•grants ceļa „Ezeriņi - Zītari” posma pārbūve 0.952 km garumā;\n•grants ceļa „Ērgļi - Saules” posma pārbūve 1.639 km garumā.\n\nVeicot šo posmu pārbūvi tiks risināta ūdens atvade no ceļa klātnes, nodrošināta segas ilgizturību un uzlabota satiksmes drošība atbilstoši Latvijas Republikas normatīvajos aktos noteiktajās prasībās.', '2017-08-01', '2019-08-01', 'Jolanta Kalinka', '63922400', 62296911, '2019-11-20 01:34:08'),
+(16, 'Atbalsts priekšlaicīgas mācību pārtraukšanas samazināšanai', 'ESF', 'Aktīvs', '8.3.4.0/16/I/001 ', 'Darbības programmas “Izaugsme un nodarbinātība” 8.3.4. specifiskā atbalsta mērķa “Samazināt priekšlaicīgu mācību pārtraukšanu, īstenojot preventīvus un intervences pasākumus”', 3981237600, 'Projekta laikā paredzēts ieviest Īslīces vidusskolā, Mežotnes pamatskolā, Vecsaules pamatskolā un Bauskas pilsētas pamatskolā sistēmisku atbalstu priekšlaicīgas mācību pārtraukšanas risku samazināšanai.\n\nTiks sniegts gan individuālais materiālais un konsultatīvais atbalsts izglītojamiem ar priekšlaicīgu mācību pārtraukšanas risku, gan sistēmiskais atbalsts riska grupas identificēšanai un uzskaitei, atbalstošas mācību vides izveidošanai, pedagogu profesionālajai pilnveidei un jauniešu iniciatīvu projektiem.', 'Projekta laikā paredzēts ieviest Īslīces vidusskolā, Mežotnes pamatskolā, Vecsaules pamatskolā un Bauskas pilsētas pamatskolā sistēmisku atbalstu priekšlaicīgas mācību pārtraukšanas risku samazināšanai.\n\nTiks sniegts gan individuālais materiālais un konsultatīvais atbalsts izglītojamiem ar priekšlaicīgu mācību pārtraukšanas risku, gan sistēmiskais atbalsts riska grupas identificēšanai un uzskaitei, atbalstošas mācību vides izveidošanai, pedagogu profesionālajai pilnveidei un jauniešu iniciatīvu projektiem.', NULL, NULL, 'Līga Kirilko', 'liga.kirilko@bauska. lv  ', 1990618800, '2019-11-20 01:34:08'),
+(17, '16.gs.kultūras pieminekļa Bauskas Sv.Gara baznīcas dienvidu fasādes atjaunošana', 'Cits', 'Arhivēts', '16-06-AL07-A019.2202-000007', ' ', 5842204, 'Projekta mērķis ir valsts nozīmes arhitektūras pieminekļa Bauskas Sv.Gara luterāņu baznīcas dienvidu fasādes apdares restaurācija, saglabāšana un pieejamība sabiedrībai.', ' ', '2018-08-20', NULL, 'Ilze Tijone  ', 'ilze.tijone@bauska.lv, 639 22233 ', 5842204, '2019-11-20 01:34:08'),
+(18, 'Teritorijas revitalizācija Codes pagastā, rekonstruējot vietējā autoceļa posmu', 'ELFA', 'Arhivēts', '5.6.2.0./17/I/011', '5.6.2.specifiskā atbalsta mērķis „Teritoriju revitalizācija, reģenerējot degradētās teritorijas atbilstoši pašvaldību integrētajām attīstības programmām”', 43913755, 'Projekta mērķis ir degradētās teritorijas atjaunošana Codes pagastā, pārbūvējot autoceļa posmu, atbilstoši pašvaldības attīstības prioritātei pievilcīga un droša dzīves un darba vide. ', 'Codes pagasta pašvaldības autoceļa „A7-Rotkalni-A7 šoseja” posma no A7 šosejas 1.081 km garumā pārbūve; būvuzraudzība; autoruzraudzība.\n\nProjekta rezultāti - 2,7 ha teritorijas revitalizācija, izveidotas  jaunas darbavietas, ieguldītas 1 208 253.28  EUR privātās investīcijas.', '2018-04-09', '2018-09-30', 'Ilze Tijone  ', 'ilze.tijone@bauska.lv, 639 22234', 43913755, '2019-11-20 01:34:08'),
+(19, 'Brīvības bulvāra revitalizācija uzņēmējdarbības veicināšanai', 'ELFA', 'Arhivēts', '5.6.2.0/17/I/009', '5.6.2.specifiskā atbalsta mērķis „Teritoriju revitalizācija, reģenerējot degradētās teritorijas atbilstoši pašvaldību integrētajām attīstības programmām”', 48609175, 'Projekta mērķis ir degradētās teritorijas atjaunošana Bauskas vecpilsētā pārbūvējot ielas posmu, atbilstoši pašvaldības attīstības prioritātei pievilcīga un droša dzīves un darba vide. Nodrošināta videi draudzīga un vides ilgtspēju veicinoša teritoriālā izaugsme un jaunu darbavietu radīšana.', 'Projekta paredzēta transporta infrastruktūras sakārtošana: \n•Brīvības bulvāra pārbūve 323m, \n•komunikāciju pārbūve, \n•satiksmes organizācijas tehnisko līdzekļu uzstādīšana, \n•apgaismojuma tikla izbūve, t.sk. 11 apgaismojuma balsti ar 22 gaismekļiem, \n•virsūdens kanalizācijas izbūve', NULL, NULL, 'Laine Baha ', '63921942', 48609175, '2019-11-20 01:34:08'),
+(20, 'Teritorijas revitalizācija Gailīšu pagastā, rekonstruējot vietējā autoceļa posmu', 'ELFA', 'Arhivēts', '5.6.2.0./17/I/010', '5.6.2.specifiskā atbalsta mērķis „Teritoriju revitalizācija, reģenerējot degradētās teritorijas atbilstoši pašvaldību integrētajām attīstības programmām”', 40286398, 'ERAF finansējums 326 064,78 EUR, valsts budžeta finansējums 14 385,21 EUR, pašvaldības līdzfinansējums 62 413,99 EUR', ' ', '2018-03-23', '2018-12-30', 'Ilze Tijone  ', 'ilze.tijone@bauska.lv, 639 22234', 40286398, '2019-11-20 01:34:08'),
+(21, 'Ceraukstes tautas nama fasādes atjaunošana pakalpojumu nodrošināšanai', 'ELFA', 'Arhivēts', '17-06-AL07-A019.2202-000007', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam apakšpasākums 19.2. „Darbības īstenošana saskaņā ar sabiedrības virzītas vietējās attīstības stratēģiju” aktivitāte 19.2.2. „Vietas potenciāla attīstības iniciatīvas', 8728071, 'ELFLA finansējums - 45 000,00 EUR, Bauskas novada pašvaldības līdzfinansējums – 42 280.71 EUR ', 'Lai uzlabotu Ceraukstes Tautas nama energoefektivitāti projektā paredzēts:\n•administratīvās ēkas cokola atjaunošana;\n•pamatu siltināšana;\n•fasādes atjaunošana un siltināšana;\n•lietus ūdens noteku uzstādīšana;\n•vēja kastes uzstādīšana;\n•ēkas bēniņu pārseguma siltināšana;\n•skatuves grīdas daļas pārseguma siltināšana no pagraba telpas puses.', '2017-12-01', '2018-12-01', 'Jolanta Kalinka', '63922400', 8728071, '2019-11-20 01:34:08'),
+(22, 'Īslīces kultūras nama 1.stāva atjaunošana', 'ELFA', 'Arhivēts', '17-06-AL07-A019.2202-000006', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam apakšpasākums 19.2. „Darbības īstenošana saskaņā ar sabiedrības virzītas vietējās attīstības stratēģiju” aktivitāte 19.2.2. „Vietas potenciāla attīstības iniciatīvas', 6914009, 'Projekta mērķis ir veikt Īslīces kultūras nama 1.stāva telpu grupu vienkāršoto atjaunošanu, lai nodrošinātu kultūras pakalpojumu pieejamību, kvalitāti un sasniedzamību un veicinātu nemateriālā kultūrvēsturiskā mantojuma saglabāšanu.', 'Lai uzlabotu Īslīces kultūras nama ēkas neatbilstības mūsdienu normatīvo aktu prasībām un uzlabotu iekštelpu vizuālo stāvokli, ir nepieciešami ievērojami remontdarbi. Paredzamās aktivitātes sekmēs konkrētā kultūras objekta sakārtošanu un minētās problēmas atrisināšanu:\n•kāpņu telpas remonts;\n•durvju nomaiņa;\n•vestibila/vējtvera pārbūve;\n•jumtiņa virs terases izveide;\n•gaiteņu un kabineta remontdarbi;\n•lielās zāles grīdas atjaunošana un radiatoru koka aizsargrežģu izgatavošana, nomaiņa;\n•skatuves sienu atjaunošana;\n•tualešu atjaunošana un izveide vides pieejamības nodrošināšanai personām ar īpašām vajadzībām. ', '2017-12-01', '2018-12-30', 'Jolanta Kalinka', '63922400', 6914009, '2019-11-20 01:34:08'),
+(23, 'Rītausmu ciema sporta un atpūtas parka izveide', 'ELFA', 'Arhivēts', '17-06-AL07-A019.2201-000008', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam apakšpasākums 19.2. „Darbības īstenošana saskaņā ar sabiedrības virzītas vietējās attīstības stratēģiju” aktivitāte 19.2.2. „Vietas potenciāla attīstības iniciatīvas', 20326592, 'Projekta mērķis ir veikt Rītausmu ciema sporta un atpūtas parka izveidi, lai nodrošinātu sporta un atpūtas pakalpojumu pieejamību, kvalitāti un sasniedzamību vietējiem iedzīvotājiem.', 'Sporta un atpūtas parks plānots blakus Īslīces kultūras namam. To varēs izmantot gan sportot gribētāji, gan māmiņas ar bērniem, seniori nūjošanai, kā arī jaunieši vienkārši kā pulcēšanās vietu. To plānots izmantot arī dažādām kultūras pasākumu un gadskārtu svētku aktivitātēm brīvā dabā Rītausmu ciemā (Lieldienu pasākumam, Līgo svētkiem, ģimeņu dienai, Bauskas novada svētkiem u.c. svētkiem).\n\nProjektā paredzēts:\n•veikt teritorijas celiņu tīkla ierīkošanu;\n•akmens ugunskura vietas ierīkošanu;\n•koku un krūmu stādījumu ierīkošanu;\n•apzaļumošanu;\n•labiekārtojuma elementu (galdu ar soliem, betona solu, pergolu, divriteņu statīvu, atkritumu urnu) uzstādīšanu;\n•teritorijas apgaismojuma izbūvi;\n•bērnu rotaļu laukuma izbūvi ar smilts iesegumu un rotaļu elementiem – šūpolēm, kāpelēšanas elementiem, smilšu kasti un rotaļu kompleksiem.', '2017-12-01', '2018-12-01', 'Jolanta Kalinka', '63922400', 20326592, '2019-11-20 01:34:08'),
+(24, 'Garozas muižas parka pārbūve', 'ELFA', 'Arhivēts', '17-06-AL07-A019.2201-000009', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam apakšpasākums 19.2. „Darbības īstenošana saskaņā ar sabiedrības virzītas vietējās attīstības stratēģiju” aktivitāte 19.2.2. „Vietas potenciāla attīstības iniciatīvas', 10025883, 'Projekta mērķis ir veikt Garozas muižas parka labiekārtošanu, lai nodrošinātu sabiedrisko aktivitāšu un atpūtas pakalpojumu pieejamību, kvalitāti un sasniedzamību.', 'Lai 3 hektāru plašais Garozas parks kļūtu piemērots gan sportiskām, gan kultūras aktivitātēm projektā paredzēts:\n•veikt teritorijas celiņu tīkla iekārtošanu;\n•autostāvvietu ierīkošanu;\n•asfalta seguma laukuma izbūvi ar soliem pie estrādes;\n•koku un krūmu stādījumu sakopšanu;\n•labiekārtojuma elementu (solu, atkritumu urnu, ziņojumu dēļu) uzstādīšanu;\n•teritorijas apgaismojuma izbūvi. ', '2017-12-01', '2018-12-30', 'Jolanta Kalinka', '63922400', 10025883, '2019-11-20 01:34:08'),
+(25, 'Īslīces kultūras nama stāvlaukumu atjaunošana un paplašināšana', 'ELFA', 'Arhivēts', '16-06-AL07-A019. 2202-000005', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam apakšpasākums 19.2. „Darbības īstenošana saskaņā ar sabiedrības virzītas vietējās attīstības stratēģiju” aktivitāte 19.2.2. „Vietas potenciāla attīstības iniciatīvas', 6077908, 'Projekta mērķis ir veikt Īslīces kultūras nama stāvlaukumu atjaunošanu un paplašināšanu, lai nodrošinātu Īslīces kultūras nama pakalpojumu pieejamību, kvalitāti un sasniedzamību, uzlabotu satiksmes drošību un veicinātu nemateriālā kultūrvēsturiskā mantojuma saglabāšanu.', 'Īslīces kultūras nams ir viens no lielākajiem un pasākumu ziņā noslogotākajiem kultūras namiem Bauskas novadā. Tajā notiek gan vietējās nozīmes koncerti un pasākumi, gan Bauskas novada pašvaldības un Latvijas mēroga pasākumi un konkursi, pieaugušo un skolēnu deju skates un starptautiski mūzikas festivāli.\n\nProjektā paredzēta esošā Īslīces kultūras nama stāvlaukuma atjaunošana ~ 1124 m2 platībā, jauna stāvlaukuma izbūve ~ 1363 m2 platībā. Projektējamie (jaunie) stāvlaukumi paredzēti kā esošo stāvlaukumu paplašinājumi, lai būtu iespēja pēc iespējas vairāk transportlīdzekļu novietot pie Īslīces kultūras nama pasākumu norises laikā. Lai nodrošinātu objekta pastāvēšanu, saglabāšanu, drošību un pilnvērtīgas tālākās darbības attīstību, ir veikts pirmais darba posms – izstrādāta Apliecinājuma karte stāvlaukuma, seguma vienkāršotai atjaunošanai (betona plātņu nomaiņa uz betona bruģi) un būvprojekts stāvlaukuma paplašināšanai (esošā zālāja seguma nomaiņa uz asfalta stāvlaukumu).', '2016-12-01', '2018-12-01', 'Jolanta Kalinka', '63922400', 6077908, '2019-11-20 01:34:08'),
+(26, 'Īslīces kultūras nama pieejamības uzlabošana', 'ELFA', 'Arhivēts', '16-06-AL07-A019. 2202-000006', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam apakšpasākums 19.2. „Darbības īstenošana saskaņā ar sabiedrības virzītas vietējās attīstības stratēģiju” aktivitāte 19.2.2. „Vietas potenciāla attīstības iniciatīvas', 3761335, 'Projekta mērķis ir veikt Īslīces kultūras nama teritorijas labiekārtošanas darbus, esošo laukumu un celiņu atjaunošanu, lai nodrošinātu Īslīces kultūras nama pakalpojumu pieejamību, kvalitāti un sasniedzamību un veicinātu nemateriālā kultūrvēsturiskā mantojuma saglabāšanu.', 'Īslīces kultūras nams tika uzbūvēts pirms vairāk kā četrdesmit gadiem. Pēdējos gados ir veikti dažādi rekonstrukcijas darbi, taču kultūras nama esošo laukumu un celiņu seguma nomaiņa un pieejamības uzlabošanas jautājumi nav risināti. Laukums un celiņi ir ne tikai vizuāli nepievilcīgi, bet arī apmeklētājiem veselībai bīstami.\n\nLai nodrošinātu pilnvērtīgu kultūras pasākumu organizēšanu gan iekštelpās, gan ārpusē, drošu vidi kultūras nama apmeklētājiem un skolniekiem ir nepieciešams veikt laukumu un taciņu seguma nomaiņu – fiziskā stāvokļa un vizuālā izskata sakārtošanu.\n\nProjektā paredzētas šādas aktivitātes:\n•esošo celiņu un laukumu betona plākšņu demontāža;\n•jauna betona bruģakmens seguma ierīkošana;\n•pandusa izveide pie ieejas durvīm vides pieejamības nodrošināšanai personām ar īpašām vajadzībām;\n•zāliena atjaunošana;\n•dekoratīvo stādījumu dobju izveide;\n•vaļējas lietus ūdens novades sistēmas izveide.', '2016-12-01', '2018-12-01', 'Jolanta Kalinka', '63922400', 3761335, '2019-11-20 01:34:08'),
+(27, 'Viļa Plūdoņa muzeja ratnīcas restaurācija', 'ELFA', 'Arhivēts', '16-06-AL07- A019. 2201-000006', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam apakšpasākums 19.2. „Darbības īstenošana saskaņā ar sabiedrības virzītas vietējās attīstības stratēģiju” aktivitāte 19.2.2. „Vietas potenciāla attīstības iniciatīvas', 10227647, 'Projekta mērķis ir veicināt  kultūrvēsturiskā mantojuma saglabāšanu, veicot ratnīcas restaurāciju un atjaunošanu, padarot to pieejamu sabiedrībai dažādu sabiedrisko aktivitāšu īstenošanai.', 'Projektā paredzēta jumta restaurācija/rekonstrukcija, griestu pārseguma rekonstrukcija, ēkas fasādes restaurācija (atjaunojot vēlāk aizbūvēto durvju ailu, likvidējot vēlāk izbūvētās logailas un rekonstruējot ēkas sākotnējo apdari – balsinājumu ar logailu, stūra rustu un cokola dekoratīvo krāsojumu), logu un durvju nomaiņa (maksimāli autentiskā izskatā), ēkas elektroinstalācijas rekonstrukcija, grīdas betonēšana, pamatu rekonstrukcija/ pastiprināšana un drenāžas ierīkošana.\n\nMuzeja galvenā funkcija ir vēstīt par dzejnieka V. Plūdoņa dzīvi un daiļradi. Paralēli tam apmeklētāji tiks aicināti iepazīties arī ar Zemgales lauku sētu, kas atrodas skaistā, gleznainā vietā Mēmeles upes krastā un izdzīvot gadskārtu tradīcijas.  \n\nIzmantojot muzeja krājumā esošās senlietas, tiks iekārtotas divas ekspozīcijas „Darbarīki un sadzīves piederumi zemnieku sētā” un „Rati un zirglietas”.\n\n Ekspozīcijā „Rati un zirglietas” varēs uzzināt par zirga iejūgu 19.-20.gs., aplūkot dažādus braucamrīkus – ratus, kamanas u.c. zirglietas. Otra ekspozīcijas daļa „Darbarīki un sadzīves piederumi zemnieku sētā” tiks veidota, lai iepazītu zemes apstrādāšanai domātos darbarīkus – arklus, ecēšas, sēšanai, labības novākšanai un apstrādei domātos darbarīkus, kā arī amatniecības darbarīkus. Ratnīcā apmeklētāji varēs aplūkot un  uzzināt par tradicionālajām zemnieku sētā pārtikai audzētajām  graudaugu un citām augu kultūrām, varēs iepazīt labības šķirnes. Būs arī dravniecībai veltīta sadaļa, kurā varēs uzzināt par biškopību un biškopja darba piederumiem. Ar zemnieku sētu tiks sasaistītas latviešu tradicionālo gadskārtu ieražu cikla norises.', '2016-10-05', '2018-10-05', 'Jolanta Kalinka', '63922400', 10227647, '2019-11-20 01:34:08'),
+(28, 'Viļa Plūdoņa muzeja klēts restaurācija un atjaunošana', 'ELFA', 'Arhivēts', '16-06-AL07- A019. 2201-000005', 'Latvijas Lauku attīstības programmas 2014.–2020.gadam apakšpasākums 19.2. „Darbības īstenošana saskaņā ar sabiedrības virzītas vietējās attīstības stratēģiju” aktivitāte 19.2.2. „Vietas potenciāla attīstības iniciatīvas', 10098743, 'Projekta mērķis ir veicināt  kultūrvēsturiskā mantojuma saglabāšanu, veicot klēts restaurāciju un atjaunošanu, padarot to pieejamu sabiedrībai dažādu sabiedrisko aktivitāšu īstenošanai.', 'Projektā paredzēta klēts ēkas restaurācija tās sākotnējā apjomā maksimāli autentiskā izskatā, atjaunojot arī zudušo klēts daļu. Tas ietver demontāžas darbus, zemes darbus, pagaidu konstrukciju izveidošanu esošā karkasa stiprināšanai, pamatu paviļu atjaunošanu, bojāto un deformēto akmeņu nomaiņu, tīrīšanu, sienu un būvju karkasa konstrukcijas restaurāciju un atjaunošanu, grīdas pamatnes atjaunošanu, griestu un durvju restaurāciju un atjaunošanu, apdares darbus, zibensaizsardzības sistēmas uzstādīšanu u.c. darbus.\n\nMuzeja galvenā funkcija ir vēstīt par dzejnieka V. Plūdoņa dzīvi un daiļradi. Paralēli tam apmeklētāji tiks aicināti iepazīties arī ar Zemgales lauku sētu, kas atrodas skaistā, gleznainā vietā Mēmeles upes krastā un izdzīvot gadskārtu tradīcijas.  Izmantojot muzeja krājumā esošās senlietas, tiks iekārtotas ekspozīcijas „Darbarīki un sadzīves piederumi zemnieku sētā” un „Meitas pūrs”. Klētiņā patstāvīgajā ekspozīcijā būs izvietoti koka trauki un pinumi pārtikas produktu glabāšanai. Būs iespēja pašrocīgi izmēģināt dažādus  darbus – akmens dzirnavās samalt miltus maizei, grūst piestā kaņepes, kult sviestu u.c.  Īpaša programma būs veltīta pārtikas mērvienībām.\n\nKlētiņas otra telpa būs atvēlēta ekspozīcijai „Meitas pūrs”. Tajā tiks izvietotas dažādas pūralādes, glabāsies aušanas un rokdarbu piederumi.  Varēs iepazīt audēju mērus dzijas un auduma mērīšanai. Dažādos tematiskajos sarīkojumos klētiņā skanēs Bauskas novada folkloras kopu dziesmas –  īpaši sagatavotas programmas par maltuvi un malšanas darbiem, par meitas pūra darināšanu, aušanu un rokdarbiem.', '2017-10-05', '2019-10-05', 'Jolanta Kalinka', '63922400', 10098743, '2019-11-20 01:34:08'),
+(29, 'Privāto investīciju palielināšana Bauskas pilsētas dienvidu aglomerācijā uzņēmējdarbības veicināšanai', 'ERAF', 'Arhivēts', '3.3.1.0/17/I/004', '3.3.1.specifiskais atbalsta mērķis \"Palielināt privāto investīciju apjomu reģionos, veicot ieguldījumus uzņēmējdarbības attīstībai atbilstoši pašvaldību attīstības programmās noteiktajai teritoriju ekonomiskajai specializācijai un', 114295147, 'Projekta vispārīgais mērķis ir palielināt privāto investīciju apjomu Zemgales reģionā, veicot ieguldījumus komercdarbības attīstībai atbilstoši Bauskas novada pašvaldības attīstības programmā noteiktajai teritorijas ekonomiskajai specializācijai- pārtikas pārstrāde, transports un loģistika, tūrisms un balstoties uz komersantu vajadzībām.\n\nProjekta tiešais mērķis ir uzņēmējdarbības vides uzlabošana lielākajiem investoriem, atjaunojot ielas posmu Bauskas pilsētas dienvidu daļā. Galvenās projekta darbības: Īslīces ielas pārbūve Bauskā, ar ielas pārbūvi saistīto inženiertīklu pārbūve, būvuzraudzība un autoruzraudzība ielas pārbūves darbiem', '•Rekonstruēta brauktuve un ietves 1032m;\n•elektrotīklu un sakaru kanalizācijas tīklu pārcelšana un aizsardzība;\n•izbūvēta un rekonstruēta notekūdeņu kanalizācija virsūdeņu novadīšanai;\n•izbūvēti stāvlaukumi, veikta apzaļumošana', '2017-07-04', '2018-12-31', 'Ilze Tijone ', ' 371 20213021, e-pasts: ilze.tijone@bauska.lv ', 114295147, '2019-11-20 01:34:08'),
+(30, 'Satiksmes drošības uzlabošana Bauskā ', 'ERAF', 'Arhivēts', '3DP/3.2.1.3.1. /10/A PIA/ CFLA/050', ' ', 48315910, 'Šīs aktivitātes mērķis ir uzlabot satiksmes drošību apdzīvotās vietās, likvidējot „melnos punktus” jeb satiksmes drošībai bīstamās vietas - ne tikai tās, kur ir liels avāriju un bojā gājušo skaits, bet arī potenciāli bīstamās vietas, veicot dažādus transporta infrastruktūras uzlabošanas un satiksmes organizācijas pasākumus, lai ar iespējami mazākiem līdzekļiem panāktu satiksmes drošības līmeņa uzlabošanos.', 'Krustojuma pārbūve, apgaismojuma ierīkošana, ietvju izbūve un aprīkojuma uzstādīšana ievērojami uzlabo satiksmes drošību un samazina potenciālo satiksmes negadījumu risku.   Lai uzlabotu vides pieejamību gājēju, velosipēdistu un ratiņbraucēju kustībai, visām rekonstruējamām ietvēm paredzētas ratiņu nobrauktuves/uzbrauktuves vienādā līmenī ar brauktuvi un kontrastējoša reljefa materiāliem; augstuma līmeņa starpības izlīdzinājumu gājēju pārejas vietās.', '2010-12-14', '2011-09-14', 'Ilze Tijone, Aiga Graudiņa', ' 372 20213021, e-pasts: ilze.tijone@bauska.lv ', 48315910, '2019-11-20 01:34:08'),
+(31, 'Darba ar jaunatni pilnveidošana Bauskas novadā', 'Valsts', 'Arhivēts', NULL, 'Izglītības un zinātnes ministrijas Jaunatnes politikas valsts programma 2017.gadam', 330158, 'Attīstīt darba ar jaunatni sistēmas izveidi Bauskas novada pašvaldībā un sekmēt plānveida ilgtermiņa darba ar jaunatni īstenošanu, atbilstoši mērķa grupu vajadzībām un pašvaldības un valsts kopējām prioritātēm, uzlabojot jaunatnes politikas sasniedzamos rezultatīvos rādītājus.', 'Veikt pētījumu, lai identificētu darba ar jaunatni prioritārās jauniešu mērķa grupas un to vajadzības.\n•Izstrādāt priekšlikumus konkrēti veicamiem pasākumiem, atbilstoši jauniešu vajadzībām.\n•Noteikt darbā ar jaunatni iesaistītās personas (institūcijas) un to kompetences pašvaldības darba ar jaunatni īstenošanai, izstrādājot optimālas institucionālās sistēmas modeli.\n•Organizēt mērķtiecīgas tikšanās - diskusijas un pieredzes apmaiņu, ieinteresētajām pusēm, nodrošinot jauniešu līdzdalību un viedokļu pārstāvēšanu.', '2017-04-20', '2017-10-02', 'Jolanta Lauva ', '63922400', 330158, '2019-11-20 01:34:08'),
+(32, 'Sporta inventāra iegāde vispārējās izglītības iestādēs', 'Valsts', 'Arhivēts', ' ', ' ', 1100000, 'Veikt nepieciešamā sporta inventāra iegādi Bauskas novada pašvaldības vispārējās izglītības iestādēs (pirmsskolas, pamatskolas un vidējās izglītības iestādēs) attiecīgā vispārējā izglītības posma prasībām atbilstošu vingrojumu un vingrinājumu pamatprasmju apguvei, lai veicinātu izglītojamo izpratni par veselīgu dzīvesveidu un vēlmi regulāri piedalīties sporta nodarbībās, nostiprinot un uzlabojot veselību, attīstot fiziskās spējas, sekmējot harmonisku fizisko un garīgo attīstību.', ' ', '2014-09-15', NULL, 'Jolanta Lauva ', NULL, 1100000, '2019-11-20 01:34:08');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `relacijas`
---
-
-CREATE TABLE `relacijas` (
-  `id` int(11) NOT NULL,
-  `log_id` int(11) DEFAULT NULL,
-  `financer_id` int(11) DEFAULT NULL,
-  `project_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `relacijas`
---
-
-INSERT INTO `relacijas` (`id`, `log_id`, `financer_id`, `project_id`) VALUES
-(4, 9, 4, 8),
-(5, 10, 5, 9),
-(6, NULL, 6, 10),
-(7, 11, 4, 8);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `atjauninajumi`
---
-ALTER TABLE `atjauninajumi`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `projectID` (`projectID`);
-
---
--- Indexes for table `finansetajs`
---
-ALTER TABLE `finansetajs`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `project_id` (`project_id`);
-
---
--- Indexes for table `projekti`
---
-ALTER TABLE `projekti`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID` (`ID`);
-
---
--- Indexes for table `relacijas`
---
-ALTER TABLE `relacijas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `log_id` (`log_id`),
-  ADD KEY `financer_id` (`financer_id`),
-  ADD KEY `project_id` (`project_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `atjauninajumi`
---
-ALTER TABLE `atjauninajumi`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `finansetajs`
---
-ALTER TABLE `finansetajs`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `projekti`
---
-ALTER TABLE `projekti`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `relacijas`
---
-ALTER TABLE `relacijas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
@@ -206,14 +142,7 @@ ALTER TABLE `atjauninajumi`
 --
 ALTER TABLE `finansetajs`
   ADD CONSTRAINT `finansetajs_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projekti` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `relacijas`
---
-ALTER TABLE `relacijas`
-  ADD CONSTRAINT `relacijas_ibfk_1` FOREIGN KEY (`log_id`) REFERENCES `atjauninajumi` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relacijas_ibfk_2` FOREIGN KEY (`financer_id`) REFERENCES `finansetajs` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relacijas_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `projekti` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

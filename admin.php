@@ -106,7 +106,7 @@
 							<form method="post" id="filtering">
 								<div class="title-container">
 									<img src="Design/Icons/funnel-outline.png" class="img-style" alt="Funnel icon">
-									<span class="title-style">Kārtot</span>
+									<span class="title-style">Filtrēt</span>
 								</div>
 								<br>
 								

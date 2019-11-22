@@ -68,9 +68,8 @@
     global $mysqli;
     connectDB();
     // Settings for query
-    $query = "SELECT projekti.Name, projekti.Status, projekti.BudgetSpent, projekti.Budget, atjauninajumi.Date, atjauninajumi.Comments, finansetajs.* 
+    $query = "SELECT projekti.Name, projekti.Status, projekti.BudgetSpent, projekti.Budget, atjauninajumi.Date, atjauninajumi.Comments 
     FROM projekti
-    LEFT JOIN finansetajs ON projekti.ID = finansetajs.project_id
     LEFT JOIN atjauninajumi ON projekti.ID = atjauninajumi.projectID
     WHERE projekti.ID =".$id;    
     $result = mysqli_query($mysqli, $query);
@@ -90,14 +89,7 @@
     for($i=0; $i < count($dataR); $i++){
       $updateDate[$dataR[$i]["Date"]] = $dataR[$i]["Comments"];
     };
-    // assign all project financers from DB to array
-    $financier =  array_slice($dataR[0],8);
-    foreach($financier as $keypair => $valuePair){
-      if($financier[$keypair] == 0){
-        unset($financier[$keypair]);
-      }
-    };
-    return [$projectName, $projectStatus, $budgetSpent, $projectBudget, $updateDate, $financier];
+    return [$projectName, $projectStatus, $budgetSpent, $projectBudget, $updateDate];
   }
   
   function intToMoney($amount){

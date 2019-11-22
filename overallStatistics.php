@@ -10,7 +10,13 @@
     <body>
       <?php 
         require_once "functions/function.php";
+        require_once "functions/statistics.php";
         require_once "blocks/head.php";
+      ?>
+      <?php 
+        $priorityArray = priorities();
+        $moneyFromFinancier = budgetByFinanciers();
+        $priorityBudgeArray = priorityBudget();
       ?>
       <h1>Kopējā projektu statistika</h1>
       <a class="back-button" href="index.php"><span>Visi Projekti</span></a>
@@ -19,15 +25,27 @@
             <script>
                 budgetBySection([
                 ['Sekcija', 'Daudzums eiro'],
-                ['Mobilitāte un satiksmes drošība', 10000000],
-                ['Kvalitatīva, droša vide', 1238866],
-                ['Kvalitatīva izglītība', 32465546],
-                ['Pievilcīga kultūras un sporta vide', 5534566],
-                ['Efektīva pārvalde', 438744]
+                ['Mobilitāte un satiksmes drošība', <?php echo intToMoney($priorityBudgeArray[0]);?>],
+                ['Kvalitatīva, droša vide', <?php echo intToMoney($priorityBudgeArray[1]);?>],
+                ['Kvalitatīva izglītība', <?php echo intToMoney($priorityBudgeArray[2]);?>],
+                ['Pievilcīga kultūras un sporta vide', <?php echo intToMoney($priorityBudgeArray[3]);?>],
+                ['Efektīva pārvalde', <?php echo intToMoney($priorityBudgeArray[4]);?>]
                 ]);
             </script>
         </div>
         <div id="barChartWrapper">
+            <div id="projectsInSection">        
+                <script>
+                    projectsInSection([
+                        ['Sekcija', 'Projektu skaits'],
+                        ['Mobilitāte un satiksmes drošība', <?php echo $priorityArray[0];?>],
+                        ['Kvalitatīva, droša vide', <?php echo $priorityArray[1];?>],
+                        ['Kvalitatīva izglītība', <?php echo $priorityArray[2];?>],
+                        ['Pievilcīga kultūras un sporta vide', <?php echo $priorityArray[3];?>],
+                        ['Efektīva pārvalde', <?php echo $priorityArray[4];?>]
+                    ]);
+                </script>
+            </div>
             <div id="projectsByFinancier">        
                 <script>
                     projectsByFinancier([
@@ -43,22 +61,11 @@
                 <script>
                     moneyByFinancier([
                     ['Finansētājs', 'Finansējums eiro'],
-                    ['ERAF', 100000],
-                    ['Pašvaldība', 332445],
-                    ['Valsts', 2543312],
-                    ['ES', 943242]
-                    ]);
-                </script>
-            </div>
-            <div id="projectsInSection">        
-                <script>
-                    projectsInSection([
-                        ['Sekcija', 'Projektu skaits'],
-                        ['Mobilitāte un satiksmes drošība', 10],
-                        ['Kvalitatīva, droša vide', 12],
-                        ['Kvalitatīva izglītība', 24],
-                        ['Pievilcīga kultūras un sporta vide', 5],
-                        ['Efektīva pārvalde', 8]
+                    <?php
+                        foreach($moneyFromFinancier as $keypair => $valuePair){ ?>
+                          ['<?php echo $keypair;?>', <?php echo intToMoney($valuePair);?>],
+                        <?php }
+                        ?>
                     ]);
                 </script>
             </div>

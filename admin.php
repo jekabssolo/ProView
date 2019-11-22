@@ -15,7 +15,7 @@
         $now = time();
         if ($now > $_SESSION['expire']) {
           session_destroy();
-          echo "Jūsu sesija ir beigusies! <a href='/login.php'>Ieiet atpakaļ</a>";
+		  echo "<script type='text/javascript'>alert('Jūsu sesija ir beigusies.');</script>";
       }
     }
     ?>

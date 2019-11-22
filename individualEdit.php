@@ -6,7 +6,6 @@
     var conf = confirm('Vai tiešām vēlaties izdzēst projektu?');
     if(conf){
       document.getElementById("delete").submit();
-      console.log("did it!!!");
     }
     }
   </script>
@@ -46,7 +45,7 @@
       $now = time();
       if ($now > $_SESSION['expire']) {
         session_destroy();
-        echo "Jūsu sesija ir beigusies! <a href='/login.php'>Ieiet atpakaļ</a>";
+        echo "<script type='text/javascript'>alert('Jūsu sesija ir beigusies.');</script>";
       }
     }
   ?>
@@ -54,31 +53,22 @@
     <?php
       require_once "functions/function.php";
       $projects = getProjects($_GET['id']);
+      $projectData = dataToVariables($_GET['id']);
+      $updateComments = $projectData[4];
+      ksort($updateComments);
       $title = $projects["Name"];
       require_once "blocks/head.php";
      ?>
-    <?php
-      function intToMoney($amount){
-      $money = floatval($amount) / 100;
-      return $money;
-      }
-    ?>
-    <?php
-      function moneyToInt($amount){
-        if ($amount < 0){
-          $amount = $amount * -1;
-        }
-        $result = intval($amount*100);
-      return $result;
-      }
-    ?>
+
+
     <?php
       if (!empty($_POST['Name'])){
       require_once "functions/update.php";
       $response = updateExisting($_GET['id'], $_POST['Name'], $_POST['Financer'], $_POST['Status'], $_POST['Number'], $_POST['SAM'], 
       moneyToInt($_POST['Budget']), moneyToInt($_POST['BudgetSpent']),  
       $_POST['Purpose'], $_POST['Activities'], $_POST['StartDate'], $_POST['FinishDate'], 
-      $_POST['CoordinatorName'], $_POST['CoordinatorContacts']);
+      $_POST['CoordinatorName'], $_POST['CoordinatorContacts'], $_POST['CoordinatorEmail']);
+      echo "<meta http-equiv='refresh' content='0'>";
       }
     ?>
 
@@ -87,6 +77,14 @@
         require_once "functions/delete.php";
         deleteProject($_GET["id"]);
         header("location:admin.php");
+      }
+    ?>
+
+    <?php
+      if (!empty($_POST['Update'])){
+      require_once "functions/update.php";
+      $response = newUpdate($_GET['id'], $_POST['UpdateDate'], $_POST['Update']);
+      echo "<meta http-equiv='refresh' content='0'>";
       }
     ?>
 
@@ -99,7 +97,7 @@
       <div id="success-message"><?php if (isset($response)){echo $response;}?></div>
 
       <!-- Logout field -->
-      <a class="logout" href="logout.php">Iziet!</a>
+      <a class="logout" href="logout.php">Iziet</a>
 
 
       <!-- saving button -->
@@ -118,26 +116,13 @@
       <div class='wrap'>
       <article class='b-article'>
 
+      <!-- Edit project info -->
 
       <form method="post" class="edit-info" id="changes">
 
 
       <b>Projekta nosaukums: </b><br>
-      <?php if(!empty($_POST)){
-        $name = $_POST["Name"];
-        $financer = $_POST["Financer"];
-        $status = $_POST["Status"];
-        $number = $_POST["Number"];
-        $sam = $_POST["SAM"];
-        $budget = intToMoney(moneyToInt($_POST["Budget"]));
-        $budgetspent = intToMoney(moneyToInt($_POST["BudgetSpent"]));
-        $purpose = $_POST["Purpose"];
-        $activities = $_POST["Activities"];
-        $startdate = $_POST["StartDate"];
-        $finishdate = $_POST["FinishDate"];
-        $cname = $_POST["CoordinatorName"];
-        $ccontacts = $_POST["CoordinatorContacts"];
-      }else{
+      <?php
         $name = $projects["Name"];
         $financer = $projects["Financer"];
         $status = $projects["Status"];
@@ -151,7 +136,7 @@
         $finishdate = $projects["FinishDate"];
         $cname = $projects["CoordinatorName"];
         $ccontacts = $projects["CoordinatorContacts"];
-      }
+        $cemail = $projects["CoordinatorEmail"];
       ?>
       <input name="Name" type="text" size="99" maxlength="21844" value="<?php echo $name; ?>">
 
@@ -220,13 +205,48 @@
       <input name="CoordinatorName" type="text" size="25" maxlength="21844" value="<?php echo $cname; ?>">
       <br><br>
 
-      <b>Kontakti: </b><br>
+      <b>Telefona numurs: </b><br>
       <input name="CoordinatorContacts" type="text" size="25" maxlength="21844" value="<?php echo $ccontacts; ?>">
       <br><br>
 
+      <b>Epasts: </b><br>
+      <input name="CoordinatorEmail" type="text" size="25" maxlength="21844" value="<?php echo $cemail; ?>">
+      <br><br>
 
-      <hr>
       </form>
+      
+      <hr>
+
+      <!-- Add new update -->
+
+      <form method="post" id="post-update">
+
+      <b> Jaunumi: </b><br>
+
+      <div id="updateLog">
+        <h2 class='updateData'>
+          <?php 
+            foreach($updateComments as $keypair => $valuePair){
+                echo date("d.m.Y.", strtotime($keypair));
+          ?>&nbsp<?php      
+                echo $valuePair;
+          ?>
+          </br> 
+          <?php 
+            };
+          ?>
+        </h2>
+      </div>
+
+      Pievienot:
+
+      <input name="UpdateDate" type="date">
+      <input name="Update" type="text" size="75" maxlength="21844" placeholder="Jaunums">
+      <input type="submit" value="Pievienot jaunumu">
+
+
+      </form>
+      <hr>
 
       </article>
       </div>

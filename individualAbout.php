@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="style.css">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-		<title>About project</title>
+		<title>Par projektu</title>
 		
 		<?php
 			require_once "functions/function.php";
@@ -119,6 +119,11 @@
 							</td>
 						</tr>
 					</table>
+					<br>
+					<div>
+						<b>Vidējā termiņa prioritāte: </b> <br>
+						<?php echo $projects["Category"]; ?>
+					</div>
 					<br>
 					<div>
 						<b>Projekta programma/SAM: </b> <br>

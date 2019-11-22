@@ -1,17 +1,17 @@
 <?php
   require_once "connect.php";
 
-  function updateExisting($id, $name, $financer, $status, $number, $sam, $budget, $budgetspent, $purpose, $activities, $sdate, $fdate, $cname, $ccontact, $cemail) {
+  function updateExisting($id, $name, $financer, $status, $number, $category, $sam, $budget, $budgetspent, $purpose, $activities, $sdate, $fdate, $cname, $ccontact, $cemail) {
 
 
     global $mysqli;
     connectDB();
 
     $query = "UPDATE projekti
-    SET Name = ?, Financer = ?, Status = ?, Number = ?, SAM = ?, Budget = ?, BudgetSpent = ?, Purpose = ?, Activities = ?, StartDate = ?, FinishDate = ?, coordinatorName = ?, CoordinatorContacts = ?, CoordinatorEmail = ?
+    SET Name = ?, Financer = ?, Status = ?, Number = ?, Category = ?, SAM = ?, Budget = ?, BudgetSpent = ?, Purpose = ?, Activities = ?, StartDate = ?, FinishDate = ?, coordinatorName = ?, CoordinatorContacts = ?, CoordinatorEmail = ?
     WHERE ID = ?;";
     $stmt= $mysqli->prepare($query);
-    $stmt->bind_param("sssssssssssssss", $name, $financer, $status, $number, $sam, $budget, $budgetspent, $purpose, $activities, $sdate, $fdate, $cname, $ccontact, $cemail, $id);
+    $stmt->bind_param("ssssssssssssssss", $name, $financer, $status, $number, $category, $sam, $budget, $budgetspent, $purpose, $activities, $sdate, $fdate, $cname, $ccontact, $cemail, $id);
     $stmt->execute();
 
 

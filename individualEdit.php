@@ -64,7 +64,7 @@
     <?php
       if (!empty($_POST['Name'])){
       require_once "functions/update.php";
-      $response = updateExisting($_GET['id'], $_POST['Name'], $_POST['Financer'], $_POST['Status'], $_POST['Number'], $_POST['SAM'], 
+      $response = updateExisting($_GET['id'], $_POST['Name'], $_POST['Financer'], $_POST['Status'], $_POST['Number'], $_POST['Category'], $_POST['SAM'], 
       moneyToInt($_POST['Budget']), moneyToInt($_POST['BudgetSpent']),  
       $_POST['Purpose'], $_POST['Activities'], $_POST['StartDate'], $_POST['FinishDate'], 
       $_POST['CoordinatorName'], $_POST['CoordinatorContacts'], $_POST['CoordinatorEmail']);
@@ -127,6 +127,7 @@
         $financer = $projects["Financer"];
         $status = $projects["Status"];
         $number = $projects["Number"];
+        $category = $projects["Category"];
         $sam = $projects["SAM"];
         $budget = intToMoney($projects["Budget"]);
         $budgetspent = intToMoney($projects["BudgetSpent"]);
@@ -169,6 +170,19 @@
       </select>
 
       <br><br>
+
+      <b>Vidējā termiņa prioritāte: </b><br>
+
+      <select size="1" name="Category">
+          <option value='Mobilitāte un satiksmes drošība' <?php echo $category == 'Mobilitāte un satiksmes drošība' ? 'selected' : '' ?>>Mobilitāte un satiksmes drošība</option>
+          <option value='Kvalitatīva, droša vide' <?php echo $category == 'Kvalitatīva, droša vide' ? 'selected' : '' ?>>Kvalitatīva, droša vide</option>
+          <option value='Kvalitatīva izglītība' <?php echo $category == 'Kvalitatīva izglītība' ? 'selected' : '' ?>>Kvalitatīva izglītība</option>
+          <option value='Pievilcīga kultūras un sporta vide' <?php echo $category == 'Pievilcīga kultūras un sporta vide' ? 'selected' : '' ?>>Pievilcīga kultūras un sporta vide</option>
+          <option value='Efektīva pārvalde' <?php echo $category == 'Efektīva pārvalde' ? 'selected' : '' ?>>Efektīva pārvalde</option>
+      </select>
+
+      <br><br>
+
       <b>Projekta numurs: </b><br>
       <input name="Number" type="text" size="30" maxlength="21844" value="<?php echo $number; ?>">
       <br><br>

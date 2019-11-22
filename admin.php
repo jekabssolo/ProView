@@ -56,7 +56,12 @@
             $finanval="";
           }else{
             $finanval=$_POST["financer"];
-          }
+		  }
+		  if (!array_key_exists('category',$_POST)) {
+			$categoryval="";
+			} else {
+				$categoryval=$_POST["category"];
+			}
           if(!array_key_exists('budgetsort',$_POST)){
             $budgetsort="";
           }else{
@@ -69,7 +74,7 @@
           }
           $searchval = preg_replace("/[']/", "", $_POST["search"]);
           require_once "functions/searchfilter.php";
-          $projects = getProjectscontaining($finanval, $statusval, $searchval, $budgetsort, $entrysort);
+          $projects = getProjectscontaining($finanval, $statusval, $categoryval, $searchval, $budgetsort, $entrysort);
         }
        ?>
   
@@ -135,6 +140,16 @@
 									<option value='Valsts' <?php echo isset($_POST['financer']) && $_POST['financer'] == 'Valsts' ? 'selected' : '' ?>>Valsts</option>
 								</select>
 
+								<!-- Pēc vidējā termiņa prioritātes -->
+								<select class="custom-select" size="1" name="category" onchange="filtersubmit()">
+									<option value='' selected>Pēc vidējā termiņa prioritātes</option>
+									<option value='Mobilitāte un satiksmes drošība' <?php echo isset($_POST['category']) && $_POST['category'] == 'Mobilitāte un satiksmes drošība' ? 'selected' : '' ?>>Mobilitāte un satiksmes drošība</option>
+									<option value='Kvalitatīva, droša vide' <?php echo isset($_POST['category']) && $_POST['category'] == 'Kvalitatīva, droša vide' ? 'selected' : '' ?>>Kvalitatīva, droša vide</option>
+									<option value='Kvalitatīva izglītība' <?php echo isset($_POST['category']) && $_POST['category'] == 'Kvalitatīva izglītība' ? 'selected' : '' ?>>Kvalitatīva izglītība</option>
+									<option value='Pievilcīga kultūras un sporta vide' <?php echo isset($_POST['category']) && $_POST['category'] == 'Pievilcīga kultūras un sporta vide' ? 'selected' : '' ?>>Pievilcīga kultūras un sporta vide</option>
+									<option value='Efektīva pārvalde' <?php echo isset($_POST['category']) && $_POST['category'] == 'Efektīva pārvalde' ? 'selected' : '' ?>>Efektīva pārvalde</option>
+								</select>
+
 								<input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
 								<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
 								<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
@@ -145,6 +160,7 @@
 							<form method="post">
 								<input name="status" value="" type="hidden">
 								<input name="financer" value="" type="hidden">
+								<input name="category" value="" type="hidden">
 								<input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
 								<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
 								<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
@@ -185,6 +201,7 @@
 
 								<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
 								<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+								<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
 								<input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
 							</form>
 		
@@ -194,6 +211,7 @@
 							<form method="post">
 								<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
 								<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+								<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
 								<input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
 								<input type="hidden" name="budgetsort" value="">
 								<input type="hidden" name="entrysort" value="">
@@ -221,6 +239,7 @@
 									</div>
 									<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
 									<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+									<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
 									<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
 									<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
 									<!-- <input type="submit" value="Meklēt"> -->

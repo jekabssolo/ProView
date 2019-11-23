@@ -45,7 +45,7 @@
       $now = time();
       if ($now > $_SESSION['expire']) {
         session_destroy();
-        echo "<script type='text/javascript'>alert('Jūsu sesija ir beigusies.');</script>";
+        echo "<script>var r = confirm('Jūsu sesija ir beigusies.'); r ? location.reload() : location.reload();</script>";
       }
     }
   ?>

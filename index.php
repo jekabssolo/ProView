@@ -10,7 +10,7 @@
 			$now = time();
 			if ($now > $_SESSION['expire']) {
 			session_destroy();
-			echo "<script type='text/javascript'>alert('Jūsu sesija ir beigusies.');</script>";
+			echo "<script>var r = confirm('Jūsu sesija ir beigusies.'); r ? location.reload() : location.reload();</script>";
 		}
 		}
 		?>
@@ -28,6 +28,9 @@
 		</script>
 		<script>
 			function filtersubmit(){document.getElementById("filtering").submit();}
+		</script>
+		<script>
+			function clearsearch(){document.getElementById("clearsearch").submit();}
 		</script>
 
 		<!-- table row linking to individual view -->
@@ -245,13 +248,21 @@
 									<div class="search-container">
 										<img src="Design/Icons/search.png" class="search-icon" alt="Search icon">
 										<input type="text" class="search-form" placeholder="Meklēt projektus" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>" maxlength="65534">
+										<img src="Design/Icons/clear.png" class="clear-icon" alt="Clear icon" onclick="clearsearch()">
 									</div>
 									<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
 									<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
 									<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
 									<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
 									<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
-									<!-- <input type="submit" value="Meklēt"> -->
+								</form>
+								<form id='clearsearch' method='post'>
+									<input type="hidden" name="search" value="">
+									<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
+									<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+									<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
+									<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
+									<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
 								</form>
 							</div>
 						</div>

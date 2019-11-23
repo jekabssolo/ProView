@@ -39,7 +39,7 @@
   </style>
   <?php session_start(); /* Starts the session */
     if(!isset($_SESSION['UserData']['Username'])){
-    header("location:login.php");
+    header("location:login.php?p=IndividualEdit.php?id=".$_GET['id']);
     exit;
     }else{
       $now = time();

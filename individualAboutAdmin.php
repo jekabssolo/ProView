@@ -134,6 +134,11 @@
 					</table>
 					<br>
 					<div>
+						<b>Vidējā termiņa prioritāte: </b> <br>
+						<?php echo $projects["Category"]; ?>
+					</div>
+					<br>
+					<div>
 						<b>Projekta programma/SAM: </b> <br>
 						<?php echo $projects["SAM"]; ?>
 					</div>

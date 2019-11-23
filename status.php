@@ -48,9 +48,10 @@
       <h1>Atjauninājumi</h1>
       <div id="updateLog">
         <h2 class='updateData'>
-          <?php 
+          <?php
+            ksort($updateComments);
             foreach($updateComments as $keypair => $valuePair){
-              echo $keypair;
+              echo date("d.m.Y.", strtotime($keypair));
           ?>&nbsp<?php      
               echo $valuePair;
           ?>
@@ -65,16 +66,16 @@
         <div id="budgetPie">
           <script>budgetChart([
           ['Budžeta veids', 'Daudzums eiro'],
-          ['Iztērēts', <?php echo $budgetSpent?>],
-          ['Atlikušais projekta budžets', <?php echo $projectBudget - $budgetSpent?>]
+          ['Iztērēts', <?php echo intToMoney($budgetSpent);?>],
+          ['Atlikušais projekta budžets', <?php echo intToMoney($projectBudget - $budgetSpent);?>]
           ]);</script>
         </div>
         
         <div id="allBudgetPie">        
           <script>allBudgetChart([
           ['Budžeta veids', 'Daudzums eiro'],
-          ['Šī projekta budžets', <?php echo $projectBudget?>],
-          ['Visu projektu budžets', <?php echo budgetSum($projectBudget)?>]
+          ['Šī projekta budžets', <?php echo intToMoney($projectBudget);?>],
+          ['Visu projektu budžets', <?php echo intToMoney(budgetSum($projectBudget));?>]
           ]);</script>
         </div>
         <p><?php dataToVariables($_GET["id"])?></p>

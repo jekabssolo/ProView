@@ -117,8 +117,12 @@ color: #0645AD;
   width: 19.5%;
   text-align: center;
 }
-#barChartWrapper{  
-  width: 100%;
+
+/*Overall status*/
+#budgetBySection, #barChartWrapper{
+  width: 98%;
+  margin: 0px;
+  padding: 0px;
 }
 #projectsByFinancier{
   display: inline-block;

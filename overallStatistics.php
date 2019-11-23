@@ -15,7 +15,7 @@
       ?>
       <?php 
         $priorityArray = priorities();
-        $moneyFromFinancier = budgetByFinanciers();
+        $budgAndProjFinancier = budgAndProjFinancier();
         $priorityBudgeArray = priorityBudget();
       ?>
       <h1>Kopējā projektu statistika</h1>
@@ -50,10 +50,11 @@
                 <script>
                     projectsByFinancier([
                     ['Finansētājs', 'Projektu skaits'],
-                    ['ERAF', 10],
-                    ['Pašvaldība', 3],
-                    ['Valsts', 2],
-                    ['ES', 9]
+                    <?php
+                        foreach($budgAndProjFinancier[1] as $keypair => $valuePair){ ?>
+                          ['<?php echo $keypair;?>', <?php echo $valuePair;?>],
+                        <?php }
+                        ?>
                     ]);
                 </script>
             </div>
@@ -62,7 +63,7 @@
                     moneyByFinancier([
                     ['Finansētājs', 'Finansējums eiro'],
                     <?php
-                        foreach($moneyFromFinancier as $keypair => $valuePair){ ?>
+                        foreach($budgAndProjFinancier[0] as $keypair => $valuePair){ ?>
                           ['<?php echo $keypair;?>', <?php echo intToMoney($valuePair);?>],
                         <?php }
                         ?>

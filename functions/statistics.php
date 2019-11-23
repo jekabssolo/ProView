@@ -76,30 +76,34 @@
         return $priorityArray;
       }
 
-    function budgetByFinanciers(){
+    function budgAndProjFinancier(){
         global $mysqli;
         connectDB();
         $query = "SELECT * FROM finansetajs";    
         $result = mysqli_query($mysqli, $query);
         closeDB();
         $budgetByFinancier = array();
+        $projectsByFinancier = array();
         $financier = mysqli_fetch_all($result,MYSQLI_ASSOC);
         for($i = 0; $i < count($financier); $i++){ 
             $financierName =  array_slice($financier[$i],2);
-            foreach($financierName as $keypair => $valuePair){
+            foreach($financierName as $keypair => $valuePair){                
+                if($valuePair != 0 and isset($projectsByFinancier[$keypair])){
+                    $projectsByFinancier[$keypair] += 1;    
+                }else if ($valuePair != 0){
+                    $projectsByFinancier[$keypair] = 1;
+                }
                 if(array_key_exists($keypair, $budgetByFinancier)){
                     $budgetByFinancier[$keypair] = $budgetByFinancier[$keypair] + $valuePair;
                 }else{
                     $budgetByFinancier[$keypair] = $valuePair;
-                }                
+                }               
                 if($budgetByFinancier[$keypair] == 0){
                     unset($budgetByFinancier[$keypair]);
                 }
             }
         }
-        print_r($budgetByFinancier);
-        return $budgetByFinancier;
+        return [$budgetByFinancier, $projectsByFinancier];
 
-    };    
-
+    }; 
 ?>

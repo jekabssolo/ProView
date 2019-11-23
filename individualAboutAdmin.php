@@ -4,13 +4,13 @@
 	<head>
     <?php session_start(); /* Starts the session */
       if(!isset($_SESSION['UserData']['Username'])){
-      header("location:login.php");
+      	header("location:login.php?p=IndividualAboutAdmin.php?id=".$_GET['id']);
       exit;
       }else{
         $now = time();
         if ($now > $_SESSION['expire']) {
           session_destroy();
-          echo "Jūsu sesija ir beigusies! <a href='/login.php'>Ieiet atpakaļ</a>";
+          echo "<script type='text/javascript'>alert('Jūsu sesija ir beigusies.');</script>";
         }
       }
     ?>
@@ -132,6 +132,11 @@
 							</td>
 						</tr>
 					</table>
+					<br>
+					<div>
+						<b>Vidējā termiņa prioritāte: </b> <br>
+						<?php echo $projects["Category"]; ?>
+					</div>
 					<br>
 					<div>
 						<b>Projekta programma/SAM: </b> <br>

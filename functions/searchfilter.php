@@ -1,7 +1,7 @@
 <?php
 require_once "connect.php";
 
-  function getProjectscontaining($finanval, $statusval, $searchval, $budgetsort, $entrysort) {
+  function getProjectscontaining($finanval, $statusval, $categoryval, $searchval, $budgetsort, $entrysort) {
     global $mysqli;
     connectDB();
     if ($budgetsort == "" && $entrysort == ""){
@@ -13,7 +13,7 @@ require_once "connect.php";
     }else{
         $orderval = "ORDER BY Entry ".$entrysort.", Budget ".$budgetsort;
     }
-    $query = "SELECT * FROM projekti WHERE ((Status like '%$statusval%' AND Financer like '%$finanval%') AND Name LIKE '%$searchval%') $orderval";
+    $query = "SELECT * FROM projekti WHERE ((Status like '%$statusval%' AND Financer like '%$finanval%' AND Category like '%$categoryval%') AND Name LIKE '%$searchval%') $orderval";
     
 
     $result = mysqli_query($mysqli, $query);

@@ -16,7 +16,7 @@
         if (isset($_GET['p'])){
          header("location:".$_GET["p"]);
         }else{
-         header("location:admin.php");
+         header("location:index.php");
         }
         exit;
         } else {

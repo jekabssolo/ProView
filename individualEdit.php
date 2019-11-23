@@ -91,9 +91,9 @@
   </head>
   <body>
 
-    <a class="back-button" href="admin.php"><span>Visi Projekti</span></a>
+    <a class="back-button" href="index.php"><span>Visi Projekti</span></a>
 
-      <!-- succesful update message -->
+      <!-- succesful update or added news message -->
       <div id="success-message"><?php if (isset($response)){echo $response;}?></div>
 
       <!-- Logout field -->

@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
+		<?php session_start(); /* Starts the session */
+		if(!isset($_SESSION['UserData']['Username'])){
+			$auth = false;
+		}else {
+			$auth = true;
+			$now = time();
+			if ($now > $_SESSION['expire']) {
+			session_destroy();
+			echo "<script type='text/javascript'>alert('Jūsu sesija ir beigusies.');</script>";
+		}
+		}
+		?>
+
 		<!-- BOOTSTRAP CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -79,11 +93,19 @@
 						</a>
 					</div>
 					<div class="col">
-						<div class="header-right admin-button" onclick="window.location='/admin.php'">
-							<img src="Design/Icons/management (1).png" class="admin-icon" alt="Management icon">
-							Administrēšana
-							<!-- <button id="admin-button" data-href="/admin.php">Administrēšana</button> -->
-						</div>
+						<?php if($auth){
+							$link = 'window.location="/logout.php"';
+							echo  "<div class='header-right admin-button' onclick='$link'>
+									<img src='Design/Icons/logout.png' class='admin-icon' alt='Logout icon'>
+									Iziet
+						  			</div>";
+						}else{
+							$link = 'window.location="/login.php"';
+							echo  "<div class='header-right admin-button' onclick='$link'>
+									<img src='Design/Icons/management (1).png' class='admin-icon' alt='Management icon'>
+									Administrēšana
+						  			</div>";
+						} ?>
 					</div>
 				</div>
 		</header>
@@ -242,11 +264,12 @@
 								<th class="align-middle">Nosaukums</th>
 								<th class="align-middle">Statuss</th>
 								<th class="align-middle">Īstenošanas laiks</th>
+								<?php echo $auth ? "<th class='align-middle'>Rediģēt</th>" : "" ?>
 							</tr>
 							<?php
 								for ($i = 0; $i<count($projects); $i++){
-									echo "<tr class='entry' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'>";
-									echo "<td class='align-middle'>", $projects[$i]["Name"], "</td>";
+									echo "<tr class='entry'>";
+									echo "<td class='align-middle' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'>", $projects[$i]["Name"], "</td>";
 									switch ($projects[$i]["Status"]) {
 										case 'Aktīvs':
 											$background = "rgb(33, 150, 83, 0.3)";
@@ -274,8 +297,9 @@
 											$color = "#A76D3C";
 											break;
 									}
-									echo "<td class='project-status align-middle text-center'><span class='status-text' style='background:" . $background . "; border: 2px solid " . $border . "; color: " . $color . "'>".$projects[$i]["Status"]."</span></td>";
-									echo "<td class='align-middle'>".date("d.m.Y.", strtotime($projects[$i]["StartDate"])), " - ", date("d.m.Y.", strtotime($projects[$i]["FinishDate"])),"</td>";
+									echo "<td class='project-status align-middle text-center' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'><span class='status-text' style='background:" . $background . "; border: 2px solid " . $border . "; color: " . $color . "'>".$projects[$i]["Status"]."</span></td>";
+									echo "<td class='align-middle' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'>".date("d.m.Y.", strtotime($projects[$i]["StartDate"])), " - ", date("d.m.Y.", strtotime($projects[$i]["FinishDate"])),"</td>";
+									echo $auth ? "<td class='align-middle text-center' data-href='/individualEdit.php?id=".$projects[$i]["ID"]."'><img src='Design/Icons/edit.png' class='img-style' alt='Edit icon'></td>" : "";
 									echo "</tr>";  
 								};
 								

@@ -95,6 +95,23 @@
 							<img src="/ProView Bauska Logo - Final.png" class="header-logo" alt="Logo">
 						</a>
 					</div>
+					<?php
+						if ($auth){
+							$link = 'window.location="/newProject.php"';
+							echo "<div class='col'>
+									<div class='header-right admin-button' onclick='$link'>
+									<img src='Design/Icons/new.png' class='admin-icon' alt='New icon'>
+									Jauns projekts
+									</div>
+								</div>";
+						}
+					?>
+					<div class="col">
+						<div class='header-right admin-button' onclick='window.location="/overallStatistics.php"'>
+							<img src='Design/Icons/statistical.png' class='admin-icon' alt='Stats icon'>
+							Statistika
+						</div>
+					</div>
 					<div class="col">
 						<?php if($auth){
 							$link = 'window.location="/logout.php"';

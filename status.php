@@ -10,6 +10,7 @@
           $projectData = dataToVariables($_GET['id']);
           $completion = completionStatusRow($projectData[1]);
           $updateComments = $projectData[4];
+          print_r($updateComments);
           $budgetSpent = $projectData[2];
           $projectBudget = $projectData[3];
           require_once "blocks/head.php"; 
@@ -45,18 +46,18 @@
         <div class="progressStatus"><h2>Arhivēts</h2></div>
       </div>
 
-      <h1>Atjauninājumi</h1>
+      <h1>Jaunumi</h1>
       <div id="updateLog">
         <h2 class='updateData'>
           <?php
             ksort($updateComments);
             foreach($updateComments as $keypair => $valuePair){
-              echo date("d.m.Y.", strtotime($keypair));
-          ?>&nbsp<?php      
-              echo $valuePair;
-          ?>
-          </br> 
-          <?php 
+              for($i=0; $i < count($valuePair); $i++){
+                echo date("d.m.Y.", strtotime($keypair));
+                ?>&nbsp<?php      
+                echo $valuePair[$i];
+                ?></br><?php
+              }
             };
           ?>
         </h2>

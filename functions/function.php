@@ -87,7 +87,7 @@
     // assign project updates and date of updates from DB to array
     $updateDate = array();
     for($i=0; $i < count($dataR); $i++){
-      $updateDate[$dataR[$i]["Date"]] = $dataR[$i]["Comments"];
+      $updateDate[$dataR[$i]["Date"]][] = $dataR[$i]["Comments"];
     };
     return [$projectName, $projectStatus, $budgetSpent, $projectBudget, $updateDate];
   }

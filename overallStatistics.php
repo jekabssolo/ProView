@@ -20,7 +20,7 @@
       ?>
       <h1>Kopējā projektu statistika</h1>
       <a class="back-button" href="index.php"><span>Visi Projekti</span></a>
-      <h2>Kopējais budžets projektiem: <?php echo budgetSum(0);?></h2>        
+      <h2>Kopējais budžets projektiem: <?php echo intToMoney(budgetSum(0));?></h2>        
         <div id="budgetBySection">        
             <script>
                 budgetBySection([

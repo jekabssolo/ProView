@@ -6,7 +6,7 @@
         global $mysqli;
         connectDB();
         // Settings for query
-        $query = "SELECT Priority, Budget  FROM projekti";   
+        $query = "SELECT Category, Budget  FROM projekti";   
         $result = mysqli_query($mysqli, $query);
         closeDB();
         $prioritiesAndBudget = mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -17,7 +17,7 @@
         $ManagementBudget = 0;
         $priorityBudget = [];
         for($i = 0; $i < count($prioritiesAndBudget); $i++){
-                switch ($prioritiesAndBudget[$i]["Priority"]) {
+                switch ($prioritiesAndBudget[$i]["Category"]) {
                     case 'Mobilitāte un satiksmes drošība':
                         $SecurityBudget += $prioritiesAndBudget[$i]["Budget"];
                         break;
@@ -43,7 +43,7 @@
     function priorities(){
         global $mysqli;
         connectDB();
-        $query = "SELECT Priority FROM projekti";    
+        $query = "SELECT Category FROM projekti";    
         $result = mysqli_query($mysqli, $query);
         closeDB();
         $priorities = mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -54,7 +54,7 @@
         $priorityManagement = 0;
         $priorityArray = [];
         for($i = 0; $i < count($priorities); $i++){  
-            switch ($priorities[$i]["Priority"]) {
+            switch ($priorities[$i]["Category"]) {
                 case 'Mobilitāte un satiksmes drošība':
                     $prioritySecurity += 1;
                     break;
@@ -88,18 +88,15 @@
         for($i = 0; $i < count($financier); $i++){ 
             $financierName =  array_slice($financier[$i],2);
             foreach($financierName as $keypair => $valuePair){                
-                if($valuePair != 0 and isset($projectsByFinancier[$keypair])){
+                if(isset($valuePair) and isset($projectsByFinancier[$keypair])){
                     $projectsByFinancier[$keypair] += 1;    
-                }else if ($valuePair != 0){
+                }else if (isset($valuePair)){
                     $projectsByFinancier[$keypair] = 1;
                 }
-                if(array_key_exists($keypair, $budgetByFinancier)){
+                if(isset($valuePair) and array_key_exists($keypair, $budgetByFinancier)){
                     $budgetByFinancier[$keypair] = $budgetByFinancier[$keypair] + $valuePair;
-                }else{
+                }else if(isset($valuePair)){
                     $budgetByFinancier[$keypair] = $valuePair;
-                }               
-                if($budgetByFinancier[$keypair] == 0){
-                    unset($budgetByFinancier[$keypair]);
                 }
             }
         }

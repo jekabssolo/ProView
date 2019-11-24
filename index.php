@@ -79,7 +79,7 @@
 				} else {
 					$entrysort=$_POST["entrysort"];
 				}
-				$searchval = preg_replace("/[']/", "", $_POST["search"]);
+				$searchval = $_POST["search"];
 				require_once "functions/searchfilter.php";
 				$projects = getProjectscontaining($finanval, $statusval, $categoryval, $searchval, $budgetsort, $entrysort);
 			}

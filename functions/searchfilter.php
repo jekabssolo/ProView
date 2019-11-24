@@ -13,12 +13,17 @@ require_once "connect.php";
     }else{
         $orderval = "ORDER BY Entry ".$entrysort.", Budget ".$budgetsort;
     }
-    $query = "SELECT * FROM projekti WHERE ((Status like '%$statusval%' AND Financer like '%$finanval%' AND Category like '%$categoryval%') AND Name LIKE '%$searchval%') $orderval";
+    $query = "SELECT * FROM projekti WHERE ((Status like '%$statusval%' AND Financer like '%$finanval%' AND Category like '%$categoryval%') AND Name LIKE ?) $orderval";
     
-
-    $result = mysqli_query($mysqli, $query);
-    closeDB();
+    if($stmt = mysqli_prepare($mysqli, $query)){
+      mysqli_stmt_bind_param($stmt, "s", $param_term);
+      $param_term = '%' . $searchval . '%';
+      if(mysqli_stmt_execute($stmt)){
+        $result = mysqli_stmt_get_result($stmt);
+      closeDB();
       return resultToArrayi($result);
+      }
+    }
   };
 
   function resultToArrayi($result){

@@ -7,6 +7,7 @@
     $name = $_POST["Name"];
     $financer = $_POST["Financer"];
     $status = $_POST["Status"];
+    $category = $_POST["Category"];
     $number = $_POST["Number"];
     $sam = $_POST["SAM"];
     $budget = intToMoney(moneyToInt($_POST["Budget"]));
@@ -17,21 +18,21 @@
     $finishdate = $_POST["FinishDate"];
     $cname = $_POST["CoordinatorName"];
     $ccontacts = $_POST["CoordinatorContacts"];
-    saveNewProject($financierList, $name, $financer, $status, $number, $sam, $budget, $budgetspent, $purpose, $activities, $startdate, $finishdate, $cname, $ccontacts);
+    saveNewProject($financierList, $name, $financer, $status, $category, $number, $sam, $budget, $budgetspent, $purpose, $activities, $startdate, $finishdate, $cname, $ccontacts);
 
 
     
-    function saveNewproject($financierList, $name, $financer, $status, $number, $sam, $budget, $budgetspent, $purpose, $activities, $startdate, $finishdate, $cname, $ccontacts){
+    function saveNewproject($financierList, $name, $financer, $status, $category, $number, $sam, $budget, $budgetspent, $purpose, $activities, $startdate, $finishdate, $cname, $ccontacts){
       global $mysqli;
       connectDB();
       /*Check if required fields are filled. If not provide link to previous field*/
-      if($name == '' or $status == '' or $number == '' or $budget == '' or $purpose == '' or $cname == '' or $ccontacts == ''){
+      if($name == '' or $status == '' or $category == '' or $number == '' or $budget == '' or $purpose == '' or $cname == '' or $ccontacts == ''){
         echo "Aizpildiet visus nepieciešamos laukus!";
       ?><a href="javascript:history.go(-1)">Atpakaļ pie jaunā projekta.</a><?php 
       /*Insert values in projekti table in DB*/ 
       }else{
-        $query = "INSERT INTO projekti (Name, Financer, Status, Number, SAM, Budget, BudgetSpent, Purpose, Activities, StartDate, FinishDate, CoordinatorName, CoordinatorContacts)
-        VALUES ('$name', '$financer', '$status', '$number', '$sam', $budget, $budgetspent, '$purpose', '$activities', '$startdate', '$finishdate', '$cname', '$ccontacts')";
+        $query = "INSERT INTO projekti (Name, Financer, Status, Category, Number, SAM, Budget, BudgetSpent, Purpose, Activities, StartDate, FinishDate, CoordinatorName, CoordinatorContacts)
+        VALUES ('$name', '$financer', '$status', '$category', '$number', '$sam', $budget, $budgetspent, '$purpose', '$activities', '$startdate', '$finishdate', '$cname', '$ccontacts')";
         mysqli_query($mysqli, $query);
         closeDB();
         $respons = "Saglabāts";

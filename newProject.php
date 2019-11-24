@@ -27,6 +27,7 @@
  <?php
     $financer = "Pašvaldība";
     $status = "Iesniegts";
+    $category = "Efektīva pārvalde";
   ?>
   </head>
   <body>
@@ -70,6 +71,18 @@
                 <option value='Plānošana' <?php echo $status == 'Plānošana' ? 'selected' : '' ?>>Plānošana</option>
                 <option value='Balsošana' <?php echo $status == 'Balsošana' ? 'selected' : '' ?>>Balsošana</option>
                 <option value='Iesniegts' <?php echo $status == 'Iesniegts' ? 'selected' : '' ?>>Iesniegts</option>
+              </select>
+              <br><br>
+
+              <!-- Dropdown menu with Category -->
+              <b>Kategorija: </b>
+              <br>
+              <select size="1" name="Category">
+                <option value='Kvalitatīva, droša vide' <?php echo $status == 'Kvalitatīva, droša vide' ? 'selected' : '' ?>>Kvalitatīva, droša vide</option>
+                <option value='Kvalitatīva izglītība' <?php echo $status == 'Kvalitatīva izglītība' ? 'selected' : '' ?>>Kvalitatīva izglītība</option>
+                <option value='Efektīva pārvalde' <?php echo $status == 'Efektīva pārvalde' ? 'selected' : '' ?>>Efektīva pārvalde</option>
+                <option value='Pievilcīga kultūras un sporta vide' <?php echo $status == 'Pievilcīga kultūras un sporta vide' ? 'selected' : '' ?>>Pievilcīga kultūras un sporta vide</option>
+                <option value='Mobilitāte un satiksmes drošība' <?php echo $status == 'Mobilitāte un satiksmes drošība' ? 'selected' : '' ?>>Mobilitāte un satiksmes drošība</option>
               </select>
               <br><br>
 

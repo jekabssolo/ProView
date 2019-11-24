@@ -64,11 +64,26 @@
     return $allBudget-$projectBudget;
   }
 
+  function budgetInCategory($projectBudget,$budgetCategory){
+    global $mysqli;
+    connectDB();
+    $query = "SELECT Budget FROM projekti
+    WHERE Category = '$budgetCategory'";  
+    $result = mysqli_query($mysqli, $query);
+    closeDB();
+    $budgets = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $allBudget = 0;
+    for($i = 0; $i < count($budgets); $i++){
+      $allBudget += $budgets[$i]["Budget"];
+    }
+    return $allBudget-$projectBudget;
+  }
+
   function dataToVariables($id){
     global $mysqli;
     connectDB();
     // Settings for query
-    $query = "SELECT projekti.Name, projekti.Status, projekti.BudgetSpent, projekti.Budget, atjauninajumi.Date, atjauninajumi.Comments 
+    $query = "SELECT projekti.Name, projekti.Status, projekti.Category, projekti.BudgetSpent, projekti.Budget, atjauninajumi.Date, atjauninajumi.Comments 
     FROM projekti
     LEFT JOIN atjauninajumi ON projekti.ID = atjauninajumi.projectID
     WHERE projekti.ID =".$id;    
@@ -81,6 +96,8 @@
     // assign project status from DB to variable
     $projectStatus = $dataR[0]["Status"];
     // assign spent project's budget from DB to variable
+    $budgetCategory = $dataR[0]["Category"];
+    // assign spent project's budget from DB to variable
     $budgetSpent = $dataR[0]["BudgetSpent"];
     // assign project's budget from DB to variable
     $projectBudget = $dataR[0]["Budget"];
@@ -89,7 +106,7 @@
     for($i=0; $i < count($dataR); $i++){
       $updateDate[$dataR[$i]["Date"]][] = $dataR[$i]["Comments"];
     };
-    return [$projectName, $projectStatus, $budgetSpent, $projectBudget, $updateDate];
+    return [$projectName, $projectStatus, $budgetCategory, $budgetSpent, $projectBudget, $updateDate];
   }
   
   function intToMoney($amount){

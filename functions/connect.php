@@ -3,12 +3,16 @@
   
   function connectDB() {
     global $mysqli;
-    $mysqli = mysqli_connect(
+    $mysqli = new mysqli(
                 'localhost',  /*hosting*/
                 'root',  /*login */
                 '',/*password */
                 'bauska_projects'); /*Data base name */
-    mysqli_set_charset($mysqli,"utf8");
+    if($mysqli->connect_error) {
+      exit('Error connecting to database'); //Should be a message a typical user could understand in production
+    }
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $mysqli->set_charset("utf8mb4");
   };
 
   function closeDB(){

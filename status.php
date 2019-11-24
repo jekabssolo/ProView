@@ -9,10 +9,10 @@
           require_once "functions/function.php";
           $projectData = dataToVariables($_GET['id']);
           $completion = completionStatusRow($projectData[1]);
-          $updateComments = $projectData[4];
-          print_r($updateComments);
-          $budgetSpent = $projectData[2];
-          $projectBudget = $projectData[3];
+          $budgetCategory = $projectData[2];
+          $updateComments = $projectData[5];
+          $budgetSpent = $projectData[3];
+          $projectBudget = $projectData[4];
           require_once "blocks/head.php"; 
         ?>
     </head>
@@ -52,12 +52,14 @@
           <?php
             ksort($updateComments);
             foreach($updateComments as $keypair => $valuePair){
-              for($i=0; $i < count($valuePair); $i++){
-                echo date("d.m.Y.", strtotime($keypair));
-                ?>&nbsp<?php      
-                echo $valuePair[$i];
-                ?></br><?php
-              }
+              if(!empty($keypair) and !empty($valuePair)){
+                for($i=0; $i < count($valuePair); $i++){
+                  echo date("d.m.Y.", strtotime($keypair));
+                  ?>&nbsp<?php      
+                  echo $valuePair[$i];
+                  ?></br><?php
+                };
+              };
             };
           ?>
         </h2>
@@ -71,12 +73,11 @@
           ['Atlikušais projekta budžets', <?php echo intToMoney($projectBudget - $budgetSpent);?>]
           ]);</script>
         </div>
-        
         <div id="allBudgetPie">        
           <script>allBudgetChart([
           ['Budžeta veids', 'Daudzums eiro'],
           ['Šī projekta budžets', <?php echo intToMoney($projectBudget);?>],
-          ['Visu projektu budžets', <?php echo intToMoney(budgetSum($projectBudget));?>]
+          ['Citu projektu budžets sekcijā', <?php echo intToMoney(budgetInCategory($projectBudget,$budgetCategory));?>]
           ]);</script>
         </div>
         <p><?php dataToVariables($_GET["id"])?></p>

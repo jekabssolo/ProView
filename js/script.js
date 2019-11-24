@@ -7,6 +7,8 @@ function budgetChart(budget){
         var data = google.visualization.arrayToDataTable(budget);
         var options = {
         title: 'Šī projekta budžets',
+        sliceVisibilityThreshold: .01,
+        pieResidueSliceLabel: "Budžets ir pārak mazs, lai tiktu attēlots",
         colors: ['red', 'green']
         };
 
@@ -22,7 +24,9 @@ function allBudgetChart(budget){
         var data = google.visualization.arrayToDataTable(budget);
 
         var options = {
-        title: 'Kopējais budžets',
+        title: 'Projekta budžets no visas sekcijas budžeta',        
+        sliceVisibilityThreshold: .01,
+        pieResidueSliceLabel: "Budžets ir pārak mazs, lai tiktu attēlots",
         colors: ['red', 'green']
         };
 

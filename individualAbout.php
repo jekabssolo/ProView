@@ -93,6 +93,8 @@
 								</div>
 								<img src="Design/Icons/phone-call.png" class="img-style individual-icon" alt="Phone icon">
 								<p class="coordination-tel"><?php echo $projects["CoordinatorContacts"]; ?></p>
+								<img src="Design/Icons/email.png" class="img-style individual-icon" alt="Email icon">
+								<p class="coordination-tel"><?php echo $projects["CoordinatorEmail"]; ?></p>
 							</div>
 						</div>
 					</div>

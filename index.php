@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
+		<?php session_start(); /* Starts the session */
+		if(!isset($_SESSION['UserData']['Username'])){
+			$auth = false;
+		}else {
+			$auth = true;
+			$now = time();
+			if ($now > $_SESSION['expire']) {
+			session_destroy();
+			echo "<script>var r = confirm('Jūsu sesija ir beigusies.'); r ? location.reload() : location.reload();</script>";
+		}
+		}
+		?>
+
 		<!-- BOOTSTRAP CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -14,6 +28,9 @@
 		</script>
 		<script>
 			function filtersubmit(){document.getElementById("filtering").submit();}
+		</script>
+		<script>
+			function clearsearch(){document.getElementById("clearsearch").submit();}
 		</script>
 
 		<!-- table row linking to individual view -->
@@ -47,6 +64,11 @@
 				} else {
 					$finanval=$_POST["financer"];
 				}
+				if (!array_key_exists('category',$_POST)) {
+					$categoryval="";
+				} else {
+					$categoryval=$_POST["category"];
+				}
 				if (!array_key_exists('budgetsort',$_POST)) {
 					$budgetsort="";
 				} else {
@@ -57,9 +79,9 @@
 				} else {
 					$entrysort=$_POST["entrysort"];
 				}
-				$searchval = preg_replace("/[']/", "", $_POST["search"]);
+				$searchval = $_POST["search"];
 				require_once "functions/searchfilter.php";
-				$projects = getProjectscontaining($finanval, $statusval, $searchval, $budgetsort, $entrysort);
+				$projects = getProjectscontaining($finanval, $statusval, $categoryval, $searchval, $budgetsort, $entrysort);
 			}
 		?>
 
@@ -73,12 +95,37 @@
 							<img src="/ProView Bauska Logo - Final.png" class="header-logo" alt="Logo">
 						</a>
 					</div>
+					<?php
+						if ($auth){
+							$link = 'window.location="/newProject.php"';
+							echo "<div class='col'>
+									<div class='header-right admin-button' onclick='$link'>
+									<img src='Design/Icons/new.png' class='admin-icon' alt='New icon'>
+									Jauns projekts
+									</div>
+								</div>";
+						}
+					?>
 					<div class="col">
-						<div class="header-right admin-button" onclick="window.location='/admin.php'">
-							<img src="Design/Icons/management (1).png" class="admin-icon" alt="Management icon">
-							Administrēšana
-							<!-- <button id="admin-button" data-href="/admin.php">Administrēšana</button> -->
+						<div class='header-right admin-button' onclick='window.location="/overallStatistics.php"'>
+							<img src='Design/Icons/statistical.png' class='admin-icon' alt='Stats icon'>
+							Statistika
 						</div>
+					</div>
+					<div class="col">
+						<?php if($auth){
+							$link = 'window.location="/logout.php"';
+							echo  "<div class='header-right admin-button' onclick='$link'>
+									<img src='Design/Icons/logout.png' class='admin-icon' alt='Logout icon'>
+									Iziet
+						  			</div>";
+						}else{
+							$link = 'window.location="/login.php"';
+							echo  "<div class='header-right admin-button' onclick='$link'>
+									<img src='Design/Icons/management (1).png' class='admin-icon' alt='Management icon'>
+									Administrēšana
+						  			</div>";
+						} ?>
 					</div>
 				</div>
 		</header>
@@ -92,7 +139,7 @@
 							<form method="post" id="filtering">
 								<div class="title-container">
 									<img src="Design/Icons/funnel-outline.png" class="img-style" alt="Funnel icon">
-									<span class="title-style">Kārtot</span>
+									<span class="title-style">Filtrēt</span>
 								</div>
 								<br>
 								
@@ -121,6 +168,17 @@
 									<option value='Valsts' <?php echo isset($_POST['financer']) && $_POST['financer'] == 'Valsts' ? 'selected' : '' ?>>Valsts</option>
 								</select>
 
+								<!-- Pēc vidējā termiņa prioritātes -->
+								<select class="custom-select" size="1" name="category" onchange="filtersubmit()">
+									<option value='' selected>Pēc vidējā termiņa prioritātes</option>
+									<option value='Mobilitāte un satiksmes drošība' <?php echo isset($_POST['category']) && $_POST['category'] == 'Mobilitāte un satiksmes drošība' ? 'selected' : '' ?>>Mobilitāte un satiksmes drošība</option>
+									<option value='Kvalitatīva, droša vide' <?php echo isset($_POST['category']) && $_POST['category'] == 'Kvalitatīva, droša vide' ? 'selected' : '' ?>>Kvalitatīva, droša vide</option>
+									<option value='Kvalitatīva izglītība' <?php echo isset($_POST['category']) && $_POST['category'] == 'Kvalitatīva izglītība' ? 'selected' : '' ?>>Kvalitatīva izglītība</option>
+									<option value='Pievilcīga kultūras un sporta vide' <?php echo isset($_POST['category']) && $_POST['category'] == 'Pievilcīga kultūras un sporta vide' ? 'selected' : '' ?>>Pievilcīga kultūras un sporta vide</option>
+									<option value='Efektīva pārvalde' <?php echo isset($_POST['category']) && $_POST['category'] == 'Efektīva pārvalde' ? 'selected' : '' ?>>Efektīva pārvalde</option>
+								</select>
+								
+
 								<input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
 								<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
 								<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
@@ -131,6 +189,7 @@
 							<form method="post">
 								<input name="status" value="" type="hidden">
 								<input name="financer" value="" type="hidden">
+								<input name="category" value="" type="hidden">
 								<input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
 								<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
 								<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
@@ -171,6 +230,7 @@
 
 								<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
 								<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+								<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
 								<input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
 							</form>
 		
@@ -180,6 +240,7 @@
 							<form method="post">
 								<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
 								<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+								<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
 								<input type="hidden" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>">
 								<input type="hidden" name="budgetsort" value="">
 								<input type="hidden" name="entrysort" value="">
@@ -204,12 +265,21 @@
 									<div class="search-container">
 										<img src="Design/Icons/search.png" class="search-icon" alt="Search icon">
 										<input type="text" class="search-form" placeholder="Meklēt projektus" name="search" value="<?php echo isset($_POST['search']) ? $_POST['search'] : '' ?>" maxlength="65534">
+										<img src="Design/Icons/clear.png" class="clear-icon" alt="Clear icon" onclick="clearsearch()">
 									</div>
 									<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
 									<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+									<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
 									<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
 									<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
-									<!-- <input type="submit" value="Meklēt"> -->
+								</form>
+								<form id='clearsearch' method='post'>
+									<input type="hidden" name="search" value="">
+									<input type="hidden" name="status" value="<?php echo isset($_POST['status']) ? $_POST['status'] : '' ?>">
+									<input type="hidden" name="financer" value="<?php echo isset($_POST['financer']) ? $_POST['financer'] : '' ?>">
+									<input type="hidden" name="category" value="<?php echo isset($_POST['category']) ? $_POST['category'] : '' ?>">
+									<input type="hidden" name="budgetsort" value="<?php echo isset($_POST['budgetsort']) ? $_POST['budgetsort'] : '' ?>">
+									<input type="hidden" name="entrysort" value="<?php echo isset($_POST['entrysort']) ? $_POST['entrysort'] : '' ?>">
 								</form>
 							</div>
 						</div>
@@ -222,11 +292,12 @@
 								<th class="align-middle">Nosaukums</th>
 								<th class="align-middle">Statuss</th>
 								<th class="align-middle">Īstenošanas laiks</th>
+								<?php echo $auth ? "<th class='align-middle'>Rediģēt</th>" : "" ?>
 							</tr>
 							<?php
 								for ($i = 0; $i<count($projects); $i++){
-									echo "<tr class='entry' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'>";
-									echo "<td class='align-middle'>", $projects[$i]["Name"], "</td>";
+									echo "<tr class='entry'>";
+									echo "<td class='align-middle' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'>", $projects[$i]["Name"], "</td>";
 									switch ($projects[$i]["Status"]) {
 										case 'Aktīvs':
 											$background = "rgb(33, 150, 83, 0.3)";
@@ -254,8 +325,9 @@
 											$color = "#A76D3C";
 											break;
 									}
-									echo "<td class='project-status align-middle text-center'><span class='status-text' style='background:" . $background . "; border: 2px solid " . $border . "; color: " . $color . "'>".$projects[$i]["Status"]."</span></td>";
-									echo "<td class='align-middle'>".date("d.m.Y.", strtotime($projects[$i]["StartDate"])), " - ", date("d.m.Y.", strtotime($projects[$i]["FinishDate"])),"</td>";
+									echo "<td class='project-status align-middle text-center' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'><span class='status-text' style='background:" . $background . "; border: 2px solid " . $border . "; color: " . $color . "'>".$projects[$i]["Status"]."</span></td>";
+									echo "<td class='align-middle' data-href='/individualAbout.php?id=".$projects[$i]["ID"]."'>".date("d.m.Y.", strtotime($projects[$i]["StartDate"])), " - ", date("d.m.Y.", strtotime($projects[$i]["FinishDate"])),"</td>";
+									echo $auth ? "<td class='align-middle text-center' data-href='/individualEdit.php?id=".$projects[$i]["ID"]."'><img src='Design/Icons/edit.png' class='img-style' alt='Edit icon'></td>" : "";
 									echo "</tr>";  
 								};
 								

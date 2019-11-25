@@ -36,6 +36,12 @@ td {
     height: 15px;
 }
 
+.clear-icon {
+    margin-left: 15px;
+    width: 15px;
+    height: 15px;
+}
+
 .search-form {
     border: none;
     padding: 5px;

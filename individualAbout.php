@@ -81,7 +81,7 @@
 						<div class="header-right" onclick="window.location='/admin.php'">
 							<a class='selected'>Par projektu: </a>
 							<?php 
-								echo "<a href='status.php?id=".$projects["ID"]."'>Status</a>";
+								echo "<a href='status.php?id=".$projects["ID"]."'>Statuss</a>";
 							?>
 						</div>
 					</div>

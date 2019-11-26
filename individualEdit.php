@@ -56,9 +56,38 @@
       $projectData = dataToVariables($_GET['id']);
       $updateComments = $projectData[4];
       ksort($updateComments);
+      $financers = financiers();
       $title = $projects["Name"];
       require_once "blocks/head.php";
      ?>
+
+    <?php
+        $name = $projects["Name"];
+        $financer = $projects["Financer"];
+        $status = $projects["Status"];
+        $number = $projects["Number"];
+        $category = $projects["Category"];
+        $sam = $projects["SAM"];
+        $budget = intToMoney($projects["Budget"]);
+        $budgetspent = intToMoney($projects["BudgetSpent"]);
+        $purpose = $projects["Purpose"];
+        $activities = $projects["Activities"];
+        $startdate = $projects["StartDate"];
+        $finishdate = $projects["FinishDate"];
+        $cname = $projects["CoordinatorName"];
+        $ccontacts = $projects["CoordinatorContacts"];
+        $cemail = $projects["CoordinatorEmail"];
+        $Municipality = intToMoney($financers["Municipality"]);
+        $Cits = intToMoney($financers["Cits"]);
+        $ELFLA = intToMoney($financers["ELFLA"]);
+        $ERAF = intToMoney($financers["ERAF"]);
+        $KF = intToMoney($financers["KF"]);
+        $KPFI = intToMoney($financers["KPFI"]);
+        $ESF = intToMoney($financers["ESF"]);
+        $LATLIT = intToMoney($financers["LATLIT"]);
+        $NFI = intToMoney($financers["NFI"]);
+        $Valsts = intToMoney($financers["Valsts"]);
+    ?>
 
 
     <?php
@@ -67,7 +96,9 @@
       $response = updateExisting($_GET['id'], $_POST['Name'], $_POST['Financer'], $_POST['Status'], $_POST['Number'], $_POST['Category'], $_POST['SAM'], 
       moneyToInt($_POST['Budget']), moneyToInt($_POST['BudgetSpent']),  
       $_POST['Purpose'], $_POST['Activities'], $_POST['StartDate'], $_POST['FinishDate'], 
-      $_POST['CoordinatorName'], $_POST['CoordinatorContacts'], $_POST['CoordinatorEmail']);
+      $_POST['CoordinatorName'], $_POST['CoordinatorContacts'], $_POST['CoordinatorEmail'],
+      moneyToInt($_POST['Municipality']), moneyToInt($_POST['Cits']), moneyToInt($_POST['ELFLA']), moneyToInt($_POST['ERAF']), moneyToInt($_POST['ESF']), 
+      moneyToInt($_POST['KF']), moneyToInt($_POST['KPFI']), moneyToInt($_POST['LATLIT']), moneyToInt($_POST['NFI']), moneyToInt($_POST['Valsts']));
       echo "<meta http-equiv='refresh' content='0'>";
       }
     ?>
@@ -94,7 +125,7 @@
     <a class="back-button" href="index.php"><span>Visi Projekti</span></a>
 
       <!-- succesful update or added news message -->
-      <div id="success-message"><?php if (isset($response)){echo $response;}?></div>
+      <div id="success-message"><?php echo isset($response) ? $response : "" ?></div>
 
       <!-- Logout field -->
       <a class="logout" href="logout.php">Iziet</a>
@@ -116,29 +147,13 @@
       <div class='wrap'>
       <article class='b-article'>
 
+
       <!-- Edit project info -->
 
       <form method="post" class="edit-info" id="changes">
 
 
       <b>Projekta nosaukums: </b><br>
-      <?php
-        $name = $projects["Name"];
-        $financer = $projects["Financer"];
-        $status = $projects["Status"];
-        $number = $projects["Number"];
-        $category = $projects["Category"];
-        $sam = $projects["SAM"];
-        $budget = intToMoney($projects["Budget"]);
-        $budgetspent = intToMoney($projects["BudgetSpent"]);
-        $purpose = $projects["Purpose"];
-        $activities = $projects["Activities"];
-        $startdate = $projects["StartDate"];
-        $finishdate = $projects["FinishDate"];
-        $cname = $projects["CoordinatorName"];
-        $ccontacts = $projects["CoordinatorContacts"];
-        $cemail = $projects["CoordinatorEmail"];
-      ?>
       <input name="Name" type="text" size="99" maxlength="21844" value="<?php echo $name; ?>">
 
       <br><br>
@@ -208,9 +223,11 @@
       <br><br>
 
       <b>Īstenošanas laiks: </b><br><br>
+
       <b>Sākšanas datums: </b><br>
       <input name="StartDate" type="date" value="<?php echo $startdate;?>">
       <br><br>
+
       <b>Beigšanas datums: </b><br>
       <input name="FinishDate" type="date" value="<?php echo $finishdate;?>">
       <br><br>
@@ -227,11 +244,46 @@
       <input name="CoordinatorEmail" type="text" size="25" maxlength="21844" value="<?php echo $cemail; ?>">
       <br><br>
 
+      <!-- Financer list -->
+
+      <b>Budžeta sadalījums: </b><br><br>
+      <b>Pašvaldība: </b><br>
+      <input name="Municipality" type="number" maxlength="21844" value="<?php echo $Municipality; ?>">
+      EUR <br><br>
+      <b>Cits: </b><br>
+      <input name="Cits" type="number" maxlength="21844" value="<?php echo $Cits; ?>">
+      EUR <br><br>
+      <b>ELFLA: </b><br>
+      <input name="ELFLA" type="number" maxlength="21844" value="<?php echo $ELFLA; ?>">
+      EUR <br><br>
+      <b>ERAF: </b><br>
+      <input name="ERAF" type="number" maxlength="21844" value="<?php echo $ERAF; ?>">
+      EUR <br><br>
+      <b>ESF: </b><br>
+      <input name="ESF" type="number" maxlength="21844" value="<?php echo $ESF; ?>">
+      EUR <br><br>
+      <b>KF: </b><br>
+      <input name="KF" type="number" maxlength="21844" value="<?php echo $KF; ?>">
+      EUR <br><br>
+      <b>KPFI: </b><br>
+      <input name="KPFI" type="number" maxlength="21844" value="<?php echo $KPFI; ?>">
+      EUR <br><br>
+      <b>LAT-LIT: </b><br>
+      <input name="LATLIT" type="number" maxlength="21844" value="<?php echo $LATLIT; ?>">
+      EUR <br><br>
+      <b>NFI: </b><br>
+      <input name="NFI" type="number" maxlength="21844" value="<?php echo $NFI; ?>">
+      EUR <br><br>
+      <b>Valsts: </b><br>
+      <input name="Valsts" type="number" maxlength="21844" value="<?php echo $Valsts; ?>">
+      EUR <br><br>
+
+
       </form>
       
       <hr>
 
-      <!-- Add new update -->
+      <!-- See project news -->
 
       <form method="post" id="post-update">
 
@@ -251,6 +303,8 @@
           ?>
         </h2>
       </div>
+
+      <!-- Add project news -->
 
       Pievienot:
 

@@ -129,7 +129,6 @@
 					</div>
 				</div>
 		</header>
-		<a href="overallStatistics.php">Kopējā statistika</a>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 shadow-sm p-3 mb-5 bg-white rounded no-margin">

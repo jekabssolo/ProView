@@ -56,7 +56,7 @@
       $projectData = dataToVariables($_GET['id']);
       $updateComments = $projectData[4];
       ksort($updateComments);
-      $financers = financiers();
+      $financers = financervalues($_GET['id']);
       $title = $projects["Name"];
       require_once "blocks/head.php";
      ?>

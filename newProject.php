@@ -8,13 +8,13 @@
   <!-- Starts the session -->
   <?php session_start();  
     if(!isset($_SESSION['UserData']['Username'])){
-      header("location:login.php");
+      header("location:login.php?p=newProject.php");
       exit;
     }else{
       $now = time();
       if ($now > $_SESSION['expire']) {
         session_destroy();
-        echo "Jūsu sesija ir beigusies! <a href='/login.php'>Ieiet atpakaļ</a>";
+        echo "<script>var r = confirm('Jūsu sesija ir beigusies.'); r ? location.reload() : location.reload();</script>";
       }
     }
   ?>
@@ -114,16 +114,46 @@
               <!-- All financiers from DB -->
               <b>Finansētāji: </b>
               <br>
-              <?php 
-                foreach($financierList as $keypair => $valuePair){
-                  ?><H1> <?php echo $keypair; ?> </H1>
-                  <input name="<?php echo $keypair;?>" type="number" maxlength="21844" value="">
-                  EUR 
-                  <br><br>
-              <?php
-                };
-              ?>
-              
+              <H1>Pašvaldība</H1>
+              <input name="Municipality" type="number" maxlength="21844" value="Municipality">
+              EUR 
+              <br><br>
+              <H1>ELFLA</H1>
+              <input name="ELFLA" type="number" maxlength="21844" value="ELFLA">
+              EUR 
+              <br><br>
+              <H1>ERAF</H1>
+              <input name="ERAF" type="number" maxlength="21844" value="ERAF">
+              EUR 
+              <br><br>
+              <H1>ESF</H1>
+              <input name="ESF" type="number" maxlength="21844" value="ESF">
+              EUR 
+              <br><br>
+              <H1>KF</H1>
+              <input name="KF" type="number" maxlength="21844" value="KF">
+              EUR 
+              <br><br>
+              <H1>KPFI</H1>
+              <input name="KPFI" type="number" maxlength="21844" value="KPFI">
+              EUR 
+              <br><br>
+              <H1>LAT-LIT</H1>
+              <input name="LAT-LIT" type="number" maxlength="21844" value="LAT-LIT">
+              EUR 
+              <br><br>
+              <H1>NFI</H1>
+              <input name="NFI" type="number" maxlength="21844" value="NFI">
+              EUR 
+              <br><br>
+              <H1>Valsts</H1>
+              <input name="Valsts" type="number" maxlength="21844" value="Valsts">
+              EUR 
+              <br><br>
+              <H1>Cits</H1>
+              <input name="Cits" type="number" maxlength="21844" value="Cits">
+              EUR 
+              <br><br>
               <b>Projekta mērķis</b>
               <br>
               <textarea name="Purpose" rows="5" cols="80"></textarea>
@@ -150,9 +180,12 @@
               <input name="CoordinatorName" type="text" size="25" maxlength="21844" value="">
               <br><br>
 
-              <b>Kontakti: </b>
-              <br>
+              <b>Telefona numurs: </b><br>
               <input name="CoordinatorContacts" type="text" size="25" maxlength="21844" value="">
+              <br><br>
+
+              <b>Epasts: </b><br>
+              <input name="CoordinatorEmail" type="text" size="25" maxlength="21844" value="">
               <br><br>
               <!-- saving button -->
               <button class="btn" type="Submit"><i class='fa fa-save' id="save"></i></button>              

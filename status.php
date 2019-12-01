@@ -65,22 +65,36 @@
         </h2>
       </div>
       <h1>Budžeta pārskats</h1>
-      <div id="budgetChart">
-        <div id="budgetPie">
-          <script>budgetChart([
-          ['Budžeta veids', 'Daudzums eiro'],
-          ['Iztērēts', <?php echo intToMoney($budgetSpent);?>],
-          ['Atlikušais projekta budžets', <?php echo intToMoney($projectBudget - $budgetSpent);?>]
-          ]);</script>
+      <?php
+      if($projectBudget != 0){        
+      ?>
+        <div id="budgetChart">
+          <div id="budgetPie">
+            <script>
+              budgetChart([
+              ['Budžeta veids', 'Daudzums eiro'],
+              ['Iztērēts', <?php echo intToMoney($budgetSpent);?>],
+              ['Atlikušais projekta budžets', <?php echo intToMoney($projectBudget - $budgetSpent);?>]
+              ]);
+            </script>
+          </div>
+          <div id="allBudgetPie">        
+            <script>
+              allBudgetChart([
+              ['Budžeta veids', 'Daudzums eiro'],
+              ['Šī projekta budžets', <?php echo intToMoney($projectBudget);?>],
+              ['Citu projektu budžets sekcijā', <?php echo intToMoney(budgetInCategory($projectBudget,$budgetCategory));?>]
+              ]);
+            </script>
+          </div>
         </div>
-        <div id="allBudgetPie">        
-          <script>allBudgetChart([
-          ['Budžeta veids', 'Daudzums eiro'],
-          ['Šī projekta budžets', <?php echo intToMoney($projectBudget);?>],
-          ['Citu projektu budžets sekcijā', <?php echo intToMoney(budgetInCategory($projectBudget,$budgetCategory));?>]
-          ]);</script>
-        </div>
-        <p><?php dataToVariables($_GET["id"])?></p>
-      </div>
+      <?php
+      }else{
+      ?>
+      <h2>Šī projekta budžeta pārskats šobrīd nav pieejams</h2>
+      <?php
+      };
+      ?>
+
     </body>
 </html>

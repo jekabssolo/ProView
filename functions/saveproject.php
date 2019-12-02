@@ -24,8 +24,8 @@
     $ERAF = moneyToInt($_POST["ERAF"]);
     $ESF = moneyToInt($_POST["ESF"]);
     $KF = moneyToInt($_POST["KF"]);
-    $KPFI = moneyToInt($_POST["LAT-LIT"]);
-    $LAT_LIT = moneyToInt($_POST["Name"]);
+    $KPFI = moneyToInt($_POST["KPFI"]);
+    $LAT_LIT = moneyToInt($_POST["LAT-LIT"]);
     $NFI = moneyToInt($_POST["NFI"]);
     $Valsts = moneyToInt($_POST["Valsts"]);
 

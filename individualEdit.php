@@ -54,8 +54,7 @@
       require_once "functions/function.php";
       $projects = getProjects($_GET['id']);
       $projectData = dataToVariables($_GET['id']);
-      $updateComments = $projectData[4];
-      ksort($updateComments);
+      $updateComments = $projectData[5];
       $financers = financervalues($_GET['id']);
       $title = $projects["Name"];
       require_once "blocks/head.php";
@@ -291,14 +290,17 @@
 
       <div id="updateLog">
         <h2 class='updateData'>
-          <?php 
+          <?php
+            ksort($updateComments);
             foreach($updateComments as $keypair => $valuePair){
-                echo date("d.m.Y.", strtotime($keypair));
-          ?>&nbsp<?php      
-                echo $valuePair;
-          ?>
-          </br> 
-          <?php 
+              if(!empty($keypair) and !empty($valuePair)){
+                for($i=0; $i < count($valuePair); $i++){
+                  echo date("d.m.Y.", strtotime($keypair));
+                  ?>&nbsp<?php      
+                  echo $valuePair[$i];
+                  ?></br><?php
+                };
+              };
             };
           ?>
         </h2>

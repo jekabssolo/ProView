@@ -135,4 +135,14 @@
     return $financierArray;
   }
   
+  function financervalues($id){
+    global $mysqli;
+    connectDB();
+    $query = "SELECT * FROM finansetajs WHERE project_id = $id";    
+    $result = mysqli_query($mysqli, $query);
+    closeDB();
+    $financierArray = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $financierArray =  array_slice($financierArray[0],2);
+    return $financierArray;
+  }
  ?>

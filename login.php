@@ -13,7 +13,11 @@
         /* Success: Set session variables and redirect to Protected page  */$_SESSION['UserData']['Username']=$logins[$Username];
         $_SESSION['start'] = time();
         $_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
-        header("location:admin.php");
+        if (isset($_GET['p'])){
+         header("location:".$_GET["p"]);
+        }else{
+         header("location:index.php");
+        }
         exit;
         } else {
         /*Unsuccessful attempt: Set error message */$msg="<span style='color:red'>Nepareizs lietotājvārds un/vai parole!</span>";

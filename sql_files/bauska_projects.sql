@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 24, 2019 at 10:41 AM
+-- Generation Time: Nov 26, 2019 at 09:34 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `atjauninajumi` (
   `projectID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `projectID` (`projectID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `atjauninajumi`
@@ -44,18 +44,23 @@ CREATE TABLE IF NOT EXISTS `atjauninajumi` (
 
 INSERT INTO `atjauninajumi` (`ID`, `Date`, `Comments`, `projectID`) VALUES
 (12, '2019-11-23', 'Hello from the other side', 1),
-(13, '2019-11-23', 'Hello from the other side', 1),
 (14, '2019-11-22', 'Not from this one', 1),
-(15, '2019-11-22', 'Not from this one', 1),
-(16, '2019-11-22', 'Not from this one', 1),
-(17, '2019-11-22', 'Not from this one', 1),
 (18, '2019-11-21', 'Or maybe...', 1),
-(19, '2019-11-21', 'Or maybe...', 1),
-(20, '2019-11-21', 'Or maybe...', 1),
 (21, '2019-11-20', 'Or still no', 1),
 (22, '2019-11-19', 'But but but', 1),
 (23, '2019-11-19', 'How about now?', 1),
-(24, '2019-11-24', 'Hello from the future', 1);
+(24, '2019-11-24', 'Hello from the future', 1),
+(25, '2019-11-30', 'He he he', 1),
+(26, '2019-11-21', 'Let\'s spam this thing', 1),
+(27, '2019-11-21', 'oooo', 1),
+(28, '2019-11-22', 'oooooooooo', 1),
+(29, '2019-11-23', 'oooooo', 1),
+(30, '2019-11-16', 'oooooooooooooooooo', 1),
+(31, '2019-11-15', 'oooooooooooooooooooooooooooooooooooooooooooooo', 1),
+(32, '2019-11-16', 'ooooooooooooooooooooo', 1),
+(33, '2019-11-09', 'oooooooooooooooooooo', 1),
+(34, '2019-11-20', 'Ole', 1),
+(35, '2019-11-29', 'Jehaw', 1);
 
 -- --------------------------------------------------------
 
@@ -74,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `finansetajs` (
   `ESF` bigint(11) DEFAULT NULL,
   `KF` bigint(11) DEFAULT NULL,
   `KPFI` bigint(11) DEFAULT NULL,
-  `LAT-LIT` bigint(11) DEFAULT NULL,
+  `LATLIT` bigint(11) DEFAULT NULL,
   `NFI` bigint(11) DEFAULT NULL,
   `Valsts` bigint(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -85,8 +90,8 @@ CREATE TABLE IF NOT EXISTS `finansetajs` (
 -- Dumping data for table `finansetajs`
 --
 
-INSERT INTO `finansetajs` (`ID`, `project_id`, `Municipality`, `Cits`, `ELFLA`, `ERAF`, `ESF`, `KF`, `KPFI`, `LAT-LIT`, `NFI`, `Valsts`) VALUES
-(40, 1, 7692678, NULL, 55330833, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+INSERT INTO `finansetajs` (`ID`, `project_id`, `Municipality`, `Cits`, `ELFLA`, `ERAF`, `ESF`, `KF`, `KPFI`, `LATLIT`, `NFI`, `Valsts`) VALUES
+(40, 1, 7692678, NULL, 55330831, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (41, 2, 8206761, NULL, 55326072, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (42, 3, 7167220, NULL, 46479846, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (43, 4, 189531371, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -145,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `projekti` (
   `Entry` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
 
 --
 -- Dumping data for table `projekti`

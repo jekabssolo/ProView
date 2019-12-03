@@ -12,13 +12,26 @@
 		<link rel="stylesheet" href="style.css">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-		<title>About project</title>
+		<title>Par projektu</title>
 		
 		<?php
 			require_once "functions/function.php";
 			$projects = getProjects($_GET['id']);
+			$financers = financervalues($_GET['id']);
 			$title = $projects["Name"];
 			require_once "blocks/head.php";
+		?>
+		<?php
+			$Municipality = intToMoney($financers["Municipality"]);
+			$Cits = intToMoney($financers["Cits"]);
+			$ELFLA = intToMoney($financers["ELFLA"]);
+			$ERAF = intToMoney($financers["ERAF"]);
+			$KF = intToMoney($financers["KF"]);
+			$KPFI = intToMoney($financers["KPFI"]);
+			$ESF = intToMoney($financers["ESF"]);
+			$LATLIT = intToMoney($financers["LATLIT"]);
+			$NFI = intToMoney($financers["NFI"]);
+			$Valsts = intToMoney($financers["Valsts"]);
 		?>
 	</head>
 	<body>
@@ -68,7 +81,7 @@
 						<div class="header-right" onclick="window.location='/admin.php'">
 							<a class='selected'>Par projektu: </a>
 							<?php 
-								echo "<a href='status.php?id=".$projects["ID"]."'>Status</a>";
+								echo "<a href='status.php?id=".$projects["ID"]."'>Statuss</a>";
 							?>
 						</div>
 					</div>
@@ -93,6 +106,8 @@
 								</div>
 								<img src="Design/Icons/phone-call.png" class="img-style individual-icon" alt="Phone icon">
 								<p class="coordination-tel"><?php echo $projects["CoordinatorContacts"]; ?></p>
+								<img src="Design/Icons/email.png" class="img-style individual-icon" alt="Email icon">
+								<p class="coordination-tel"><?php echo $projects["CoordinatorEmail"]; ?></p>
 							</div>
 						</div>
 					</div>
@@ -119,6 +134,25 @@
 							</td>
 						</tr>
 					</table>
+					<br>
+					<div>
+						<b>Vidējā termiņa prioritāte: </b> <br>
+						<?php echo $projects["Category"]; ?>
+					</div>
+					<br>
+					<div>
+						<b>Budžeta sadalījums: </b> <br>
+						<?php echo $Municipality > 0 ? "Pašvaldība - ".$Municipality." EUR<br>" : "" ?>
+						<?php echo $Cits > 0 ? "Cits - ".$Cits." EUR<br>" : "" ?>
+						<?php echo $ELFLA > 0 ? "ELFLA - ".$ELFLA." EUR<br>" : "" ?>
+						<?php echo $ERAF > 0 ? "ERAF - ".$ERAF." EUR<br>" : "" ?>
+						<?php echo $ESF > 0 ? "ESF - ".$ESF." EUR<br>" : "" ?>
+						<?php echo $KF > 0 ? "KF - ".$KF." EUR<br>" : "" ?>
+						<?php echo $KPFI > 0 ? "KPFI - ".$KPFI." EUR<br>" : "" ?>
+						<?php echo $LATLIT > 0 ? "LAT-LIT - ".$LATLIT." EUR<br>" : "" ?>
+						<?php echo $NFI > 0 ? "NFI - ".$NFI." EUR<br>" : "" ?>
+						<?php echo $Valsts > 0 ? "Valsts - ".$Valsts." EUR<br>" : "" ?>
+					</div>
 					<br>
 					<div>
 						<b>Projekta programma/SAM: </b> <br>

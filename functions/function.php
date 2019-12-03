@@ -64,13 +64,27 @@
     return $allBudget-$projectBudget;
   }
 
+  function budgetInCategory($projectBudget,$budgetCategory){
+    global $mysqli;
+    connectDB();
+    $query = "SELECT Budget FROM projekti
+    WHERE Category = '$budgetCategory'";  
+    $result = mysqli_query($mysqli, $query);
+    closeDB();
+    $budgets = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $allBudget = 0;
+    for($i = 0; $i < count($budgets); $i++){
+      $allBudget += $budgets[$i]["Budget"];
+    }
+    return $allBudget-$projectBudget;
+  }
+
   function dataToVariables($id){
     global $mysqli;
     connectDB();
     // Settings for query
-    $query = "SELECT projekti.Name, projekti.Status, projekti.BudgetSpent, projekti.Budget, atjauninajumi.Date, atjauninajumi.Comments, finansetajs.* 
+    $query = "SELECT projekti.Name, projekti.Status, projekti.Category, projekti.BudgetSpent, projekti.Budget, atjauninajumi.Date, atjauninajumi.Comments 
     FROM projekti
-    LEFT JOIN finansetajs ON projekti.ID = finansetajs.project_id
     LEFT JOIN atjauninajumi ON projekti.ID = atjauninajumi.projectID
     WHERE projekti.ID =".$id;    
     $result = mysqli_query($mysqli, $query);
@@ -82,22 +96,17 @@
     // assign project status from DB to variable
     $projectStatus = $dataR[0]["Status"];
     // assign spent project's budget from DB to variable
+    $budgetCategory = $dataR[0]["Category"];
+    // assign spent project's budget from DB to variable
     $budgetSpent = $dataR[0]["BudgetSpent"];
     // assign project's budget from DB to variable
     $projectBudget = $dataR[0]["Budget"];
     // assign project updates and date of updates from DB to array
     $updateDate = array();
     for($i=0; $i < count($dataR); $i++){
-      $updateDate[$dataR[$i]["Date"]] = $dataR[$i]["Comments"];
+      $updateDate[$dataR[$i]["Date"]][] = $dataR[$i]["Comments"];
     };
-    // assign all project financers from DB to array
-    $financier =  array_slice($dataR[0],8);
-    foreach($financier as $keypair => $valuePair){
-      if($financier[$keypair] == 0){
-        unset($financier[$keypair]);
-      }
-    };
-    return [$projectName, $projectStatus, $budgetSpent, $projectBudget, $updateDate, $financier];
+    return [$projectName, $projectStatus, $budgetCategory, $budgetSpent, $projectBudget, $updateDate];
   }
   
   function intToMoney($amount){
@@ -125,7 +134,7 @@
     $financierArray =  array_slice($financierArray[0],2);
     return $financierArray;
   }
-
+  
   function financervalues($id){
     global $mysqli;
     connectDB();
@@ -136,5 +145,4 @@
     $financierArray =  array_slice($financierArray[0],2);
     return $financierArray;
   }
-  
  ?>

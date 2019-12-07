@@ -43,7 +43,7 @@
 							<img src="/ProView Bauska Logo - Final.png" class="header-logo" alt="Logo">
 						</a>
 					</div>
-					<div class="col">
+					<div class="col-md">
 						<div class="header-center">
 							<?php 
 								switch ($projects["Status"]) {
@@ -77,8 +77,8 @@
 							?>
 						</div>
 					</div>
-					<div class="col">
-						<div class="header-right" onclick="window.location='/admin.php'">
+					<div class="col-md">
+						<div class="header-right" onclick="window.location='/login.php'">
 							<a class='selected'>Par projektu: </a>
 							<?php 
 								echo "<a href='status.php?id=".$projects["ID"]."'>Statuss</a>";

@@ -83,7 +83,7 @@
       closeDB();
 
       /*When done send to the main project page with admin access*/
-      header("location:../admin.php");
+      header("location:../index.php");
       exit;
     };
 

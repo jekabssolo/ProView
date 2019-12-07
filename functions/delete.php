@@ -13,7 +13,7 @@
 
     mysqli_query($mysqli, $query2);
 
-    $query3 = "DELETE FROM projekti WHERE projectID = $id";
+    $query3 = "DELETE FROM atjauninajumi WHERE projectID = $id";
 
     mysqli_query($mysqli, $query3);
 

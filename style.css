@@ -37,15 +37,15 @@ td {
 }
 
 .clear-icon {
-    margin-left: 15px;
     width: 15px;
     height: 15px;
+    cursor: pointer;
 }
 
 .search-form {
     border: none;
     padding: 5px;
-    width: calc(100% - 50px);
+    width: calc(100% - 70px);
 }
 
 .search-form:focus {
@@ -84,27 +84,22 @@ td {
 
 header {
     background: white;
-    height: 120px;
     margin-bottom: 30px;
 }
 
-header .container {
-    height: inherit;
-}
-
-header .container .row {
-    height: inherit;
-}
-
-header .col {
-    height: inherit;
+header .col-md {
+    height: 120px;
     position: relative;
 }
 
-header .col div {
+header .col-md div {
     position: absolute;
     top: 50%;
     transform: translate(0%, -50%);
+}
+
+header .center {
+    left: 50%;
 }
 
 .header-left {
@@ -124,7 +119,7 @@ header .col div {
 }
 
 .header-logo {
-    height: inherit;
+    height: 120px;
 }
 
 .admin-button {
@@ -195,4 +190,120 @@ header .col div {
     margin-right: 10px;
     height: 20px;
     width: 20px;
+}
+
+/* LOGIN PAGE */
+
+.error {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.my-container {
+    background: white;
+    margin: 0 auto;
+}
+
+.login-tilte {
+    margin-top: 30px;
+}
+
+.login-container {
+    border: 2px solid #EDEDED;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.login-icon {
+    margin-left: 15px;
+    width: 15px;
+    height: 15px;
+}
+
+.login-button {
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 7px;
+    width: 30%;
+    color: #219653;
+    background: rgb(33, 150, 83, 0.3);
+    border: 2px solid #219653;
+    font-weight: bold;
+}
+
+.login-button:hover, .login-button:active:focus {
+    background: rgb(33, 150, 83) !important;
+    border: 2px solid #219653 !important;
+}
+
+.login-icon-submit {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.clear-icon {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.login-form {
+    border: none;
+    padding: 10px;
+    width: calc(100% - 50px);
+}
+
+.login-form:focus {
+    outline: none;
+}
+
+.form-signin .center {
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .login-tilte, .login-image {
+        margin-top: 0;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .my-container {
+        max-width: 55%;
+    }
+}
+
+@media (min-width: 992px) {
+    .my-container {
+        max-width: 45%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .my-container {
+        max-width: 35%;
+    }
+}
+
+/* NEW PROJECT */
+
+.new-project-my {
+    padding: 64px !important;
+}
+
+.new-middle-part {
+    border: 1px solid gray;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+.my-new-name {
+    height: 77%;
 }

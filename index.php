@@ -90,7 +90,7 @@
 		<header class="shadow-sm">
 			<div class="container">
 				<div class="row">
-					<div class="col">
+					<div class="col-md">
 						<a class="header-logo" href="/">
 							<img src="/ProView Bauska Logo - Final.png" class="header-logo" alt="Logo">
 						</a>
@@ -98,7 +98,7 @@
 					<?php
 						if ($auth){
 							$link = 'window.location="/newProject.php"';
-							echo "<div class='col'>
+							echo "<div class='col-md'>
 									<div class='header-right admin-button' onclick='$link'>
 									<img src='Design/Icons/new.png' class='admin-icon' alt='New icon'>
 									Jauns projekts
@@ -106,13 +106,13 @@
 								</div>";
 						}
 					?>
-					<div class="col">
-						<div class='header-right admin-button' onclick='window.location="/overallStatistics.php"'>
+					<div class="col-md">
+						<div class='center admin-button' onclick='window.location="/overallStatistics.php"'>
 							<img src='Design/Icons/statistical.png' class='admin-icon' alt='Stats icon'>
 							Statistika
 						</div>
 					</div>
-					<div class="col">
+					<div class="col-md">
 						<?php if($auth){
 							$link = 'window.location="/logout.php"';
 							echo  "<div class='header-right admin-button' onclick='$link'>

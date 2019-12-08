@@ -38,7 +38,7 @@
 		<header class="shadow-sm">
 			<div class="container">
 				<div class="row">
-					<div class="col">
+					<div class="col-md">
 						<a class="header-logo" href="/">
 							<img src="/ProView Bauska Logo - Final.png" class="header-logo" alt="Logo">
 						</a>
@@ -78,12 +78,16 @@
 						</div>
 					</div>
 					<div class="col-md">
-						<div class="header-right" onclick="window.location='/login.php'">
+						<div class='center admin-button' onclick='window.location="<?php echo "status.php?id=" . $projects["ID"] ?>"'>
+							<img src='Design/Icons/icon.png' class='admin-icon' alt='Stats icon'>
+							Statuss
+						</div>
+						<!-- <div class="header-right" onclick="window.location='/admin.php'">
 							<a class='selected'>Par projektu: </a>
 							<?php 
 								echo "<a href='status.php?id=".$projects["ID"]."'>Statuss</a>";
 							?>
-						</div>
+						</div> -->
 					</div>
 				</div>
 		</header>

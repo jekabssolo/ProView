@@ -123,6 +123,7 @@ header .center {
 }
 
 .admin-button {
+    box-shadow: none !important;
     background: #E0E0E0;
     border-radius: 10px;
     cursor: pointer;
@@ -306,4 +307,34 @@ header .center {
 
 .my-new-name {
     height: 77%;
+}
+
+/* EDIT PROJECT */
+
+#post-update {
+    width: 100%;
+}
+
+/* PROJECT OVERALL STATUS */
+
+.stat1-container {
+    background: rgb(235, 235, 228);
+    border: 2px solid #EDEDED;
+    border-radius: 50px;
+}
+
+.stat1-icon {
+    margin-left: 15px;
+    width: 15px;
+    height: 15px;
+}
+
+.stat1-form {
+    border: none;
+    padding: 5px;
+    width: calc(100% - 50px);
+}
+
+.stat1-form:focus {
+    outline: none;
 }

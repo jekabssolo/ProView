@@ -57,10 +57,6 @@
 					</div>
 				</div>
 		</header>
-  <!-- <a class="back-button" href="index.php"><span>Visi Projekti</span></a> -->
-
-      <!-- Logout field -->
-      <!-- <a class="logout" href="logout.php">Iziet!</a>       -->
       
       <form action="functions/saveproject.php" method="post" class="edit-info" id="changes">
         <div class="container shadow-sm p-3 mb-5 bg-white rounded new-project-my">
@@ -145,9 +141,9 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-8 border-right mt-2">
+              <div class="col-md-12 mt-2">
                 <b class="coordination-name">Projekta budžets: </b>
-                <div class="row">
+                <div class="row border-bottom mb-2">
                   <div class="col-6">
                     <b class="coordination-name">Kopējais budžets: </b>
                     <input name="Budget" class="form-control" type="number" maxlength="21844" value="">EUR
@@ -157,40 +153,49 @@
                     <input name="BudgetSpent" class="form-control" type="number" maxlength="21844" value="">EUR 
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <b class="coordination-name">Finansētāji: </b>
-                <br>
-                <b class="coordination-name">Pašvaldība</b>
-                <input name="Municipality" class="form-control" type="number" maxlength="21844" value="Municipality">EUR 
-                <br>
-                <b class="coordination-name">ELFLA</b>
-                <input name="ELFLA" class="form-control" type="number" maxlength="21844" value="ELFLA">EUR 
-                <br>
-                <b class="coordination-name">ERAF</b>
-                <input name="ERAF" class="form-control" type="number" maxlength="21844" value="ERAF">EUR 
-                <br>
-                <b class="coordination-name">ESF</b>
-                <input name="ESF" class="form-control" type="number" maxlength="21844" value="ESF">EUR 
-                <br>
-                <b class="coordination-name">KF</b>
-                <input name="KF" class="form-control" type="number" maxlength="21844" value="KF">EUR 
-                <br>
-                <b class="coordination-name">KPFI</b>
-                <input name="KPFI" class="form-control" type="number" maxlength="21844" value="KPFI">EUR 
-                <br>
-                <b class="coordination-name">LAT-LIT</b>
-                <input name="LAT-LIT" class="form-control" type="number" maxlength="21844" value="LAT-LIT">EUR 
-                <br>
-                <b class="coordination-name">NFI</b>
-                <input name="NFI" class="form-control" type="number" maxlength="21844" value="NFI">EUR 
-                <br>
-                <b class="coordination-name">Valsts</b>
-                <input name="Valsts" class="form-control" type="number" maxlength="21844" value="Valsts">EUR 
-                <br>
-                <b class="coordination-name">Cits</b>
-                <input name="Cits" class="form-control" type="number" maxlength="21844" value="Cits">EUR 
-                <br><br>
+                <b class="coordination-name">Budžeta sadalījums: </b>
+                <div class="row">
+                  <div class="col-6">
+                    <b class="coordination-name">Pašvaldība</b>
+                    <input name="Municipality" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">ELFLA</b>
+                    <input name="ELFLA" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">ERAF</b>
+                    <input name="ERAF" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">ESF</b>
+                    <input name="ESF" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">KF</b>
+                    <input name="KF" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">KPFI</b>
+                    <input name="KPFI" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">LAT-LIT</b>
+                    <input name="LAT-LIT" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">NFI</b>
+                    <input name="NFI" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">Valsts</b>
+                    <input name="Valsts" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                  <div class="col-6">
+                    <b class="coordination-name">Cits</b>
+                    <input name="Cits" class="form-control" type="number" maxlength="21844" value="">EUR 
+                  </div>
+                </div>
               </div>
             </div>
           </div>

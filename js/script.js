@@ -6,10 +6,11 @@ function budgetChart(budget){
 
         var data = google.visualization.arrayToDataTable(budget);
         var options = {
-        title: 'Šī projekta budžets',
-        sliceVisibilityThreshold: .01,
-        pieResidueSliceLabel: "Budžets ir pārak mazs, lai tiktu attēlots",
-        colors: ['red', 'green']
+            // title: 'Šī projekta budžets',
+            sliceVisibilityThreshold: .01,
+            pieResidueSliceLabel: "Budžets ir pārak mazs, lai tiktu attēlots",
+            colors: ['#EB5757', '#27AE60'],
+            legend: {position: 'bottom'}
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('budgetPie'));
@@ -24,10 +25,11 @@ function allBudgetChart(budget){
         var data = google.visualization.arrayToDataTable(budget);
 
         var options = {
-        title: 'Projekta budžets no visas sekcijas budžeta',        
-        sliceVisibilityThreshold: .01,
-        pieResidueSliceLabel: "Budžets ir pārak mazs, lai tiktu attēlots",
-        colors: ['red', 'green']
+            // title: 'Projekta budžets no visas sekcijas budžeta',        
+            sliceVisibilityThreshold: .01,
+            pieResidueSliceLabel: "Budžets ir pārak mazs, lai tiktu attēlots",
+            colors: ['#EB5757', '#27AE60'],
+            legend: { position: 'bottom' }
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('allBudgetPie'));
@@ -42,8 +44,9 @@ function budgetBySection(budget){
         var data = google.visualization.arrayToDataTable(budget);
 
         var options = {
-        title: 'Budžeta sadalījums pēc vidēja termiņa prioritātēm',
-        colors: ['red', 'green', 'purple', 'orange', 'brown']
+        // title: 'Budžeta sadalījums pēc vidēja termiņa prioritātēm',
+            colors: ['red', 'green', 'purple', 'orange', 'brown'],
+            legend: {position: 'left'}
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('budgetBySection'));
@@ -58,12 +61,11 @@ function projectsByFinancier(budget){
         var data = google.visualization.arrayToDataTable(budget);
 
         var options = {
-        title: 'Projektu sadalījums pēc finansētāja',
-        colors: ['#76A7FA'],
-        legend: {position: 'top'}
+        // title: 'Projektu sadalījums pēc finansētāja',
+            legend: { position: 'none' }
         };
 
-        var chart = new google.visualization.BarChart(document.getElementById('projectsByFinancier'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('projectsByFinancier'));
 
         chart.draw(data, options);
     }
@@ -75,11 +77,11 @@ function moneyByFinancier(budget){
         var data = google.visualization.arrayToDataTable(budget);
 
         var options = {
-        title: 'Finansējuma apjoms pēc finansētāja',
-        legend: {position: 'top'}
+        // title: 'Finansējuma apjoms pēc finansētāja',
+            legend: { position: 'none' }
         };
 
-        var chart = new google.visualization.BarChart(document.getElementById('moneyByFinancier'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('moneyByFinancier'));
 
         chart.draw(data, options);
     }
@@ -91,11 +93,11 @@ function projectsInSection(budget){
         var data = google.visualization.arrayToDataTable(budget);
 
         var options = {
-        title: 'Projektu daudzums pēc vidēja termiņa prioritātēm',
-        legend: {position: 'top'}
+        // title: 'Projektu daudzums pēc vidēja termiņa prioritātēm',
+            legend: { position: 'none' }
         };
 
-        var chart = new google.visualization.BarChart(document.getElementById('projectsInSection'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('projectsInSection'));
 
         chart.draw(data, options);
     }projectsInSection

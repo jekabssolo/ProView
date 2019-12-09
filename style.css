@@ -59,6 +59,10 @@ td {
 .projects-title-column {
     width: 50%;
 }
+.red_star{
+    color: red;
+    font-size: 20px;
+}
 
 .col2-style {
     height: 40px;

@@ -64,7 +64,7 @@
         <div class="container shadow-sm p-3 mb-5 bg-white rounded new-project-my">
           <div class="row">
             <div class="col-md-9">
-              <b class="coordination-name">Projekta nosaukums: </b>
+              <b class="coordination-name"><span class="red_star">*</span>Projekta nosaukums: </b>
               <br>              
               <input name="Name" class="form-control my-new-name" type="text" maxlength="21844" value="">
             </div>
@@ -83,7 +83,7 @@
           <div class="new-middle-part">
             <div class="row border-bottom pb-2">
               <div class="col-md-4">
-                <b class="coordination-name">Projekta finansētājs: </b>
+                <b class="coordination-name"><span class="red_star">*</span>Projekta finansētājs: </b>
                 <br>
                 <select class="form-control" name="Financer">
                   <option value='Pašvaldība' <?php echo $financer == 'Pašvaldība' ? 'selected' : '' ?>>Pašvaldība</option>
@@ -106,7 +106,7 @@
                 <br>
                 <div class="row">
                   <div class="col-5">
-                    <b class="coordination-name">Sākšanas datums: </b>
+                    <b class="coordination-name"><span class="red_star">*</span>Sākšanas datums: </b>
                   </div>
                   <div class="col-7">
                     <input name="StartDate" class="form-control" type="date" value="">
@@ -114,7 +114,7 @@
                 </div>
                 <div class="row">
                   <div class="col-5">
-                    <b class="coordination-name">Beigšanas datums: </b>
+                    <b class="coordination-name"><span class="red_star">*</span>Beigšanas datums: </b>
                   </div>
                   <div class="col-7">
                     <input name="FinishDate" class="form-control" type="date" value="">
@@ -122,7 +122,7 @@
                 </div>
               </div>
               <div class="col-md-4">
-                <b class="coordination-name">Statuss: </b>
+                <b class="coordination-name"><span class="red_star">*</span>Statuss: </b>
                 <br>
                 <select class="form-control" name="Status">
                   <option value='Aktīvs' <?php echo $status == 'Aktīvs' ? 'selected' : '' ?>>Aktīvs</option>
@@ -131,7 +131,7 @@
                   <option value='Balsošana' <?php echo $status == 'Balsošana' ? 'selected' : '' ?>>Balsošana</option>
                   <option value='Iesniegts' <?php echo $status == 'Iesniegts' ? 'selected' : '' ?>>Iesniegts</option>
                 </select>
-                <b class="coordination-name">Kategorija: </b>
+                <b class="coordination-name"><span class="red_star">*</span>Kategorija: </b>
                 <br>
                 <select class="form-control" name="Category">
                   <option value='Kvalitatīva, droša vide' <?php echo $status == 'Kvalitatīva, droša vide' ? 'selected' : '' ?>>Kvalitatīva, droša vide</option>

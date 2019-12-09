@@ -10,6 +10,8 @@
     }
     }
   </script>
+  <!--Favicon-->
+  <link rel="icon" type="image/png" href="../Design/Icons/output-onlinepngtools.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- <style>
       .logout{

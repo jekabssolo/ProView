@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>Statistika</title>
+        <!--Favicon-->
+		<link rel="icon" type="image/png" href="../Design/Icons/output-onlinepngtools.ico">
         <!-- Load d3.js & color scale -->
         <script src="https://d3js.org/d3.v4.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>

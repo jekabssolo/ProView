@@ -8,7 +8,7 @@
     connectDB();
 
     $query1 = "UPDATE projekti
-    SET Name = ?, Financer = ?, Status = ?, Number = ?, Category = ?, SAM = ?, Budget = ?, BudgetSpent = ?, Purpose = ?, Activities = ?, StartDate = ?, FinishDate = ?, coordinatorName = ?, CoordinatorContacts = ?, CoordinatorEmail = ?
+    SET Name = ?, Financer = ?, Status = ?, Number = ?, Category = ?, SAM = ?, Budget = ?, BudgetSpent = ?, Purpose = ?, Activities = ?, StartDate = ?, FinishDate = ?, CoordinatorName = ?, CoordinatorContacts = ?, CoordinatorEmail = ?, UpdateDate = CURRENT_TIMESTAMP
     WHERE ID = ?;";
     $stmt1= $mysqli->prepare($query1);
     $stmt1->bind_param("ssssssssssssssss", $name, $financer, $status, $number, $category, $sam, $budget, $budgetspent, $purpose, $activities, $sdate, $fdate, $cname, $ccontact, $cemail, $id);

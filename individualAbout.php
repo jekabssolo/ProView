@@ -110,10 +110,14 @@
 										<b><?php echo $projects["CoordinatorName"]; ?></b> <br>
 									</span>
 								</div>
+								<div>
 								<img src="Design/Icons/phone-call.png" class="img-style individual-icon" alt="Phone icon">
 								<p class="coordination-tel"><?php echo $projects["CoordinatorContacts"]; ?></p>
+								</div>
+								<div>
 								<img src="Design/Icons/email.png" class="img-style individual-icon" alt="Email icon">
 								<p class="coordination-tel"><?php echo $projects["CoordinatorEmail"]; ?></p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -173,6 +177,11 @@
 					<div>
 						<b>Galvenās aktivitātes</b> <br>
 						<?php echo $projects["Activities"]; ?>
+					</div>
+					<br>
+					<div>
+						<b>Pēdējo reizi informācija atjaunota:</b>
+						<?php echo date("d.m.Y.", strtotime($projects["UpdateDate"])); ?>
 					</div>
 					<br>
 				</div>

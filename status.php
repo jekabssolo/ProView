@@ -170,6 +170,11 @@
                   <?php
                   };
                   ?>
+                  <br>
+                  <div>
+                    <b>Pēdējo reizi informācija atjaunota:</b>
+                    <?php echo date("d.m.Y.", strtotime($projects["UpdateDate"])); ?>
+                  </div>
                 </div>
               </div>
             </div>

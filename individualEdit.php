@@ -109,7 +109,7 @@
       if (!empty($_POST['Delete'])){
         require_once "functions/delete.php";
         deleteProject($_GET["id"]);
-        header("location:admin.php");
+        header("location:index.php");
       }
     ?>
 

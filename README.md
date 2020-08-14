@@ -7,3 +7,6 @@ ProView Bauska includes such options as municipality's project listing and admin
 Thanks to the main contributors of this project:
 
 [@jekabssolo](https://github.com/jekabssolo), [@vladi-j](https://github.com/vladi-j), [@edvards05](https://github.com/edvards05)
+
+---
+ProView now available at [ProView Bauska](https://www.proview.jekabssolo.id.lv/)
